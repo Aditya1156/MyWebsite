@@ -55,16 +55,24 @@
   }
   
   .sphere-root[data-enlarging="true"] .enlarge {
-    pointer-events: all !important;
+    pointer-events: none !important;
     z-index: 45 !important;
   }
   
   .enlarge {
-    cursor: default;
+    pointer-events: none !important;
   }
   
   .enlarge img {
-    pointer-events: none;
+    pointer-events: none !important;
+  }
+  
+  .enlarge > * {
+    pointer-events: auto !important;
+  }
+  
+  .enlarge button {
+    pointer-events: auto !important;
   }
   
   @media (max-aspect-ratio: 1/1) {
