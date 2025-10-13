@@ -1,0 +1,83 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <link rel="icon" type="image/svg+xml" href="/vite.svg" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Aditya Kumar | Engineer, Creator, Dream Builder</title>
+    <script src="https://cdn.tailwindcss.com"></script>
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Space+Grotesk:wght@500;700&family=Inter:wght@400;500;600&family=JetBrains+Mono:wght@400&display=swap" rel="stylesheet">
+    <style>
+      /* html {
+        scroll-behavior: smooth;
+      } */
+    </style>
+    <script>
+      tailwind.config = {
+        theme: {
+          extend: {
+            colors: {
+              cream: '#FFF7ED',
+              charcoal: '#1E1E1E',
+              orange: {
+                DEFAULT: '#FF6B00',
+                light: '#FF8A33',
+              },
+            },
+            fontFamily: {
+              sans: ['Inter', 'sans-serif'],
+              display: ['Space Grotesk', 'sans-serif'],
+              mono: ['JetBrains Mono', 'monospace'],
+            },
+            animation: {
+              'gradient-bg': 'gradient-bg 15s ease infinite',
+              'float': 'float 6s ease-in-out infinite',
+              'marquee': 'marquee 40s linear infinite',
+              'marquee-reverse': 'marquee-reverse 40s linear infinite',
+            },
+            keyframes: {
+              'gradient-bg': {
+                '0%, 100%': { 'background-position': '0% 50%' },
+                '50%': { 'background-position': '100% 50%' },
+              },
+              'float': {
+                '0%, 100%': { transform: 'translateY(-20px)' },
+                '50%': { transform: 'translateY(20px)' },
+              },
+              'marquee': {
+                '0%': { transform: 'translateX(0%)' },
+                '100%': { transform: 'translateX(-100%)' },
+              },
+              'marquee-reverse': {
+                '0%': { transform: 'translateX(-100%)' },
+                '100%': { transform: 'translateX(0%)' },
+              },
+            }
+          }
+        }
+      }
+    </script>
+  <script type="importmap">
+{
+  "imports": {
+    "react/": "https://aistudiocdn.com/react@^19.2.0/",
+    "react": "https://aistudiocdn.com/react@^19.2.0",
+    "react-dom/": "https://aistudiocdn.com/react-dom@^19.2.0/",
+    "framer-motion": "https://aistudiocdn.com/framer-motion@^11.2.12",
+    "gsap": "https://aistudiocdn.com/gsap@^3.13.0",
+    "lenis": "https://aistudiocdn.com/lenis@^1.1.6",
+    "lenis/": "https://aistudiocdn.com/lenis@^1.1.6/",
+    "@use-gesture/react": "https://aistudiocdn.com/@use-gesture/react@^10.3.1"
+  }
+}
+</script>
+<link rel="stylesheet" href="/index.css">
+</head>
+  <body>
+    <div id="root"></div>
+    <script type="text/javascript" src="https://cdn.jsdelivr.net/npm/@emailjs/browser@4/dist/email.min.js"></script>
+    <script type="module" src="/index.tsx"></script>
+  </body>
+</html>
