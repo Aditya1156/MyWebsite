@@ -187,6 +187,7 @@ export default function DomeGallery({
   const openStartedAtRef = useRef(0);
   const lastDragEndAt = useRef(0);
   const shareRootRef = useRef<Root | null>(null);
+  const closeFnRef = useRef<(() => void) | null>(null);
 
   const scrollLockedRef = useRef(false);
   const lockScroll = useCallback(() => {
@@ -478,17 +479,26 @@ export default function DomeGallery({
         width: ${finalWidth}px;
         height: ${finalHeight}px;
         opacity: 0;
-        z-index: 30;
+        z-index: 45;
         will-change: transform, opacity;
         transform-origin: top left;
         transition: transform ${enlargeTransitionMs}ms cubic-bezier(0.22, 1, 0.36, 1), opacity ${enlargeTransitionMs * 0.7}ms ease-out;
         border-radius: ${openedImageBorderRadius};
-        overflow: hidden;
-        box-shadow: 0 20px 40px rgba(0,0,0,.4);
+        overflow: visible;
+        pointer-events: none;
+    `;
+    
+    const imageContainer = document.createElement('div');
+    imageContainer.style.cssText = `
+        width: 100%;
+        height: 100%;
         background-color: #FFF7ED;
         padding: 16px;
         box-sizing: border-box;
-        pointer-events: none;
+        border-radius: ${openedImageBorderRadius};
+        box-shadow: 0 20px 40px rgba(0,0,0,.4);
+        position: relative;
+        pointer-events: auto;
     `;
     
     const rawSrc = parent.dataset.src || el.querySelector('img')?.src || '';
@@ -503,8 +513,51 @@ export default function DomeGallery({
         object-fit: contain;
         filter: ${grayscale ? 'grayscale(1)' : 'none'};
         border-radius: ${imgBorderRadius};
+        pointer-events: none;
     `;
-    overlay.appendChild(img);
+    imageContainer.appendChild(img);
+
+    const closeButton = document.createElement('button');
+    closeButton.innerHTML = '&times;';
+    closeButton.setAttribute('aria-label', 'Close image');
+    closeButton.style.cssText = `
+        position: absolute;
+        top: 8px;
+        right: 8px;
+        width: 40px;
+        height: 40px;
+        border-radius: 50%;
+        background: rgba(30, 30, 30, 0.8);
+        color: white;
+        border: none;
+        font-size: 32px;
+        line-height: 1;
+        cursor: pointer;
+        z-index: 20;
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        transition: all 0.2s;
+        font-weight: 300;
+        padding: 0;
+        pointer-events: auto;
+    `;
+    closeButton.onmouseover = () => {
+        closeButton.style.background = 'rgba(255, 107, 0, 0.9)';
+        closeButton.style.transform = 'scale(1.1)';
+    };
+    closeButton.onmouseout = () => {
+        closeButton.style.background = 'rgba(30, 30, 30, 0.8)';
+        closeButton.style.transform = 'scale(1)';
+    };
+    closeButton.onclick = (e) => {
+        e.stopPropagation();
+        if (closeFnRef.current) {
+            closeFnRef.current();
+        }
+    };
+    imageContainer.appendChild(closeButton);
+    overlay.appendChild(imageContainer);
 
     const shareWidgetContainer = document.createElement('div');
     shareWidgetContainer.style.cssText = `
@@ -512,8 +565,9 @@ export default function DomeGallery({
         bottom: 24px;
         right: 24px;
         z-index: 10;
+        pointer-events: auto;
     `;
-    overlay.appendChild(shareWidgetContainer);
+    imageContainer.appendChild(shareWidgetContainer);
 
     shareRootRef.current = createRoot(shareWidgetContainer);
     shareRootRef.current.render(
@@ -603,9 +657,16 @@ export default function DomeGallery({
           box-shadow: 0 10px 30px rgba(0,0,0,.35);
           transition: all ${enlargeTransitionMs}ms ease-out;
           pointer-events: none;
+      `;
+      
+      const animatingContainer = document.createElement('div');
+      animatingContainer.style.cssText = `
+          width: 100%;
+          height: 100%;
           background-color: #FFF7ED;
           padding: 16px;
           box-sizing: border-box;
+          border-radius: ${openedImageBorderRadius};
       `;
       
       const originalImg = overlay.querySelector('img');
@@ -613,8 +674,9 @@ export default function DomeGallery({
           const img = originalImg.cloneNode() as HTMLImageElement;
           const imgBorderRadius = (parseFloat(openedImageBorderRadius.replace('px', '') || '0') - 16) + 'px';
           img.style.cssText = `width: 100%; height: 100%; object-fit: contain; border-radius: ${imgBorderRadius}; filter: ${grayscale ? 'grayscale(1)' : 'none'};`;
-          animatingOverlay.appendChild(img);
+          animatingContainer.appendChild(img);
       }
+      animatingOverlay.appendChild(animatingContainer);
       
       overlay.remove();
       rootRef.current.appendChild(animatingOverlay);
@@ -668,6 +730,8 @@ export default function DomeGallery({
       animatingOverlay.addEventListener('transitionend', cleanup, { once: true });
     };
 
+    closeFnRef.current = close;
+
     scrim.addEventListener('click', close);
     const onKey = (e: KeyboardEvent) => {
       if (e.key === 'Escape') close();
@@ -677,6 +741,7 @@ export default function DomeGallery({
     return () => {
       scrim.removeEventListener('click', close);
       window.removeEventListener('keydown', onKey);
+      closeFnRef.current = null;
     };
   }, [enlargeTransitionMs, openedImageBorderRadius, grayscale, unlockScroll]);
 
@@ -799,18 +864,19 @@ export default function DomeGallery({
         />
 
         <div
+          ref={scrimRef}
+          className="scrim absolute inset-0 z-50 pointer-events-none opacity-0 transition-opacity duration-500 cursor-pointer"
+          style={{
+            background: 'rgba(30, 30, 30, 0.6)',
+            backdropFilter: 'blur(3px)'
+          }}
+        />
+        
+        <div
           ref={viewerRef}
           className="absolute inset-0 z-20 pointer-events-none flex items-center justify-center"
           style={{ padding: 'var(--viewer-pad)' }}
         >
-          <div
-            ref={scrimRef}
-            className="scrim absolute inset-0 z-40 pointer-events-none opacity-0 transition-opacity duration-500 cursor-pointer"
-            style={{
-              background: 'rgba(30, 30, 30, 0.6)',
-              backdropFilter: 'blur(3px)'
-            }}
-          />
           <div
             ref={frameRef}
             className="viewer-frame h-full aspect-square flex"
