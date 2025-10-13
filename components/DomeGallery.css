@@ -50,6 +50,13 @@
     opacity: 1 !important;
     pointer-events: all !important;
     background: rgba(30, 30, 30, 0.6) !important;
+    cursor: pointer !important;
+    z-index: 40 !important;
+  }
+  
+  .sphere-root[data-enlarging="true"] .enlarge {
+    pointer-events: none !important;
+    z-index: 30 !important;
   }
   
   @media (max-aspect-ratio: 1/1) {

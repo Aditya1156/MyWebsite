@@ -488,6 +488,7 @@ export default function DomeGallery({
         background-color: #FFF7ED;
         padding: 16px;
         box-sizing: border-box;
+        pointer-events: none;
     `;
     
     const rawSrc = parent.dataset.src || el.querySelector('img')?.src || '';
@@ -804,7 +805,7 @@ export default function DomeGallery({
         >
           <div
             ref={scrimRef}
-            className="scrim absolute inset-0 z-10 pointer-events-none opacity-0 transition-opacity duration-500"
+            className="scrim absolute inset-0 z-40 pointer-events-none opacity-0 transition-opacity duration-500 cursor-pointer"
             style={{
               background: 'rgba(30, 30, 30, 0.6)',
               backdropFilter: 'blur(3px)'
