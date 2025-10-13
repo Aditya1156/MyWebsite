@@ -25,7 +25,7 @@ const About: React.FC = () => {
               handle="adicodes"
               status="Available for Projects"
               contactText="Hire Me"
-              avatarUrl="https://picsum.photos/seed/aditya-avatar/800/1000"
+              avatarUrl="/images/aditya.jpeg"
               enableTilt={true}
               onContactClick={() => {
                 lenis?.scrollTo('#hire-me');
