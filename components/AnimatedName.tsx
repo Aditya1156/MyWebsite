@@ -6,8 +6,8 @@ const containerVariants: Variants = {
   visible: {
     opacity: 1,
     transition: {
-      staggerChildren: 0.08,
-      delayChildren: 0.5,
+      staggerChildren: 0.05, // Faster stagger for quicker appearance
+      delayChildren: 0.2, // Reduced delay
     },
   },
 };
@@ -38,19 +38,21 @@ const AnimatedName: React.FC = () => {
       animate="visible"
       aria-label="Aditya Kumar"
     >
-      <div>
-        {firstName.map((letter, index) => (
-          <motion.span key={`first-${index}`} variants={letterVariants} className="inline-block">
-            {letter}
-          </motion.span>
-        ))}
-      </div>
-      <div className="mt-2">
-        {lastName.map((letter, index) => (
-          <motion.span key={`last-${index}`} variants={letterVariants} className="inline-block text-orange">
-            {letter}
-          </motion.span>
-        ))}
+      <div className="flex justify-center items-center gap-3">
+        <span>
+          {firstName.map((letter, index) => (
+            <motion.span key={`first-${index}`} variants={letterVariants} className="inline-block">
+              {letter}
+            </motion.span>
+          ))}
+        </span>
+        <span className="text-orange">
+          {lastName.map((letter, index) => (
+            <motion.span key={`last-${index}`} variants={letterVariants} className="inline-block">
+              {letter}
+            </motion.span>
+          ))}
+        </span>
       </div>
     </motion.div>
   );

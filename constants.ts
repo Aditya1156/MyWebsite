@@ -37,6 +37,7 @@ export const NAV_LINKS = [
 export const SOCIAL_LINKS = [
   { label: 'GitHub', link: 'https://github.com/Aditya1156' },
   { label: 'LinkedIn', link: 'https://linkedin.com/in/aditya-kumar-165911339' },
+  { label: 'Twitter', link: 'https://twitter.com/adicodes_' },
   { label: 'Medium', link: 'https://medium.com/@refactorslife' },
 ];
 

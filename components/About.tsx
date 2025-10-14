@@ -28,7 +28,10 @@ const About: React.FC = () => {
               avatarUrl="/images/aditya.jpeg"
               enableTilt={true}
               onContactClick={() => {
-                lenis?.scrollTo('#hire-me');
+                lenis?.scrollTo('#hire-me', {
+                  duration: 1.5,
+                  easing: (t) => Math.min(1, 1.001 - Math.pow(2, -10 * t)),
+                });
               }}
             />
           </div>

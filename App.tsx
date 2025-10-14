@@ -3,6 +3,7 @@ import Loader from './components/Loader';
 import Selection from './components/Selection';
 import FullExperience from './components/FullExperience';
 import VCard from './components/VCard';
+import SEO from './components/SEO';
 
 declare global {
   interface Window {
@@ -45,9 +46,12 @@ const App: React.FC = () => {
   };
 
   return (
-    <div className="bg-cream text-charcoal font-sans min-h-screen">
-      {renderContent()}
-    </div>
+    <>
+      <SEO />
+      <div className="bg-cream text-charcoal font-sans min-h-screen">
+        {renderContent()}
+      </div>
+    </>
   );
 };
 

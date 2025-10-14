@@ -53,7 +53,11 @@ const Hero: React.FC = () => {
     e.preventDefault();
     const href = e.currentTarget.getAttribute('href');
     if (href && lenis) {
-      lenis.scrollTo(href);
+      lenis.scrollTo(href, {
+        duration: 1.2,
+        easing: (t) => Math.min(1, 1.001 - Math.pow(2, -10 * t)),
+        offset: 0,
+      });
     }
   };
   

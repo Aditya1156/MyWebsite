@@ -37,6 +37,11 @@ const FullExperience: React.FC = () => {
     return () => cancelFrame(update);
   }, []);
 
+  // Smooth scroll to top on mount
+  useEffect(() => {
+    window.scrollTo(0, 0);
+  }, []);
+
   const scrollIndicatorSections = NAV_LINKS.map(link => ({
     id: link.href.substring(1),
     name: link.name
@@ -77,7 +82,23 @@ const FullExperience: React.FC = () => {
 
   return (
     <>
-      <ReactLenis root options={{ autoRaf: false }} ref={lenisRef} />
+      <ReactLenis 
+        root 
+        options={{ 
+          autoRaf: false,
+          lerp: 0.1,
+          duration: 1.2,
+          easing: (t) => Math.min(1, 1.001 - Math.pow(2, -10 * t)),
+          orientation: 'vertical',
+          gestureOrientation: 'vertical',
+          smoothWheel: true,
+          smoothTouch: false,
+          wheelMultiplier: 1,
+          touchMultiplier: 2,
+          infinite: false,
+        }} 
+        ref={lenisRef} 
+      />
       <CursorTrail />
        <ScrollIndicator sections={scrollIndicatorSections} />
        <CardNav

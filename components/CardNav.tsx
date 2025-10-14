@@ -198,7 +198,11 @@ const CardNav: React.FC<CardNavProps> = ({
     e.preventDefault();
     if (!lenis) return;
     
-    const scroll = () => lenis.scrollTo(href);
+    const scroll = () => lenis.scrollTo(href, {
+      duration: 1.2,
+      easing: (t) => Math.min(1, 1.001 - Math.pow(2, -10 * t)),
+      offset: 0,
+    });
 
     if (isExpanded) {
       toggleMenu();
@@ -210,9 +214,11 @@ const CardNav: React.FC<CardNavProps> = ({
 
   return (
     <div
-      className={`card-nav-container fixed left-1/2 -translate-x-1/2 w-[90%] max-w-[800px] z-[99] top-[1.2em] md:top-[2em] ${className} transition-transform duration-300 ease-in-out ${
-        !isVisible && !isExpanded ? '-translate-y-[calc(100%+2.4em)]' : 'translate-y-0'
-      }`}
+      className={`card-nav-container fixed w-[90%] max-w-[800px] z-[99] top-[1.2em] md:top-[2em] ${className} transition-transform duration-300 ease-in-out`}
+      style={{
+        left: '50%',
+        transform: `translateX(-50%) ${!isVisible && !isExpanded ? 'translateY(calc(-100% - 2.4em))' : 'translateY(0)'}`,
+      }}
     >
       <nav
         ref={navRef}
