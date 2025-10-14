@@ -110,7 +110,7 @@ const Hero: React.FC = () => {
           </span>
         </motion.h1>
         <p className="font-sans text-lg md:text-xl text-charcoal/80 mb-10">
-          Engineer | Creator | Dream Builder
+          MERN Stack Developer | Full-Stack Engineer | AI Enthusiast
         </p>
         <div className="flex justify-center items-center space-x-4">
           <a href="#hire-me" onClick={handleScrollTo} className="bg-orange text-cream px-8 py-4 rounded-full font-semibold hover:bg-orange-light transition-all duration-300 transform hover:scale-105 inline-flex items-center group">

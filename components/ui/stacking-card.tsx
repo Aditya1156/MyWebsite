@@ -1,6 +1,6 @@
 import { useTransform, motion, useScroll, MotionValue } from 'framer-motion';
 import { useRef } from 'react';
-import { Project } from '../../../types';
+import { Project } from '../../types';
 import { ArrowRightIcon } from '../icons';
 
 interface CardProps {
@@ -32,7 +32,7 @@ export const Card = ({
   return (
     <div
       ref={container}
-      className='h-screen flex items-center justify-center sticky top-0'
+      className='h-screen flex items-center justify-center sticky top-0 overflow-visible'
     >
       <motion.div
         style={{
@@ -40,7 +40,7 @@ export const Card = ({
           scale,
           top: `calc(-5vh + ${i * 25}px)`,
         }}
-        className={`flex flex-col relative h-[500px] w-[90vw] max-w-[1000px] rounded-2xl p-6 md:p-10 origin-top text-charcoal`}
+        className={`flex flex-col relative h-[500px] w-[90vw] max-w-[1000px] rounded-2xl p-6 md:p-10 origin-top text-charcoal overflow-visible`}
       >
         <h2 className='text-2xl md:text-3xl text-center font-display font-bold'>{project.title}</h2>
         <div className={`flex flex-col md:flex-row h-full mt-5 gap-6 md:gap-10`}>

@@ -191,15 +191,17 @@ export default function DomeGallery({
 
   const scrollLockedRef = useRef(false);
   const lockScroll = useCallback(() => {
-    if (scrollLockedRef.current) return;
-    scrollLockedRef.current = true;
-    document.body.classList.add('dg-scroll-lock');
+    // Disabled to prevent app freezing
+    // if (scrollLockedRef.current) return;
+    // scrollLockedRef.current = true;
+    // document.body.classList.add('dg-scroll-lock');
   }, []);
   const unlockScroll = useCallback(() => {
-    if (!scrollLockedRef.current) return;
-    if (rootRef.current?.getAttribute('data-enlarging') === 'true') return;
-    scrollLockedRef.current = false;
-    document.body.classList.remove('dg-scroll-lock');
+    // Disabled to prevent app freezing
+    // if (!scrollLockedRef.current) return;
+    // if (rootRef.current?.getAttribute('data-enlarging') === 'true') return;
+    // scrollLockedRef.current = false;
+    // document.body.classList.remove('dg-scroll-lock');
   }, []);
 
   const items = useMemo(() => buildItems(images, segments), [images, segments]);
@@ -479,7 +481,7 @@ export default function DomeGallery({
         width: ${finalWidth}px;
         height: ${finalHeight}px;
         opacity: 0;
-        z-index: 45;
+        z-index: 60;
         will-change: transform, opacity;
         transform-origin: top left;
         transition: transform ${enlargeTransitionMs}ms cubic-bezier(0.22, 1, 0.36, 1), opacity ${enlargeTransitionMs * 0.7}ms ease-out;
@@ -487,6 +489,13 @@ export default function DomeGallery({
         overflow: visible;
         pointer-events: none;
     `;
+    
+    // Add click handler to overlay background to close on outside click
+    overlay.onclick = (e) => {
+      if (e.target === overlay && closeFnRef.current) {
+        closeFnRef.current();
+      }
+    };
     
     const imageContainer = document.createElement('div');
     imageContainer.style.cssText = `
@@ -533,22 +542,25 @@ export default function DomeGallery({
         font-size: 32px;
         line-height: 1;
         cursor: pointer;
-        z-index: 20;
+        z-index: 30;
         display: flex;
         align-items: center;
         justify-content: center;
-        transition: all 0.2s;
+        transition: all 0.3s cubic-bezier(0.34, 1.56, 0.64, 1);
         font-weight: 300;
         padding: 0;
         pointer-events: auto;
+        box-shadow: 0 4px 12px rgba(0, 0, 0, 0.3);
     `;
     closeButton.onmouseover = () => {
-        closeButton.style.background = 'rgba(255, 107, 0, 0.9)';
-        closeButton.style.transform = 'scale(1.1)';
+        closeButton.style.background = 'rgba(255, 107, 0, 0.95)';
+        closeButton.style.transform = 'scale(1.15) rotate(90deg)';
+        closeButton.style.boxShadow = '0 6px 16px rgba(255, 107, 0, 0.4)';
     };
     closeButton.onmouseout = () => {
         closeButton.style.background = 'rgba(30, 30, 30, 0.8)';
-        closeButton.style.transform = 'scale(1)';
+        closeButton.style.transform = 'scale(1) rotate(0deg)';
+        closeButton.style.boxShadow = '0 4px 12px rgba(0, 0, 0, 0.3)';
     };
     closeButton.onclick = (e) => {
         e.stopPropagation();
@@ -564,7 +576,7 @@ export default function DomeGallery({
         position: absolute;
         bottom: 24px;
         right: 24px;
-        z-index: 10;
+        z-index: 30;
         pointer-events: auto;
     `;
     imageContainer.appendChild(shareWidgetContainer);
@@ -574,7 +586,7 @@ export default function DomeGallery({
         <ShareWidget url={window.location.href} title={rawAlt || 'A memory from Aditya Kumar\'s portfolio'} />
     );
 
-    viewerRef.current.appendChild(overlay);
+    mainRef.current.appendChild(overlay);
 
     const tx0 = tileR.left - finalLeft;
     const ty0 = tileR.top - finalTop;
@@ -605,7 +617,7 @@ export default function DomeGallery({
       const el = focusedElRef.current;
       if (!el || !rootRef.current) return;
       const parent = el.parentElement as HTMLElement;
-      const overlay = viewerRef.current?.querySelector('.enlarge') as HTMLElement | null;
+      const overlay = mainRef.current?.querySelector('.enlarge') as HTMLElement | null;
       if (!overlay) return;
 
       if (shareRootRef.current) {
@@ -846,7 +858,9 @@ export default function DomeGallery({
           style={{
             WebkitMaskImage: `radial-gradient(rgba(235, 235, 235, 0) 70%, var(--overlay-blur-color, ${overlayBlurColor}) 90%)`,
             maskImage: `radial-gradient(rgba(235, 235, 235, 0) 70%, var(--overlay-blur-color, ${overlayBlurColor}) 90%)`,
-            backdropFilter: 'blur(3px)'
+            backdropFilter: focusedElRef.current ? 'none' : 'blur(3px)',
+            opacity: focusedElRef.current ? 0 : 1,
+            transition: 'opacity 300ms'
           }}
         />
 
@@ -865,10 +879,19 @@ export default function DomeGallery({
 
         <div
           ref={scrimRef}
-          className="scrim absolute inset-0 z-50 pointer-events-none opacity-0 transition-opacity duration-500 cursor-pointer"
+          className="scrim absolute inset-0 z-50 pointer-events-none opacity-0 transition-all duration-500 cursor-pointer"
           style={{
-            background: 'rgba(30, 30, 30, 0.6)',
-            backdropFilter: 'blur(3px)'
+            background: 'rgba(30, 30, 30, 0.85)'
+          }}
+          onMouseEnter={(e) => {
+            if (rootRef.current?.getAttribute('data-enlarging') === 'true') {
+              e.currentTarget.style.background = 'rgba(30, 30, 30, 0.9)';
+            }
+          }}
+          onMouseLeave={(e) => {
+            if (rootRef.current?.getAttribute('data-enlarging') === 'true') {
+              e.currentTarget.style.background = 'rgba(30, 30, 30, 0.85)';
+            }
           }}
         />
         

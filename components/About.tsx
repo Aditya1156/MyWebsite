@@ -35,19 +35,19 @@ const About: React.FC = () => {
           <div className="lg:max-w-xl text-center lg:text-left">
             <h2 className="font-display text-4xl md:text-5xl font-bold text-charcoal mb-6 tracking-tighter">My Story, My Purpose</h2>
             <p className="text-charcoal/80 mb-6 leading-relaxed">
-              I'm Aditya, a passionate engineer and creator driven by curiosity and a desire to build things that matter. My journey in technology is fueled by a fascination with turning complex problems into elegant, user-centric solutions. From architecting intelligent AI systems to crafting pixel-perfect web experiences, I thrive at the intersection of innovation and precision.
+              I'm Aditya Kumar, a third-year Computer Science student at PESITM, Shivamogga, driven by an insatiable passion for MERN stack development and full-stack engineering. My journey in tech is powered by the thrill of transforming complex challenges into scalable, intelligent web applications that make a real impact.
             </p>
             <p className="text-charcoal/80 mb-8 leading-relaxed">
-              I believe in the power of technology to not just solve problems, but to build dreams. Let's create something extraordinary together.
+              From architecting <strong>TypingPath</strong>—an AI-powered typing education platform with Google Gemini integration—to building robust desktop applications like an Airline Management System, I thrive at the intersection of performance optimization, clean code architecture, and modern UI/UX design. I believe technology should be elegant, purposeful, and user-centric. Let's build something extraordinary together.
             </p>
-            <button
-              type="button"
-              onClick={() => alert('Resume download is not available in this portfolio demo.')}
-              className="bg-charcoal text-cream px-8 py-3 rounded-full font-semibold hover:bg-orange transition-all duration-300 transform hover:scale-105 inline-flex items-center group cursor-pointer"
+            <a
+              href="/resume.pdf"
+              download="Aditya_Kumar_Resume.pdf"
+              className="bg-charcoal text-cream px-8 py-3 rounded-full font-semibold hover:bg-orange transition-all duration-300 transform hover:scale-105 inline-flex items-center group cursor-pointer no-underline"
             >
               Download Resume
               <DownloadIcon className="w-5 h-5 ml-2 transition-transform duration-300 group-hover:translate-y-0.5" />
-            </button>
+            </a>
           </div>
         </div>
         

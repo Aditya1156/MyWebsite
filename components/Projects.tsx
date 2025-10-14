@@ -6,6 +6,7 @@ import { ArrowRightIcon, CloseIcon, GithubIcon, GoArrowUpRightIcon } from './ico
 import { motion, AnimatePresence, Variants } from 'framer-motion';
 import StackingCards from './ui/stacking-card';
 import ShareButtons from './ShareButtons';
+import './Projects.css';
 
 // FIX: Explicitly type backdropVariants with Variants for consistency.
 const backdropVariants: Variants = {
@@ -53,13 +54,20 @@ const Projects: React.FC = () => {
   // Effect to lock body scroll when modal is open
   useEffect(() => {
     if (selectedProject) {
+        // Store original overflow values
+        const originalOverflow = document.body.style.overflow;
+        const originalPaddingRight = document.body.style.paddingRight;
+        
+        // Prevent scrolling on body
         document.body.style.overflow = 'hidden';
-    } else {
-        document.body.style.overflow = 'auto';
+        document.body.style.paddingRight = '0px';
+        
+        // Cleanup function
+        return () => {
+            document.body.style.overflow = originalOverflow;
+            document.body.style.paddingRight = originalPaddingRight;
+        };
     }
-    return () => {
-        document.body.style.overflow = 'auto';
-    };
   }, [selectedProject]);
 
 
@@ -86,22 +94,35 @@ const Projects: React.FC = () => {
             animate="visible"
             exit="hidden"
             onClick={() => setSelectedProject(null)}
-            className="fixed inset-0 bg-charcoal/70 backdrop-blur-sm z-50 flex items-center justify-center p-4 cursor-pointer"
+            className="fixed inset-0 bg-charcoal/70 backdrop-blur-sm z-50 flex items-center justify-center p-4 overflow-hidden"
+            style={{ cursor: 'pointer' }}
           >
             <motion.div
               key="modal-content"
               variants={modalVariants}
               exit="exit"
               onClick={(e) => e.stopPropagation()}
-              className="bg-white rounded-2xl w-full max-w-4xl max-h-[90vh] overflow-y-auto p-6 md:p-8 lg:p-12 relative cursor-default"
+              onWheel={(e) => e.stopPropagation()}
+              onTouchMove={(e) => e.stopPropagation()}
+              className="bg-white rounded-2xl w-full max-w-4xl overflow-hidden relative"
+              style={{ cursor: 'default', maxHeight: '90vh' }}
             >
-              <button 
-                onClick={() => setSelectedProject(null)} 
-                className="absolute top-4 right-4 text-charcoal/50 hover:text-orange transition-colors z-10"
-                aria-label="Close project details"
+              {/* Scrollable content wrapper */}
+              <div 
+                className="modal-scroll overflow-y-auto p-6 md:p-8 lg:p-12"
+                style={{
+                  scrollbarWidth: 'thin',
+                  scrollbarColor: '#ff6b00 #f5f5f5',
+                  maxHeight: '90vh'
+                }}
               >
-                <CloseIcon className="w-8 h-8" />
-              </button>
+                <button 
+                  onClick={() => setSelectedProject(null)} 
+                  className="sticky top-0 right-0 float-right text-charcoal/50 hover:text-orange transition-colors z-20 bg-white rounded-full p-2 shadow-lg mb-4"
+                  aria-label="Close project details"
+                >
+                  <CloseIcon className="w-6 h-6" />
+                </button>
               
                 <img src={selectedProject.imageUrl} alt={selectedProject.title} className="w-full h-auto max-h-80 object-cover rounded-xl shadow-lg mb-8" />
 
@@ -156,6 +177,7 @@ const Projects: React.FC = () => {
                         </div>
                     </div>
                 </div>
+              </div>
             </motion.div>
           </motion.div>
         )}
