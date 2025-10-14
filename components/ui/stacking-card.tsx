@@ -99,8 +99,9 @@ const StackingCards = ({ projects, onCardClick }: StackingCardsProps) => {
             const range: [number, number] = [start, end];
             
             return (
+                // @ts-ignore - key is a valid React prop
                 <Card
-                    key={`p_${i}`}
+                    key={`project_${i}_${project.title}`}
                     i={i}
                     project={project}
                     progress={scrollYProgress}
