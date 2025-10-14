@@ -58,26 +58,26 @@ const Contact: React.FC = () => {
   };
 
   return (
-    <AnimatedSection id="contact" className="py-24 bg-cream">
-      <div className="container mx-auto px-6">
-        <div className="grid lg:grid-cols-2 gap-16 items-center">
+    <AnimatedSection id="contact" className="py-16 sm:py-20 md:py-24 bg-cream">
+      <div className="container mx-auto px-4 sm:px-6">
+        <div className="grid lg:grid-cols-2 gap-10 sm:gap-12 lg:gap-16 items-center">
           <div>
-            <h2 className="font-display text-4xl md:text-5xl font-bold mb-4 tracking-tighter">
+            <h2 className="font-display text-3xl sm:text-4xl md:text-5xl font-bold mb-3 sm:mb-4 tracking-tighter">
               Say Hello
             </h2>
-            <p className="text-charcoal/70 text-lg leading-relaxed mb-8">
+            <p className="text-charcoal/70 text-sm sm:text-base md:text-lg leading-relaxed mb-6 sm:mb-8">
               Whether you have a question, a project idea, or just want to connect, feel free to drop me a line. I'm always excited to hear about new ideas and opportunities.
             </p>
             <div>
-                <h3 className="font-display text-xl font-bold mb-2">Contact Details</h3>
-                <p className="text-charcoal/80">
+                <h3 className="font-display text-lg sm:text-xl font-bold mb-2">Contact Details</h3>
+                <p className="text-charcoal/80 text-sm sm:text-base">
                     <a href="mailto:hello@adicodes.in" className="hover:text-orange transition-colors">hello@adicodes.in</a>
                 </p>
             </div>
           </div>
           <motion.form 
             onSubmit={handleSubmit} 
-            className="w-full space-y-6 bg-white p-8 rounded-2xl shadow-lg"
+            className="w-full space-y-5 sm:space-y-6 bg-white p-5 sm:p-6 md:p-8 rounded-xl sm:rounded-2xl shadow-lg"
             variants={containerVariants}
             initial="hidden"
             whileInView="visible"
@@ -90,7 +90,7 @@ const Contact: React.FC = () => {
             <motion.button 
               type="submit"
               disabled={status === 'sending'}
-              className="w-full bg-charcoal text-cream font-bold py-4 px-8 rounded-lg transition-colors duration-300 hover:bg-orange focus:outline-none focus:ring-2 focus:ring-orange focus:ring-offset-2 disabled:bg-charcoal/50 disabled:cursor-not-allowed inline-flex items-center justify-center group"
+              className="w-full bg-charcoal text-cream font-bold py-3 sm:py-4 px-6 sm:px-8 rounded-lg transition-colors duration-300 hover:bg-orange focus:outline-none focus:ring-2 focus:ring-orange focus:ring-offset-2 disabled:bg-charcoal/50 disabled:cursor-not-allowed inline-flex items-center justify-center group min-h-[48px] touch-manipulation text-sm sm:text-base"
               whileHover={{ scale: 1.03 }}
               whileTap={{ scale: 0.98 }}
               transition={{ type: 'spring', stiffness: 400, damping: 15 }}
@@ -98,8 +98,8 @@ const Contact: React.FC = () => {
               {status === 'sending' ? 'Sending...' : 'Send Message'}
                {status !== 'sending' && <ArrowRightIcon className="w-5 h-5 ml-2 transition-transform duration-300 group-hover:translate-x-1" />}
             </motion.button>
-            {status === 'success' && <p className="text-center text-green-600 text-sm">✅ Message sent! Thanks for reaching out.</p>}
-            {status === 'error' && <p className="text-center text-red-600 text-sm">❌ Oops! Something went wrong. Please try again.</p>}
+            {status === 'success' && <p className="text-center text-green-600 text-xs sm:text-sm">✅ Message sent! Thanks for reaching out.</p>}
+            {status === 'error' && <p className="text-center text-red-600 text-xs sm:text-sm">❌ Oops! Something went wrong. Please try again.</p>}
           </motion.form>
         </div>
       </div>
@@ -111,14 +111,14 @@ const InputField: React.FC<{ label: string, name: string, type: string, placehol
   const [isFocused, setIsFocused] = useState(false);
   return (
     <motion.div variants={fieldVariants} className="transition-transform duration-300 ease-out focus-within:-translate-y-1">
-      <label htmlFor={name} className="block text-sm font-medium text-charcoal/80 mb-2">{label}</label>
+      <label htmlFor={name} className="block text-xs sm:text-sm font-medium text-charcoal/80 mb-1.5 sm:mb-2">{label}</label>
       <motion.input 
         type={type} 
         name={name} 
         id={name} 
         placeholder={placeholder}
         required
-        className="w-full bg-cream/50 border border-cream rounded-lg py-3 px-4 focus:outline-none focus:ring-2 focus:ring-orange transition-all"
+        className="w-full bg-cream/50 border border-cream rounded-lg py-2.5 sm:py-3 px-3 sm:px-4 focus:outline-none focus:ring-2 focus:ring-orange transition-all text-sm sm:text-base min-h-[44px] touch-manipulation"
         onFocus={() => setIsFocused(true)}
         onBlur={() => setIsFocused(false)}
         animate={{ boxShadow: isFocused ? "0 0 0 4px rgba(255, 107, 0, 0.2)" : "0 0 0 0px rgba(255, 107, 0, 0)" }}
@@ -132,14 +132,14 @@ const TextareaField: React.FC<{ label: string, name: string, placeholder: string
   const [isFocused, setIsFocused] = useState(false);
   return (
     <motion.div variants={fieldVariants} className="transition-transform duration-300 ease-out focus-within:-translate-y-1">
-      <label htmlFor={name} className="block text-sm font-medium text-charcoal/80 mb-2">{label}</label>
+      <label htmlFor={name} className="block text-xs sm:text-sm font-medium text-charcoal/80 mb-1.5 sm:mb-2">{label}</label>
       <motion.textarea
         name={name}
         id={name}
         placeholder={placeholder}
         rows={4}
         required
-        className="w-full bg-cream/50 border border-cream rounded-lg py-3 px-4 focus:outline-none focus:ring-2 focus:ring-orange transition-all resize-none"
+        className="w-full bg-cream/50 border border-cream rounded-lg py-2.5 sm:py-3 px-3 sm:px-4 focus:outline-none focus:ring-2 focus:ring-orange transition-all resize-none text-sm sm:text-base min-h-[100px] touch-manipulation"
         onFocus={() => setIsFocused(true)}
         onBlur={() => setIsFocused(false)}
         animate={{ boxShadow: isFocused ? "0 0 0 4px rgba(255, 107, 0, 0.2)" : "0 0 0 0px rgba(255, 107, 0, 0)" }}

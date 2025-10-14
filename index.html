@@ -3,8 +3,15 @@
   <head>
     <!-- Essential Meta Tags -->
     <meta charset="UTF-8" />
-    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=5.0, user-scalable=yes, viewport-fit=cover" />
     <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+    <meta name="format-detection" content="telephone=no" />
+    <meta name="mobile-web-app-capable" content="yes" />
+    <meta name="apple-mobile-web-app-capable" content="yes" />
+    <meta name="apple-mobile-web-app-status-bar-style" content="black-translucent" />
+    <meta name="apple-mobile-web-app-title" content="Aditya Kumar" />
+    <meta name="HandheldFriendly" content="true" />
+    <meta name="MobileOptimized" content="width" />
     
     <!-- Primary Meta Tags -->
     <title>Aditya Kumar - Full Stack Developer | MERN Stack Specialist | React & TypeScript Expert</title>
@@ -160,6 +167,36 @@
       /* Disable native smooth scroll - Lenis will handle it */
       html {
         scroll-behavior: auto;
+      }
+      
+      /* Mobile touch optimizations */
+      * {
+        -webkit-tap-highlight-color: rgba(255, 107, 0, 0.1);
+        -webkit-touch-callout: none;
+      }
+      
+      /* Prevent text size adjustment on orientation change */
+      html {
+        -webkit-text-size-adjust: 100%;
+        -ms-text-size-adjust: 100%;
+        text-size-adjust: 100%;
+      }
+      
+      /* Safe area handling for notched devices */
+      body {
+        padding: env(safe-area-inset-top) env(safe-area-inset-right) env(safe-area-inset-bottom) env(safe-area-inset-left);
+      }
+      
+      /* Smooth scrolling for touch devices */
+      @supports (-webkit-overflow-scrolling: touch) {
+        * {
+          -webkit-overflow-scrolling: touch;
+        }
+      }
+      
+      /* Better touch target sizing */
+      .touch-manipulation {
+        touch-action: manipulation;
       }
     </style>
     <script>

@@ -43,8 +43,8 @@ const modalVariants: Variants = {
 
 const DetailSection: React.FC<{ title: string; content: string }> = ({ title, content }) => (
   <div>
-    <h3 className="font-display text-2xl font-bold text-charcoal mb-2 border-l-4 border-orange pl-3">{title}</h3>
-    <p className="text-charcoal/80 leading-relaxed">{content}</p>
+    <h3 className="font-display text-lg sm:text-xl md:text-2xl font-bold text-charcoal mb-2 border-l-4 border-orange pl-3">{title}</h3>
+    <p className="text-charcoal/80 leading-relaxed text-sm sm:text-base">{content}</p>
   </div>
 );
 
@@ -73,10 +73,10 @@ const Projects: React.FC = () => {
 
   return (
     <section id="projects" className="bg-charcoal">
-      <AnimatedSection className="pt-24 pb-16">
-        <div className="container mx-auto px-6 text-center">
-          <h2 className="font-display text-4xl md:text-5xl font-bold text-cream mb-6 tracking-tighter">Things I've Built</h2>
-          <p className="text-cream/70 max-w-2xl mx-auto">
+      <AnimatedSection className="pt-16 sm:pt-20 md:pt-24 pb-12 sm:pb-14 md:pb-16">
+        <div className="container mx-auto px-4 sm:px-6 text-center">
+          <h2 className="font-display text-3xl sm:text-4xl md:text-5xl font-bold text-cream mb-4 sm:mb-6 tracking-tighter">Things I've Built</h2>
+          <p className="text-cream/70 max-w-2xl mx-auto text-sm sm:text-base px-4">
               A selection of projects that showcase my passion for creating meaningful technology. Scroll down to see them in action.
           </p>
         </div>
@@ -109,7 +109,7 @@ const Projects: React.FC = () => {
             >
               {/* Scrollable content wrapper */}
               <div 
-                className="modal-scroll overflow-y-auto p-6 md:p-8 lg:p-12"
+                className="modal-scroll overflow-y-auto p-5 sm:p-6 md:p-8 lg:p-12"
                 style={{
                   scrollbarWidth: 'thin',
                   scrollbarColor: '#ff6b00 #f5f5f5',
@@ -118,32 +118,32 @@ const Projects: React.FC = () => {
               >
                 <button 
                   onClick={() => setSelectedProject(null)} 
-                  className="sticky top-0 right-0 float-right text-charcoal/50 hover:text-orange transition-colors z-20 bg-white rounded-full p-2 shadow-lg mb-4"
+                  className="sticky top-0 right-0 float-right text-charcoal/50 hover:text-orange transition-colors z-20 bg-white rounded-full p-2 shadow-lg mb-3 sm:mb-4 min-h-[44px] min-w-[44px] touch-manipulation"
                   aria-label="Close project details"
                 >
-                  <CloseIcon className="w-6 h-6" />
+                  <CloseIcon className="w-5 h-5 sm:w-6 sm:h-6" />
                 </button>
               
-                <img src={selectedProject.imageUrl} alt={selectedProject.title} className="w-full h-auto max-h-80 object-cover rounded-xl shadow-lg mb-8" />
+                <img src={selectedProject.imageUrl} alt={selectedProject.title} className="w-full h-auto max-h-60 sm:max-h-80 object-cover rounded-lg sm:rounded-xl shadow-lg mb-6 sm:mb-8" />
 
-                <div className="grid md:grid-cols-3 gap-8">
+                <div className="grid md:grid-cols-3 gap-6 sm:gap-8">
                     <div className="md:col-span-2">
-                        <h2 className="font-display text-3xl md:text-4xl font-bold text-charcoal tracking-tighter mb-2">{selectedProject.title}</h2>
-                        <p className="font-mono text-sm text-charcoal/60 mb-6">{selectedProject.category} Project</p>
+                        <h2 className="font-display text-2xl sm:text-3xl md:text-4xl font-bold text-charcoal tracking-tighter mb-2">{selectedProject.title}</h2>
+                        <p className="font-mono text-xs sm:text-sm text-charcoal/60 mb-5 sm:mb-6">{selectedProject.category} Project</p>
                         
-                        <div className="space-y-8">
+                        <div className="space-y-6 sm:space-y-8">
                             <DetailSection title="About" content={selectedProject.description} />
                             <DetailSection title="The Challenge" content={selectedProject.challenge} />
                             <DetailSection title="The Solution" content={selectedProject.solution} />
                         </div>
                     </div>
                     <div className="md:col-span-1">
-                        <div className="bg-cream p-6 rounded-xl space-y-6">
+                        <div className="bg-cream p-5 sm:p-6 rounded-xl space-y-5 sm:space-y-6">
                             <div>
-                                <h4 className="font-display text-xl font-bold text-charcoal mb-4">Tech Stack</h4>
-                                <div className="flex flex-wrap gap-2">
+                                <h4 className="font-display text-lg sm:text-xl font-bold text-charcoal mb-3 sm:mb-4">Tech Stack</h4>
+                                <div className="flex flex-wrap gap-1.5 sm:gap-2">
                                     {selectedProject.tools.map(tool => (
-                                        <span key={tool} className="text-sm font-mono bg-white text-charcoal/80 px-3 py-1 rounded-full">{tool}</span>
+                                        <span key={tool} className="text-xs sm:text-sm font-mono bg-white text-charcoal/80 px-2 sm:px-3 py-1 rounded-full">{tool}</span>
                                     ))}
                                 </div>
                             </div>

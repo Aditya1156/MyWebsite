@@ -32,7 +32,7 @@ export const Card = ({
   return (
     <div
       ref={container}
-      className='h-screen flex items-center justify-center sticky top-0 overflow-visible'
+      className='h-screen flex items-center justify-center sticky top-0 overflow-visible py-4 sm:py-0'
     >
       <motion.div
         style={{
@@ -40,25 +40,28 @@ export const Card = ({
           scale,
           top: `calc(-5vh + ${i * 25}px)`,
         }}
-        className={`flex flex-col relative h-[500px] w-[90vw] max-w-[1000px] rounded-2xl p-6 md:p-10 origin-top text-charcoal overflow-visible`}
+        className={`flex flex-col relative h-auto min-h-[520px] sm:min-h-[500px] md:h-[500px] w-[92vw] sm:w-[90vw] max-w-[1000px] rounded-xl sm:rounded-2xl p-5 sm:p-6 md:p-10 origin-top text-charcoal overflow-visible`}
       >
-        <h2 className='text-2xl md:text-3xl text-center font-display font-bold'>{project.title}</h2>
-        <div className={`flex flex-col md:flex-row h-full mt-5 gap-6 md:gap-10`}>
+        <h2 className='text-xl sm:text-2xl md:text-3xl text-center font-display font-bold mb-3 sm:mb-0'>{project.title}</h2>
+        <div className={`flex flex-col md:flex-row h-full mt-3 sm:mt-5 gap-4 sm:gap-6 md:gap-10`}>
           <div className={`w-full md:w-[40%] relative md:top-[10%]`}>
-            <p className='text-sm text-charcoal/80 leading-relaxed'>{project.description}</p>
-             <div className="flex flex-wrap gap-2 my-4">
+            <p className='text-xs sm:text-sm text-charcoal/80 leading-relaxed mb-3 sm:mb-0'>{project.description}</p>
+             <div className="flex flex-wrap gap-1.5 sm:gap-2 my-3 sm:my-4">
                 {project.tools.map(tool => (
-                  <span key={tool} className="text-xs font-mono bg-white/50 text-charcoal/80 px-3 py-1 rounded-full">{tool}</span>
+                  <span key={tool} className="text-[10px] sm:text-xs font-mono bg-white/50 text-charcoal/80 px-2 sm:px-3 py-0.5 sm:py-1 rounded-full">{tool}</span>
                 ))}
               </div>
-            <button onClick={() => onCardClick(project)} className="inline-flex items-center text-orange font-semibold hover:text-orange-light transition-colors duration-300 group mt-2">
+            <button 
+              onClick={() => onCardClick(project)} 
+              className="inline-flex items-center text-orange font-semibold hover:text-orange-light transition-colors duration-300 group mt-1 sm:mt-2 text-sm sm:text-base min-h-[44px] sm:min-h-0 touch-manipulation"
+            >
                 View Case Study
                 <ArrowRightIcon className="w-4 h-4 ml-2 transition-transform duration-300 group-hover:translate-x-1" />
             </button>
           </div>
 
           <div
-            className={`relative w-full md:w-[60%] h-48 md:h-full rounded-lg overflow-hidden `}
+            className={`relative w-full md:w-[60%] h-40 sm:h-48 md:h-full rounded-lg overflow-hidden `}
           >
             <motion.div
               className={`w-full h-full`}

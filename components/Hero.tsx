@@ -88,15 +88,16 @@ const Hero: React.FC = () => {
       
       {/* Icons layer - icons are now outside the main background div to move independently */}
       <div className="absolute inset-0 z-0" aria-hidden="true">
-        <FloatingIcon icon={<ReactIcon className="w-16 h-16" />} position="top-20 left-10" animationDelay="0s" y={icon1Y} />
-        <FloatingIcon icon={<AIIcon className="w-20 h-20" />} position="top-1/2 right-16" animationDelay="-2s" y={icon2Y} />
-        <FloatingIcon icon={<DevIcon className="w-12 h-12" />} position="bottom-24 left-1/4" animationDelay="-4s" y={icon3Y} />
-        <FloatingIcon icon={<ReactIcon className="w-8 h-8" />} position="bottom-10 right-1/4" animationDelay="-1s" y={icon4Y} />
+        {/* Mobile: smaller icons and adjusted positions */}
+        <FloatingIcon icon={<ReactIcon className="w-10 h-10 md:w-16 md:h-16" />} position="top-16 left-4 md:top-20 md:left-10" animationDelay="0s" y={icon1Y} />
+        <FloatingIcon icon={<AIIcon className="w-12 h-12 md:w-20 md:h-20" />} position="top-1/2 right-8 md:right-16" animationDelay="-2s" y={icon2Y} />
+        <FloatingIcon icon={<DevIcon className="w-8 h-8 md:w-12 md:h-12" />} position="bottom-20 left-8 md:bottom-24 md:left-1/4" animationDelay="-4s" y={icon3Y} />
+        <FloatingIcon icon={<ReactIcon className="w-6 h-6 md:w-8 md:h-8" />} position="bottom-12 right-12 md:bottom-10 md:right-1/4" animationDelay="-1s" y={icon4Y} />
       </div>
       
-      <div className="container mx-auto px-6 text-center z-10">
+      <div className="container mx-auto px-4 sm:px-6 text-center z-10">
         <motion.h1 
-          className="font-display text-5xl md:text-7xl lg:text-8xl font-bold text-charcoal mb-4 tracking-tighter"
+          className="font-display text-4xl sm:text-5xl md:text-7xl lg:text-8xl font-bold text-charcoal mb-4 md:mb-6 tracking-tighter leading-tight"
           variants={headlineContainerVariants}
           initial="hidden"
           animate="visible"
@@ -113,15 +114,23 @@ const Hero: React.FC = () => {
             </motion.span>
           </span>
         </motion.h1>
-        <p className="font-sans text-lg md:text-xl text-charcoal/80 mb-10">
+        <p className="font-sans text-base sm:text-lg md:text-xl text-charcoal/80 mb-8 md:mb-10 px-4">
           MERN Stack Developer | Full-Stack Engineer | AI Enthusiast
         </p>
-        <div className="flex justify-center items-center space-x-4">
-          <a href="#hire-me" onClick={handleScrollTo} className="bg-orange text-cream px-8 py-4 rounded-full font-semibold hover:bg-orange-light transition-all duration-300 transform hover:scale-105 inline-flex items-center group">
+        <div className="flex flex-col sm:flex-row justify-center items-center gap-4 px-4">
+          <a 
+            href="#hire-me" 
+            onClick={handleScrollTo} 
+            className="bg-orange text-cream px-6 sm:px-8 py-3 sm:py-4 rounded-full font-semibold hover:bg-orange-light transition-all duration-300 transform hover:scale-105 inline-flex items-center justify-center group w-full sm:w-auto min-h-[48px] touch-manipulation"
+          >
             Hire Me
             <ArrowRightIcon className="w-5 h-5 ml-2 transition-transform duration-300 group-hover:translate-x-1" />
           </a>
-          <a href="#projects" onClick={handleScrollTo} className="bg-charcoal text-cream px-8 py-4 rounded-full font-semibold hover:bg-charcoal/80 transition-all duration-300 transform hover:scale-105">
+          <a 
+            href="#projects" 
+            onClick={handleScrollTo} 
+            className="bg-charcoal text-cream px-6 sm:px-8 py-3 sm:py-4 rounded-full font-semibold hover:bg-charcoal/80 transition-all duration-300 transform hover:scale-105 w-full sm:w-auto min-h-[48px] touch-manipulation text-center"
+          >
             Show My Work
           </a>
         </div>
