@@ -26,7 +26,11 @@ import useOnScreen from '../hooks/useOnScreen';
 
 const logoText = "Aditya Kumar";
 
-const FullExperience: React.FC = () => {
+interface FullExperienceProps {
+  onBackToSelection?: () => void;
+}
+
+const FullExperience: React.FC<FullExperienceProps> = ({ onBackToSelection }) => {
   const heroEndRef = useRef<HTMLDivElement>(null);
   const isHeroOnScreen = useOnScreen(heroEndRef, 0);
   const lenisRef = useRef<LenisRef>(null);
@@ -45,7 +49,11 @@ const FullExperience: React.FC = () => {
   }, []);
 
   const handleBackToHome = () => {
-    window.location.href = '/';
+    if (onBackToSelection) {
+      onBackToSelection();
+    } else {
+      window.location.href = '/';
+    }
   };
 
   const scrollIndicatorSections = NAV_LINKS.map(link => ({

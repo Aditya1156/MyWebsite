@@ -30,6 +30,10 @@ const App: React.FC = () => {
     setAppState(experience);
   };
 
+  const handleBackToSelection = () => {
+    setAppState('selection');
+  };
+
   const renderContent = () => {
     switch (appState) {
       case 'loading':
@@ -37,7 +41,7 @@ const App: React.FC = () => {
       case 'selection':
         return <Selection onSelect={handleSelectExperience} />;
       case 'full':
-        return <FullExperience />;
+        return <FullExperience onBackToSelection={handleBackToSelection} />;
       case 'minimal':
         return <VCard onSwitchToFull={() => setAppState('full')} />;
       default:

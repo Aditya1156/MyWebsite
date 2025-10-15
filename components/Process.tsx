@@ -145,22 +145,22 @@ const Process: React.FC = () => {
                 </div>
 
                 {/* Animated Components Grid */}
-                <div className="grid md:grid-cols-2 lg:grid-cols-3 gap-8 mb-20">
+                <div className="grid md:grid-cols-2 lg:grid-cols-3 gap-8">
                     {/* CPU Architecture - Discover Phase */}
                     <motion.div
                         initial={{ opacity: 0, y: 50 }}
                         whileInView={{ opacity: 1, y: 0 }}
                         viewport={{ once: true, amount: 0.3 }}
                         transition={{ duration: 0.6, delay: 0.1 }}
-                        className="bg-white/80 backdrop-blur-sm rounded-2xl p-8 shadow-xl border border-charcoal/5 hover:shadow-2xl transition-all duration-300"
+                        className="bg-white/80 backdrop-blur-sm rounded-2xl p-8 shadow-xl border border-orange/10 hover:shadow-2xl hover:border-orange/30 transition-all duration-300 group"
                     >
-                        <h3 className="font-display text-2xl font-bold text-charcoal mb-4">01. Discover</h3>
+                        <h3 className="font-display text-2xl font-bold text-charcoal mb-4 group-hover:text-orange transition-colors">01. Discover</h3>
                         <p className="text-charcoal/70 mb-6 text-sm">
                             Understanding requirements and mapping data flows
                         </p>
-                        <div className="flex justify-center items-center h-[250px] bg-gradient-to-br from-cream/30 to-orange/5 rounded-xl">
+                        <div className="flex justify-center items-center h-[250px] bg-gradient-to-br from-cream/50 to-orange/10 rounded-xl border border-orange/20">
                             <CpuArchitecture
-                                className="text-orange/60"
+                                className="text-orange"
                                 text="IDEA"
                                 width="100%"
                                 height="250px"
@@ -174,9 +174,9 @@ const Process: React.FC = () => {
                         whileInView={{ opacity: 1, y: 0 }}
                         viewport={{ once: true, amount: 0.3 }}
                         transition={{ duration: 0.6, delay: 0.2 }}
-                        className="bg-white/80 backdrop-blur-sm rounded-2xl p-8 shadow-xl border border-charcoal/5 hover:shadow-2xl transition-all duration-300"
+                        className="bg-white/80 backdrop-blur-sm rounded-2xl p-8 shadow-xl border border-orange/10 hover:shadow-2xl hover:border-orange/30 transition-all duration-300 group"
                     >
-                        <h3 className="font-display text-2xl font-bold text-charcoal mb-4">02. Design</h3>
+                        <h3 className="font-display text-2xl font-bold text-charcoal mb-4 group-hover:text-orange transition-colors">02. Design</h3>
                         <p className="text-charcoal/70 mb-6 text-sm">
                             Architecting scalable systems and API structures
                         </p>
@@ -206,31 +206,16 @@ const Process: React.FC = () => {
                         whileInView={{ opacity: 1, y: 0 }}
                         viewport={{ once: true, amount: 0.3 }}
                         transition={{ duration: 0.6, delay: 0.3 }}
-                        className="bg-gradient-to-br from-charcoal via-charcoal/95 to-charcoal rounded-2xl overflow-hidden shadow-xl border border-white/10 hover:shadow-2xl transition-all duration-300 md:col-span-2 lg:col-span-1"
+                        className="bg-gradient-to-br from-orange via-orange-light to-cream rounded-2xl overflow-hidden shadow-xl border border-orange/20 hover:shadow-2xl transition-all duration-300 md:col-span-2 lg:col-span-1"
                     >
                         <div className="h-[400px] relative">
                             <RadialOrbitalTimeline timelineData={timelineData} />
                             <div className="absolute top-4 left-4 z-50">
-                                <h3 className="font-display text-xl font-bold text-white mb-1">03. Full Cycle</h3>
-                                <p className="text-white/60 text-xs">Click nodes to explore</p>
+                                <h3 className="font-display text-xl font-bold text-cream mb-1">03. Full Cycle</h3>
+                                <p className="text-cream/80 text-xs">Click nodes to explore</p>
                             </div>
                         </div>
                     </motion.div>
-                </div>
-
-                {/* Original Process Cards */}
-                <div className="grid md:grid-cols-3 gap-8">
-                    {processSteps.map((step, index) => (
-                         <motion.div
-                            key={index}
-                            initial={{ opacity: 0, y: 50 }}
-                            whileInView={{ opacity: 1, y: 0 }}
-                            viewport={{ once: true, amount: 0.3 }}
-                            transition={{ duration: 0.6, delay: index * 0.2 }}
-                        >
-                            <ProcessCard {...step} />
-                        </motion.div>
-                    ))}
                 </div>
             </div>
         </AnimatedSection>
