@@ -1,5 +1,5 @@
 import { useTransform, motion, useScroll, MotionValue } from 'framer-motion';
-import { useRef } from 'react';
+import { useRef, type FC } from 'react';
 import { Project } from '../../types';
 import { ArrowRightIcon } from '../icons';
 
@@ -12,14 +12,14 @@ interface CardProps {
   onCardClick: (project: Project) => void;
 }
 
-export const Card = ({
+export const Card: FC<CardProps> = ({
   i,
   project,
   progress,
   range,
   targetScale,
   onCardClick
-}: CardProps) => {
+}) => {
   const container = useRef(null);
   const { scrollYProgress } = useScroll({
     target: container,
@@ -102,7 +102,6 @@ const StackingCards = ({ projects, onCardClick }: StackingCardsProps) => {
             const range: [number, number] = [start, end];
             
             return (
-                // @ts-ignore - key is a valid React prop
                 <Card
                     key={`project_${i}_${project.title}`}
                     i={i}

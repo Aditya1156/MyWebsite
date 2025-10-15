@@ -17,6 +17,7 @@ import BlurText from './BlurText';
 import { NAV_LINKS } from '../constants';
 import ScrollIndicator from './ScrollIndicator';
 import Gallery from './Gallery';
+import SocialConnect from './SocialConnect';
 import CardNav from './CardNav';
 import { CardNavItem } from '../types';
 import GoToTopButton from './GoToTopButton';
@@ -190,6 +191,8 @@ const FullExperience: React.FC = () => {
           </section>
 
           <Contact />
+
+          <SocialConnect />
 
           <section className="py-24 bg-white text-center">
             <div className="container mx-auto px-6">

@@ -146,80 +146,86 @@ export const PROJECTS_DATA: Project[] = [
 export const GALLERY_DATA = [
   {
     id: 1,
-    title: "Hackathon Finals",
-    category: "AI for Good Hackathon 2023",
-    imageUrl: "https://picsum.photos/seed/hackathon1/800/1200",
+    title: "Journey Snapshot 1",
+    category: "My Memories",
+    imageUrl: "/images/1.jpeg",
   },
   {
     id: 2,
-    title: "Winning Moment",
-    category: "DevFest Conference",
-    imageUrl: "https://picsum.photos/seed/event1/800/600",
+    title: "Journey Snapshot 2",
+    category: "My Memories",
+    imageUrl: "/images/2.jpeg",
   },
   {
     id: 3,
-    title: "Team Collaboration",
-    category: "Internal Tech Summit",
-    imageUrl: "https://picsum.photos/seed/teamwork/1200/800",
+    title: "Journey Snapshot 3",
+    category: "My Memories",
+    imageUrl: "/images/3.jpeg",
   },
   {
     id: 4,
-    title: "Presenting My Project",
-    category: "WebDev Conference 2022",
-    imageUrl: "https://picsum.photos/seed/presenting/800/1000",
+    title: "Journey Snapshot 4",
+    category: "My Memories",
+    imageUrl: "/images/4.jpeg",
   },
   {
     id: 5,
-    title: "Late Night Coding",
-    category: "Project Zenith Launch",
-    imageUrl: "https://picsum.photos/seed/coding/1200/800",
+    title: "Journey Snapshot 5",
+    category: "My Memories",
+    imageUrl: "/images/5.jpeg",
   },
   {
     id: 6,
-    title: "Networking Event",
-    category: "Founder's Meetup",
-    imageUrl: "https://picsum.photos/seed/networking/800/600",
+    title: "Journey Snapshot 6",
+    category: "My Memories",
+    imageUrl: "/images/6.jpeg",
   },
   {
     id: 7,
-    title: "Brainstorming Session",
-    category: "Design Sprint Week",
-    imageUrl: "https://picsum.photos/seed/brainstorm/1200/800",
+    title: "Journey Snapshot 7",
+    category: "My Memories",
+    imageUrl: "/images/7.jpeg",
+  },
+  {
+    id: 8,
+    title: "Journey Snapshot 8",
+    category: "My Memories",
+    imageUrl: "/images/8.jpeg",
   }
 ];
 
 export const MEMORY_IMAGES = [
   {
-    src: 'https://picsum.photos/seed/hackathon-memory/800/600',
-    alt: 'A team working late at a hackathon'
+    src: '/images/1.jpeg',
+    alt: 'A memorable moment from my journey'
   },
   {
-    src: 'https://picsum.photos/seed/conference-memory/800/600',
-    alt: 'Speaker on stage at a tech conference'
+    src: '/images/2.jpeg',
+    alt: 'Special memory from my experiences'
   },
   {
-    src: 'https://picsum.photos/seed/coding-memory/800/600',
-    alt: 'Close-up of code on a curved monitor'
+    src: '/images/3.jpeg',
+    alt: 'Captured moment in time'
   },
   {
-    src: 'https://picsum.photos/seed/team-memory/800/600',
-    alt: 'A diverse development team collaborating around a table'
+    src: '/images/4.jpeg',
+    alt: 'Journey through tech and learning'
   },
   {
-    src: 'https://picsum.photos/seed/presentation-memory/800/600',
-    alt: 'Presenting a project demo to an audience'
+    src: '/images/5.jpeg',
+    alt: 'Memorable experience'
   },
   {
-    src: 'https://picsum.photos/seed/whiteboard-memory/800/600',
-    alt: 'Complex architecture diagram on a whiteboard'
+    src: '/images/6.jpeg',
+    alt: 'Special occasion'
   },
   {
-    src: 'https://picsum.photos/seed/office-memory/800/600',
-    alt: 'A modern and creative office space'
+    src: '/images/7.jpeg',
+    alt: 'Cherished memory'
   },
   {
-    src: 'https://picsum.photos/seed/celebration-memory/800/600',
-    alt: 'Team celebrating a successful project launch'
+    src: '/images/8.jpeg',
+    alt: 'Unforgettable moment'
   }
 ];
 

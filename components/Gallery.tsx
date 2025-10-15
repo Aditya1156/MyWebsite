@@ -3,6 +3,7 @@ import { motion, AnimatePresence } from 'framer-motion';
 import AnimatedSection from './AnimatedSection';
 import { GALLERY_DATA } from '../constants';
 import { CloseIcon, ArrowRightIcon } from './icons';
+import { soundManager } from '../lib/sounds';
 
 interface GalleryItem {
   id: number;
@@ -82,22 +83,48 @@ const Gallery: React.FC = () => {
         </div>
 
         <div 
-          className="columns-1 sm:columns-2 lg:columns-3 gap-8"
+          className="columns-1 sm:columns-2 lg:columns-3 xl:columns-4 gap-4 sm:gap-6 lg:gap-8"
           style={{ columnFill: 'balance' }}
         >
           {GALLERY_DATA.map((item) => (
             <motion.div
               key={item.id}
               layoutId={`card-${item.id}`}
-              onClick={() => setSelectedId(item.id)}
-              className="mb-8 break-inside-avoid cursor-pointer relative rounded-2xl overflow-hidden group shadow-lg"
+              onClick={() => {
+                setSelectedId(item.id);
+                soundManager.playWhoosh();
+              }}
+              onMouseEnter={() => soundManager.playHover()}
+              className="mb-4 sm:mb-6 lg:mb-8 break-inside-avoid cursor-pointer relative rounded-xl sm:rounded-2xl overflow-hidden group shadow-xl hover:shadow-2xl transition-all duration-300"
               initial={{ opacity: 0, y: 50 }}
               whileInView={{ opacity: 1, y: 0 }}
               viewport={{ once: true, amount: 0.2 }}
               transition={{ duration: 0.5, ease: 'easeOut' }}
-              whileHover={{ scale: 1.03, y: -5, boxShadow: '0 20px 30px -10px rgba(0, 0, 0, 0.2)' }}
+              whileHover={{ scale: 1.02, y: -3, boxShadow: '0 25px 40px -15px rgba(0, 0, 0, 0.3)' }}
             >
-              <img src={item.imageUrl} alt={item.title} className="w-full h-auto object-cover" />
+              <img 
+                src={item.imageUrl} 
+                alt={item.title} 
+                className="w-full h-auto object-cover vintage-photo"
+                style={{
+                  filter: 'sepia(0.5) contrast(1.2) brightness(0.95) saturate(0.8)',
+                }}
+              />
+              {/* Vintage film grain overlay */}
+              <div 
+                className="absolute inset-0 pointer-events-none opacity-20 mix-blend-overlay"
+                style={{
+                  backgroundImage: 'url("data:image/svg+xml,%3Csvg viewBox=\'0 0 400 400\' xmlns=\'http://www.w3.org/2000/svg\'%3E%3Cfilter id=\'noiseFilter\'%3E%3CfeTurbulence type=\'fractalNoise\' baseFrequency=\'0.9\' numOctaves=\'4\' stitchTiles=\'stitch\'/%3E%3C/filter%3E%3Crect width=\'100%25\' height=\'100%25\' filter=\'url(%23noiseFilter)\'/%3E%3C/svg%3E")',
+                  backgroundSize: '200px 200px',
+                }}
+              />
+              {/* Vignette effect */}
+              <div 
+                className="absolute inset-0 pointer-events-none"
+                style={{
+                  background: 'radial-gradient(circle, transparent 50%, rgba(0,0,0,0.3) 100%)',
+                }}
+              />
               <div className="absolute inset-0 bg-gradient-to-t from-charcoal/70 via-transparent to-transparent opacity-0 group-hover:opacity-100 transition-opacity duration-300">
                 <div className="absolute bottom-0 left-0 p-6">
                   <h3 className="text-cream font-display text-2xl font-bold">{item.title}</h3>
@@ -116,10 +143,15 @@ const Gallery: React.FC = () => {
             initial={{ opacity: 0 }}
             animate={{ opacity: 1 }}
             exit={{ opacity: 0 }}
+            onClick={() => {
+              setSelectedId(null);
+              soundManager.playWhoosh();
+            }}
           >
             <motion.div 
               className="w-full h-full max-w-5xl max-h-[90vh] relative"
               layoutId={`card-${selectedItem.id}`}
+              onClick={(e) => e.stopPropagation()}
             >
                <motion.div className="relative w-full h-full flex items-center justify-center">
                 <motion.img
@@ -144,7 +176,10 @@ const Gallery: React.FC = () => {
             </motion.div>
             
             <motion.button
-              onClick={() => setSelectedId(null)}
+              onClick={() => {
+                setSelectedId(null);
+                soundManager.playClick();
+              }}
               className="absolute top-6 right-6 text-cream/70 hover:text-orange transition-colors"
               aria-label="Close image view"
               initial={{ scale: 0, opacity: 0 }}
@@ -154,7 +189,10 @@ const Gallery: React.FC = () => {
             </motion.button>
 
             <motion.button
-                onClick={() => navigate('prev')}
+                onClick={() => {
+                  navigate('prev');
+                  soundManager.playClick();
+                }}
                 className="absolute left-6 top-1/2 -translate-y-1/2 text-cream/70 hover:text-orange bg-charcoal/50 rounded-full p-3 transition-colors"
                 aria-label="Previous image"
                 initial={{ x: -20, opacity: 0 }}
@@ -163,7 +201,10 @@ const Gallery: React.FC = () => {
                 <ArrowLeftIcon className="w-8 h-8" />
             </motion.button>
             <motion.button
-                onClick={() => navigate('next')}
+                onClick={() => {
+                  navigate('next');
+                  soundManager.playClick();
+                }}
                 className="absolute right-6 top-1/2 -translate-y-1/2 text-cream/70 hover:text-orange bg-charcoal/50 rounded-full p-3 transition-colors"
                 aria-label="Next image"
                 initial={{ x: 20, opacity: 0 }}

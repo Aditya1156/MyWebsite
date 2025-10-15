@@ -1,6 +1,7 @@
 import React, { useState } from 'react';
 import AnimatedSection from './AnimatedSection';
 import { motion } from 'framer-motion';
+import { soundManager } from '../lib/sounds';
 
 const containerVariants = {
   hidden: { opacity: 0 },
@@ -107,6 +108,7 @@ ${originalMessage}
             <motion.button 
               type="submit"
               disabled={status === 'sending'}
+              onClick={() => soundManager.playClick()}
               className="w-full bg-orange text-cream font-bold py-3 sm:py-4 px-6 sm:px-8 rounded-lg transition-colors duration-300 focus:outline-none focus:ring-2 focus:ring-orange-light focus:ring-offset-2 focus:ring-offset-charcoal disabled:bg-orange/50 disabled:cursor-not-allowed min-h-[48px] touch-manipulation text-sm sm:text-base"
               whileHover={{ scale: 1.03 }}
               whileTap={{ scale: 0.98 }}

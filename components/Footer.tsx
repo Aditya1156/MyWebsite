@@ -2,6 +2,7 @@ import React from 'react';
 import { useLenis } from 'lenis/react';
 import { NAV_LINKS, SOCIAL_LINKS } from '../constants';
 import { TwitterIcon, LinkedInIcon, GithubIcon, ArrowUpIcon, MailIcon } from './icons';
+import { TextHoverEffect, FooterBackgroundGradient } from './ui/hover-footer';
 
 const ICON_MAP: { [key: string]: React.FC<any> } = {
     Twitter: TwitterIcon,
@@ -26,8 +27,9 @@ const Footer: React.FC = () => {
   const currentYear = new Date().getFullYear();
 
   return (
-    <footer className="bg-charcoal text-cream">
-      <div className="container mx-auto px-4 sm:px-6 py-12 sm:py-16">
+    <footer className="bg-charcoal text-cream relative">
+      <FooterBackgroundGradient />
+      <div className="container mx-auto px-4 sm:px-6 py-12 sm:py-16 relative z-10">
         
         {/* Top Section: CTA */}
         <div className="flex flex-col lg:flex-row justify-between items-center gap-6 sm:gap-8 pb-10 sm:pb-12 border-b border-cream/20">
@@ -182,6 +184,13 @@ const Footer: React.FC = () => {
               This website uses smooth scrolling powered by Lenis, animations by Framer Motion, and is deployed on Vercel.
             </p>
           </div>
+        </div>
+      </div>
+
+      {/* Text hover effect - positioned at the very end of footer */}
+      <div className="lg:flex hidden justify-center items-center h-[20rem] sm:h-[25rem] relative z-0 overflow-hidden pb-8">
+        <div className="w-full max-w-6xl">
+          <TextHoverEffect text="ADITYA" />
         </div>
       </div>
     </footer>
