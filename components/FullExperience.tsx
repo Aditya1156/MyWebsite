@@ -19,6 +19,11 @@ import { NAV_LINKS } from '../constants';
 import ScrollIndicator from './ScrollIndicator';
 import Gallery from './Gallery';
 import SocialConnect from './SocialConnect';
+import AreaCoverage from './AreaCoverage';
+import Pricing from './Pricing';
+import VideoSection from './VideoSection';
+import { LazyComponent, LoadingSkeleton } from './ui/LazyComponent';
+import { PerformanceProvider } from './PerformanceProvider';
 import CardNav from './CardNav';
 import { CardNavItem } from '../types';
 import GoToTopButton from './GoToTopButton';
@@ -95,24 +100,25 @@ const FullExperience: React.FC<FullExperienceProps> = ({ onBackToSelection }) =>
   ];
 
   return (
-    <>
+    <PerformanceProvider>
       <ReactLenis 
         root 
         options={{ 
           autoRaf: false,
-          lerp: 0.1,
-          duration: 1.2,
+          lerp: 0.05, // Smoother interpolation
+          duration: 1.8, // Longer duration for smoother feel
           easing: (t) => Math.min(1, 1.001 - Math.pow(2, -10 * t)),
           orientation: 'vertical',
           gestureOrientation: 'vertical',
           smoothWheel: true,
-          smoothTouch: false,
-          wheelMultiplier: 1,
+          smoothTouch: false, // Disable on touch for better performance
+          wheelMultiplier: 0.8, // Reduce wheel sensitivity for smoother scroll
           touchMultiplier: 2,
           infinite: false,
+          syncTouch: true, // Better touch responsiveness
         }} 
         ref={lenisRef} 
-      />
+      >
       <CursorTrail />
        <ScrollIndicator sections={scrollIndicatorSections} />
        
@@ -164,6 +170,8 @@ const FullExperience: React.FC<FullExperienceProps> = ({ onBackToSelection }) =>
         <div className="relative z-40 bg-white">
           <Process />
           <Projects />
+
+          <VideoSection />
           
           <section className="py-24 bg-cream text-center">
             <div className="container mx-auto px-6">
@@ -179,7 +187,9 @@ const FullExperience: React.FC<FullExperienceProps> = ({ onBackToSelection }) =>
 
           <Skills />
           
-          <Gallery />
+          <LazyComponent fallback={<LoadingSkeleton className="h-96 mx-4" />}>
+            <Gallery />
+          </LazyComponent>
 
           <section className="py-24 bg-white text-center">
             <div className="container mx-auto px-6">
@@ -194,7 +204,10 @@ const FullExperience: React.FC<FullExperienceProps> = ({ onBackToSelection }) =>
           </section>
 
           <HireMe />
-          <Memories />
+          
+          <LazyComponent fallback={<LoadingSkeleton className="h-64 mx-4" />}>
+            <Memories />
+          </LazyComponent>
 
           <section className="py-24 bg-cream text-center">
             <div className="container mx-auto px-6">
@@ -222,6 +235,14 @@ const FullExperience: React.FC<FullExperienceProps> = ({ onBackToSelection }) =>
 
           <Contact />
 
+          <LazyComponent fallback={<LoadingSkeleton className="h-96 mx-4" />}>
+            <AreaCoverage />
+          </LazyComponent>
+
+          <LazyComponent fallback={<LoadingSkeleton className="h-[600px] mx-4" />}>
+            <Pricing />
+          </LazyComponent>
+
           <SocialConnect />
 
           <section className="py-24 bg-white text-center">
@@ -240,7 +261,8 @@ const FullExperience: React.FC<FullExperienceProps> = ({ onBackToSelection }) =>
       </main>
       <GoToTopButton isVisible={!isHeroOnScreen} />
       <Footer />
-    </>
+      </ReactLenis>
+    </PerformanceProvider>
   );
 };
 

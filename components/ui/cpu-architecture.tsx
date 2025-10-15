@@ -343,8 +343,8 @@ const CpuArchitecture = ({
             dx="1.5"
             dy="1.5"
             stdDeviation="1"
-            floodColor="black"
-            floodOpacity="0.1"
+            floodColor="#FF6B00"
+            floodOpacity="0.2"
           />
         </filter>
         <marker
@@ -360,8 +360,8 @@ const CpuArchitecture = ({
             cx="5"
             cy="5"
             r="2"
-            fill="black"
-            stroke="#232323"
+            fill="#FF6B00"
+            stroke="#FF8533"
             strokeWidth="0.5"
           >
             {animateMarkers && (

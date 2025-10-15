@@ -4,6 +4,7 @@ import AnimatedSection from './AnimatedSection';
 import { CpuArchitecture } from './ui/cpu-architecture';
 import DatabaseWithRestApi from './ui/database-with-rest-api';
 import RadialOrbitalTimeline from './ui/radial-orbital-timeline';
+import OptimizedImage from './ui/OptimizedImage';
 import { Calendar, Code, FileText, User, Clock } from 'lucide-react';
 import BlurText from './BlurText';
 
@@ -107,13 +108,14 @@ const ProcessCard: React.FC<ProcessCardProps> = ({ number, title, description, i
         <div ref={ref} className="relative h-96 rounded-2xl overflow-hidden group shadow-lg">
             <motion.div
                 className="absolute inset-0 z-0"
-                style={{
-                    backgroundImage: `url(${imageUrl})`,
-                    backgroundSize: 'cover',
-                    backgroundPosition: 'center',
-                    y,
-                }}
-            />
+                style={{ y }}
+            >
+                <OptimizedImage
+                    src={imageUrl}
+                    alt={`${title} process step`}
+                    className="w-full h-full object-cover"
+                />
+            </motion.div>
             <div className="absolute inset-0 bg-charcoal opacity-60 group-hover:opacity-80 transition-opacity duration-300 z-10"></div>
             <div className="relative z-20 p-8 flex flex-col justify-between h-full text-cream">
                 <div>
