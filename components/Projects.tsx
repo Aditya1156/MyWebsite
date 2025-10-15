@@ -6,6 +6,7 @@ import { ArrowRightIcon, CloseIcon, GithubIcon, GoArrowUpRightIcon } from './ico
 import { motion, AnimatePresence, Variants } from 'framer-motion';
 import StackingCards from './ui/stacking-card';
 import ShareButtons from './ShareButtons';
+import BlurText from './BlurText';
 import './Projects.css';
 
 // FIX: Explicitly type backdropVariants with Variants for consistency.
@@ -94,7 +95,13 @@ const Projects: React.FC = () => {
     <section id="projects" className="bg-charcoal">
       <AnimatedSection className="pt-16 sm:pt-20 md:pt-24 pb-12 sm:pb-14 md:pb-16">
         <div className="container mx-auto px-4 sm:px-6 text-center">
-          <h2 className="font-display text-3xl sm:text-4xl md:text-5xl font-bold text-cream mb-4 sm:mb-6 tracking-tighter">Things I've Built</h2>
+          <BlurText
+            text="Things I've Built"
+            delay={100}
+            animateBy="words"
+            direction="top"
+            className="font-display text-3xl sm:text-4xl md:text-5xl font-bold text-cream mb-4 sm:mb-6 tracking-tighter"
+          />
           <p className="text-cream/70 max-w-2xl mx-auto text-sm sm:text-base px-4">
               A selection of projects that showcase my passion for creating meaningful technology. Scroll down to see them in action.
           </p>
@@ -152,10 +159,13 @@ const Projects: React.FC = () => {
                         src={selectedProject.images ? selectedProject.images[currentImageIndex] : selectedProject.imageUrl}
                         alt={`${selectedProject.title} - Image ${currentImageIndex + 1}`}
                         className="w-full h-full object-contain"
-                        initial={{ opacity: 0, scale: 1.05 }}
-                        animate={{ opacity: 1, scale: 1 }}
-                        exit={{ opacity: 0, scale: 0.95 }}
-                        transition={{ duration: 0.5 }}
+                        initial={{ opacity: 0, x: 100, scale: 0.95 }}
+                        animate={{ opacity: 1, x: 0, scale: 1 }}
+                        exit={{ opacity: 0, x: -100, scale: 0.95 }}
+                        transition={{ 
+                          duration: 0.6,
+                          ease: [0.22, 1, 0.36, 1]
+                        }}
                       />
                     </AnimatePresence>
                   </div>
@@ -164,16 +174,19 @@ const Projects: React.FC = () => {
                   {selectedProject.images && selectedProject.images.length > 1 && (
                     <div className="flex justify-center gap-2 mt-4">
                       {selectedProject.images.map((_, index) => (
-                        <button
+                        <motion.button
                           key={index}
                           onClick={() => setCurrentImageIndex(index)}
-                          className={`w-2 h-2 rounded-full transition-all duration-300 ${
+                          className={`h-2 rounded-full transition-all duration-300 ${
                             index === currentImageIndex 
                               ? 'bg-orange w-8' 
-                              : 'bg-charcoal/30 hover:bg-charcoal/50'
+                              : 'bg-charcoal/30 hover:bg-charcoal/50 w-2'
                           }`}
+                          whileHover={{ scale: 1.2 }}
+                          whileTap={{ scale: 0.9 }}
                           aria-label={`Go to image ${index + 1}`}
-                        />
+                        >
+                        </motion.button>
                       ))}
                     </div>
                   )}

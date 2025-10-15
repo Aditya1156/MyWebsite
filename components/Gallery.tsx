@@ -73,20 +73,26 @@ const Gallery: React.FC = () => {
   return (
     <AnimatedSection id="gallery" className="py-24 bg-cream">
       <div className="container mx-auto px-6">
-        <div className="text-center mb-16">
+        <motion.div 
+          className="text-center mb-16"
+          initial={{ opacity: 0, y: -20 }}
+          whileInView={{ opacity: 1, y: 0 }}
+          viewport={{ once: true }}
+          transition={{ duration: 0.6, ease: "easeOut" }}
+        >
           <h2 className="font-display text-4xl md:text-5xl font-bold text-charcoal mb-4 tracking-tighter">
             Snapshots of My Journey
           </h2>
           <p className="text-charcoal/70 max-w-2xl mx-auto text-lg">
             A collection of moments from hackathons, conferences, and collaborative projects.
           </p>
-        </div>
+        </motion.div>
 
         <div 
           className="columns-1 sm:columns-2 lg:columns-3 xl:columns-4 gap-4 sm:gap-6 lg:gap-8"
           style={{ columnFill: 'balance' }}
         >
-          {GALLERY_DATA.map((item) => (
+          {GALLERY_DATA.map((item, index) => (
             <motion.div
               key={item.id}
               layoutId={`card-${item.id}`}
@@ -96,10 +102,14 @@ const Gallery: React.FC = () => {
               }}
               onMouseEnter={() => soundManager.playHover()}
               className="mb-4 sm:mb-6 lg:mb-8 break-inside-avoid cursor-pointer relative rounded-xl sm:rounded-2xl overflow-hidden group shadow-xl hover:shadow-2xl transition-all duration-300"
-              initial={{ opacity: 0, y: 50 }}
-              whileInView={{ opacity: 1, y: 0 }}
+              initial={{ opacity: 0, y: 30, scale: 0.95 }}
+              whileInView={{ opacity: 1, y: 0, scale: 1 }}
               viewport={{ once: true, amount: 0.2 }}
-              transition={{ duration: 0.5, ease: 'easeOut' }}
+              transition={{ 
+                duration: 0.5, 
+                delay: index * 0.05,
+                ease: [0.22, 1, 0.36, 1]
+              }}
               whileHover={{ scale: 1.02, y: -3, boxShadow: '0 25px 40px -15px rgba(0, 0, 0, 0.3)' }}
             >
               <img 
