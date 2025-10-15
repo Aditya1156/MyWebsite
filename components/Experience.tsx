@@ -99,7 +99,7 @@ const Experience: React.FC = () => {
           </p>
         </motion.div>
         
-        <div className="relative max-w-5xl mx-auto px-4 md:px-0">
+        <div className="relative max-w-6xl mx-auto px-4 md:px-0">
           {/* Vertical line with animated progress - responsive positioning */}
           <div className="absolute border-opacity-20 border-charcoal/10 h-full border-2 left-4 md:left-1/2 -translate-x-1/2" style={{ borderStyle: 'solid' }}></div>
           
@@ -113,10 +113,10 @@ const Experience: React.FC = () => {
           ></motion.div>
           
           {EXPERIENCE_DATA.map((item, index) => (
-            <div key={index} className={`mb-10 w-full relative flex md:justify-between items-center ${index % 2 === 0 ? 'md:flex-row-reverse' : ''}`}>
+            <div key={index} className={`mb-12 w-full relative flex md:justify-between items-start ${index % 2 === 0 ? 'md:flex-row-reverse' : ''}`}>
               
               {/* Spacer for desktop layout */}
-              <div className="hidden md:block w-5/12 flex-shrink-0"></div>
+              <div className="hidden md:block w-[45%] flex-shrink-0"></div>
               
               {/* Animated Dot with ripple effect */}
               <motion.div 
@@ -144,12 +144,12 @@ const Experience: React.FC = () => {
               
               {/* Enhanced Card with gradient and glassmorphism */}
               <motion.div 
-                className="bg-white/80 backdrop-blur-sm rounded-2xl shadow-xl w-full ml-12 md:ml-0 md:w-5/12 px-6 py-5 flex-shrink-0 border border-charcoal/5 relative overflow-hidden group"
+                className="bg-white/80 backdrop-blur-sm rounded-2xl shadow-xl w-full ml-12 md:ml-0 md:w-[45%] px-6 py-5 flex-shrink-0 border border-charcoal/5 relative overflow-visible group"
                 custom={index % 2 !== 0}
                 variants={cardVariants}
                 initial="offscreen"
                 whileInView="onscreen"
-                viewport={{ once: true, amount: 0.5 }}
+                viewport={{ once: true, amount: 0.3 }}
                 whileHover={{ 
                   y: -12, 
                   scale: 1.02,

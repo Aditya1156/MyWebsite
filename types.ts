@@ -29,6 +29,7 @@ export interface Project {
   tools: string[];
   category: 'Web' | 'AI' | 'Design' | 'Apps';
   imageUrl: string;
+  images?: string[]; // Multiple images for carousel
   link: string;
   color: string;
 }

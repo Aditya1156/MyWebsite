@@ -21,14 +21,14 @@ const socialLinks: SocialLink[] = [
   },
   {
     platform: 'LinkedIn',
-    url: 'https://www.linkedin.com/in/adicodes',
+    url: 'https://www.linkedin.com/in/aditya-kumar-165911339/',
     icon: LinkedInIcon,
     color: '#0077B5',
     description: 'Connect with me professionally and see my career updates'
   },
   {
     platform: 'LeetCode',
-    url: 'https://leetcode.com/Aditya1156',
+    url: 'https://leetcode.com/u/adityaissc7/',
     icon: ({ className }: { className?: string }) => (
       <svg className={className} viewBox="0 0 24 24" fill="currentColor">
         <path d="M13.483 0a1.374 1.374 0 0 0-.961.438L7.116 6.226l-3.854 4.126a5.266 5.266 0 0 0-1.209 2.104 5.35 5.35 0 0 0-.125.513 5.527 5.527 0 0 0 .062 2.362 5.83 5.83 0 0 0 .349 1.017 5.938 5.938 0 0 0 1.271 1.818l4.277 4.193.039.038c2.248 2.165 5.852 2.133 8.063-.074l2.396-2.392c.54-.54.54-1.414.003-1.955a1.378 1.378 0 0 0-1.951-.003l-2.396 2.392a3.021 3.021 0 0 1-4.205.038l-.02-.019-4.276-4.193c-.652-.64-.972-1.469-.948-2.263a2.68 2.68 0 0 1 .066-.523 2.545 2.545 0 0 1 .619-1.164L9.13 8.114c1.058-1.134 3.204-1.27 4.43-.278l3.501 2.831c.593.48 1.461.387 1.94-.207a1.384 1.384 0 0 0-.207-1.943l-3.5-2.831c-.8-.647-1.766-1.045-2.774-1.202l2.015-2.158A1.384 1.384 0 0 0 13.483 0zm-2.866 12.815a1.38 1.38 0 0 0-1.38 1.382 1.38 1.38 0 0 0 1.38 1.382H20.79a1.38 1.38 0 0 0 1.38-1.382 1.38 1.38 0 0 0-1.38-1.382z"/>
@@ -39,7 +39,7 @@ const socialLinks: SocialLink[] = [
   },
   {
     platform: 'HackerRank',
-    url: 'https://www.hackerrank.com/adicodes',
+    url: 'https://www.hackerrank.com/profile/adityaissc7',
     icon: ({ className }: { className?: string }) => (
       <svg className={className} viewBox="0 0 24 24" fill="currentColor">
         <path d="M12 0c1.285 0 9.75 4.886 10.392 6 .645 1.115.645 10.885 0 12S13.287 24 12 24s-9.75-4.885-10.395-6c-.641-1.115-.641-10.885 0-12C2.25 4.886 10.715 0 12 0zm2.295 6.799c-.141 0-.258.115-.258.258v3.875H9.963V6.908h.701c.141 0 .254-.104.254-.258 0-.094-.049-.176-.123-.221L9.223 4.92c-.049-.063-.141-.109-.226-.109-.084 0-.16.045-.207.107L7.11 6.43c-.072.045-.12.126-.12.218 0 .154.113.258.255.258h.704v4.574c0 .383.311.693.693.693h4.072v3.002h-.699c-.143 0-.256.104-.256.258 0 .092.053.177.125.217l1.574 1.514c.045.061.141.108.227.108.084 0 .16-.047.207-.11l1.678-1.511c.072-.047.119-.129.119-.221 0-.154-.112-.258-.255-.258h-.703V11.51c0-.383-.309-.693-.693-.693h-4.07V7.056h4.064c.139 0 .252-.115.252-.258 0-.094-.049-.176-.123-.221L14.75 5.065c-.049-.062-.141-.108-.226-.108-.084 0-.16.046-.207.108l-1.674 1.511c-.072.045-.119.127-.119.219z"/>
@@ -50,7 +50,7 @@ const socialLinks: SocialLink[] = [
   },
   {
     platform: 'YouTube',
-    url: 'https://youtube.com/@adicodes',
+    url: 'https://youtube.com/@RefactorsLife',
     icon: ({ className }: { className?: string }) => (
       <svg className={className} viewBox="0 0 24 24" fill="currentColor">
         <path d="M23.498 6.186a3.016 3.016 0 0 0-2.122-2.136C19.505 3.545 12 3.545 12 3.545s-7.505 0-9.377.505A3.017 3.017 0 0 0 .502 6.186C0 8.07 0 12 0 12s0 3.93.502 5.814a3.016 3.016 0 0 0 2.122 2.136c1.871.505 9.376.505 9.376.505s7.505 0 9.377-.505a3.015 3.015 0 0 0 2.122-2.136C24 15.93 24 12 24 12s0-3.93-.502-5.814zM9.545 15.568V8.432L15.818 12l-6.273 3.568z"/>
@@ -60,11 +60,15 @@ const socialLinks: SocialLink[] = [
     description: 'Watch my coding tutorials and tech content'
   },
   {
-    platform: 'Twitter',
-    url: 'https://twitter.com/adicodes',
-    icon: TwitterIcon,
-    color: '#1DA1F2',
-    description: 'Follow my tech thoughts and quick updates'
+    platform: 'Medium',
+    url: 'https://medium.com/@refactorslife',
+    icon: ({ className }: { className?: string }) => (
+      <svg className={className} viewBox="0 0 24 24" fill="currentColor">
+        <path d="M13.54 12a6.8 6.8 0 01-6.77 6.82A6.8 6.8 0 010 12a6.8 6.8 0 016.77-6.82A6.8 6.8 0 0113.54 12zM20.96 12c0 3.54-1.51 6.42-3.38 6.42-1.87 0-3.39-2.88-3.39-6.42s1.52-6.42 3.39-6.42 3.38 2.88 3.38 6.42M24 12c0 3.17-.53 5.75-1.19 5.75-.66 0-1.19-2.58-1.19-5.75s.53-5.75 1.19-5.75C23.47 6.25 24 8.83 24 12z"/>
+      </svg>
+    ),
+    color: '#000000',
+    description: 'Read my technical articles and blog posts'
   }
 ];
 

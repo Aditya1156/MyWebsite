@@ -50,6 +50,25 @@ const DetailSection: React.FC<{ title: string; content: string }> = ({ title, co
 
 const Projects: React.FC = () => {
   const [selectedProject, setSelectedProject] = useState<Project | null>(null);
+  const [currentImageIndex, setCurrentImageIndex] = useState(0);
+
+  // Auto-swap images every 3 seconds
+  useEffect(() => {
+    if (selectedProject && selectedProject.images && selectedProject.images.length > 1) {
+      const interval = setInterval(() => {
+        setCurrentImageIndex((prevIndex) => 
+          (prevIndex + 1) % selectedProject.images!.length
+        );
+      }, 3000);
+      
+      return () => clearInterval(interval);
+    }
+  }, [selectedProject]);
+
+  // Reset image index when project changes
+  useEffect(() => {
+    setCurrentImageIndex(0);
+  }, [selectedProject]);
 
   // Effect to lock body scroll when modal is open
   useEffect(() => {
@@ -124,7 +143,41 @@ const Projects: React.FC = () => {
                   <CloseIcon className="w-5 h-5 sm:w-6 sm:h-6" />
                 </button>
               
-                <img src={selectedProject.imageUrl} alt={selectedProject.title} className="w-full h-auto max-h-60 sm:max-h-80 object-cover rounded-lg sm:rounded-xl shadow-lg mb-6 sm:mb-8" />
+                {/* Image Carousel */}
+                <div className="relative w-full mb-6 sm:mb-8">
+                  <div className="relative w-full aspect-video rounded-lg sm:rounded-xl shadow-lg overflow-hidden bg-charcoal/5">
+                    <AnimatePresence mode="wait">
+                      <motion.img 
+                        key={selectedProject.images ? selectedProject.images[currentImageIndex] : selectedProject.imageUrl}
+                        src={selectedProject.images ? selectedProject.images[currentImageIndex] : selectedProject.imageUrl}
+                        alt={`${selectedProject.title} - Image ${currentImageIndex + 1}`}
+                        className="w-full h-full object-contain"
+                        initial={{ opacity: 0, scale: 1.05 }}
+                        animate={{ opacity: 1, scale: 1 }}
+                        exit={{ opacity: 0, scale: 0.95 }}
+                        transition={{ duration: 0.5 }}
+                      />
+                    </AnimatePresence>
+                  </div>
+                  
+                  {/* Image indicators */}
+                  {selectedProject.images && selectedProject.images.length > 1 && (
+                    <div className="flex justify-center gap-2 mt-4">
+                      {selectedProject.images.map((_, index) => (
+                        <button
+                          key={index}
+                          onClick={() => setCurrentImageIndex(index)}
+                          className={`w-2 h-2 rounded-full transition-all duration-300 ${
+                            index === currentImageIndex 
+                              ? 'bg-orange w-8' 
+                              : 'bg-charcoal/30 hover:bg-charcoal/50'
+                          }`}
+                          aria-label={`Go to image ${index + 1}`}
+                        />
+                      ))}
+                    </div>
+                  )}
+                </div>
 
                 <div className="grid md:grid-cols-3 gap-6 sm:gap-8">
                     <div className="md:col-span-2">

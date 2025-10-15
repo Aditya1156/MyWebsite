@@ -101,7 +101,14 @@ export const PROJECTS_DATA: Project[] = [
     results: ["Deployed and live at typingpath.com serving users globally", "Real-time user analytics and personalized progress tracking", "AI-driven adaptive lessons that adjust to each user's learning pace", "Responsive design works seamlessly across all devices"],
     tools: ['React 19', 'TypeScript', 'Firebase', 'Google Gemini AI', 'Vite', 'TailwindCSS'],
     category: 'AI',
-    imageUrl: 'https://picsum.photos/seed/typingpath/600/400',
+    imageUrl: '/images/typingpath1.jpg',
+    images: [
+      '/images/typingpath1.jpg',
+      '/images/typingpath2.jpg',
+      '/images/typingpath3.jpg',
+      '/images/typingpath4.jpg',
+      '/images/typingpath5.jpg'
+    ],
     link: 'https://typingpath.com',
     color: '#D1E8E2',
   },
@@ -113,7 +120,14 @@ export const PROJECTS_DATA: Project[] = [
     results: ["Complete flight booking and reservation system", "Real-time flight status tracking and updates", "Passenger management with detailed record keeping", "Modular architecture for easy feature additions"],
     tools: ['Java', 'OOP Design Patterns', 'Desktop GUI'],
     category: 'Apps',
-    imageUrl: 'https://picsum.photos/seed/airline/600/400',
+    imageUrl: '/images/airline (1).png',
+    images: [
+      '/images/airline (1).png',
+      '/images/airline (2).png',
+      '/images/airline (3).png',
+      '/images/airline (4).png',
+      '/images/airline (5).png'
+    ],
     link: 'https://github.com/Aditya1156/FlightManagementSys',
     color: '#F4C7C4',
   },
@@ -125,7 +139,13 @@ export const PROJECTS_DATA: Project[] = [
     results: ["Live at godox.netlify.app serving logistics queries 24/7", "AI-powered natural language understanding", "Instant responses to common logistics questions", "Reduced manual support workload significantly"],
     tools: ['React', 'Google Gemini API', 'JavaScript', 'Netlify'],
     category: 'AI',
-    imageUrl: 'https://picsum.photos/seed/godox/600/400',
+    imageUrl: '/images/chatbot1.jpg',
+    images: [
+      '/images/chatbot1.jpg',
+      '/images/chatbot2.jpg',
+      '/images/chatbot3.jpg',
+      '/images/chatbot4.jpg'
+    ],
     link: 'https://godox.netlify.app/',
     color: '#FFD3B6',
   },
@@ -137,7 +157,11 @@ export const PROJECTS_DATA: Project[] = [
     results: ["Lightning-fast load times with optimized assets", "Engaging 3D gallery and interactive components", "Fully responsive across all devices", "Smooth animations and transitions throughout"],
     tools: ['React', 'TypeScript', 'TailwindCSS', 'Framer Motion', 'Vite', 'Vercel'],
     category: 'Web',
-    imageUrl: 'https://picsum.photos/seed/portfolio/600/400',
+    imageUrl: '/images/portfolio1.jpg',
+    images: [
+      '/images/portfolio1.jpg',
+      '/images/portfolio2.jpg'
+    ],
     link: 'https://adicodes.in',
     color: '#C3E2DD',
   },
