@@ -9,20 +9,15 @@ import Experience from './Experience';
 import Projects from './Projects';
 import Skills from './Skills';
 import HireMe from './HireMe';
-import Memories from './Memories';
 import Footer from './Footer';
 import Contact from './Contact';
 import CursorTrail from './CursorTrail';
 import Process from './Process';
 import BlurText from './BlurText';
 import { NAV_LINKS } from '../constants';
-import ScrollIndicator from './ScrollIndicator';
-import Gallery from './Gallery';
+import ScrollProgress from './ScrollProgress';
 import SocialConnect from './SocialConnect';
-import AreaCoverage from './AreaCoverage';
-import Pricing from './Pricing';
-import VideoSection from './VideoSection';
-import { LazyComponent, LoadingSkeleton } from './ui/LazyComponent';
+import { LazyComponent, LoadingSkeleton, LazyVideoSection, LazyGallery, LazyMemories, LazyAreaCoverage, LazyPricing } from './ui/LazyComponent';
 import { PerformanceProvider } from './PerformanceProvider';
 import CardNav from './CardNav';
 import { CardNavItem } from '../types';
@@ -60,11 +55,6 @@ const FullExperience: React.FC<FullExperienceProps> = ({ onBackToSelection }) =>
       window.location.href = '/';
     }
   };
-
-  const scrollIndicatorSections = NAV_LINKS.map(link => ({
-    id: link.href.substring(1),
-    name: link.name
-  }));
 
   const cardNavItems: CardNavItem[] = [
     {
@@ -120,7 +110,7 @@ const FullExperience: React.FC<FullExperienceProps> = ({ onBackToSelection }) =>
         ref={lenisRef} 
       >
       <CursorTrail />
-       <ScrollIndicator sections={scrollIndicatorSections} />
+       <ScrollProgress />
        
        {/* Back to Home Button */}
        <motion.button
@@ -171,7 +161,9 @@ const FullExperience: React.FC<FullExperienceProps> = ({ onBackToSelection }) =>
           <Process />
           <Projects />
 
-          <VideoSection />
+          <LazyComponent fallback={<LoadingSkeleton className="h-96 mx-4" />}>
+            <LazyVideoSection />
+          </LazyComponent>
           
           <section className="py-24 bg-cream text-center">
             <div className="container mx-auto px-6">
@@ -188,7 +180,7 @@ const FullExperience: React.FC<FullExperienceProps> = ({ onBackToSelection }) =>
           <Skills />
           
           <LazyComponent fallback={<LoadingSkeleton className="h-96 mx-4" />}>
-            <Gallery />
+            <LazyGallery />
           </LazyComponent>
 
           <section className="py-24 bg-white text-center">
@@ -206,7 +198,7 @@ const FullExperience: React.FC<FullExperienceProps> = ({ onBackToSelection }) =>
           <HireMe />
           
           <LazyComponent fallback={<LoadingSkeleton className="h-64 mx-4" />}>
-            <Memories />
+            <LazyMemories />
           </LazyComponent>
 
           <section className="py-24 bg-cream text-center">
@@ -236,11 +228,11 @@ const FullExperience: React.FC<FullExperienceProps> = ({ onBackToSelection }) =>
           <Contact />
 
           <LazyComponent fallback={<LoadingSkeleton className="h-96 mx-4" />}>
-            <AreaCoverage />
+            <LazyAreaCoverage />
           </LazyComponent>
 
           <LazyComponent fallback={<LoadingSkeleton className="h-[600px] mx-4" />}>
-            <Pricing />
+            <LazyPricing />
           </LazyComponent>
 
           <SocialConnect />

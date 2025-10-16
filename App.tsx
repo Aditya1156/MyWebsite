@@ -1,9 +1,23 @@
-import React, { useEffect, useState } from 'react';
+import React, { useEffect, useState, lazy, Suspense } from 'react';
 import Loader from './components/Loader';
 import Selection from './components/Selection';
-import FullExperience from './components/FullExperience';
-import VCard from './components/VCard';
 import SEO from './components/SEO';
+import LenisProvider from './components/LenisProvider';
+import TransitionWrapper from './components/TransitionWrapper';
+
+// Lazy load heavy components for better performance
+const FullExperience = lazy(() => import('./components/FullExperience'));
+const VCard = lazy(() => import('./components/VCard'));
+
+// Loading fallback component
+const PageLoader: React.FC = () => (
+  <div className="min-h-screen flex items-center justify-center bg-cream">
+    <div className="flex flex-col items-center gap-4">
+      <div className="w-12 h-12 border-4 border-orange border-t-transparent rounded-full animate-spin" />
+      <p className="text-charcoal/60 font-medium">Loading...</p>
+    </div>
+  </div>
+);
 
 declare global {
   interface Window {
@@ -37,13 +51,35 @@ const App: React.FC = () => {
   const renderContent = () => {
     switch (appState) {
       case 'loading':
-        return <Loader onComplete={() => setAppState('selection')} />;
+        return (
+          <TransitionWrapper transitionKey="loading">
+            <Loader onComplete={() => setAppState('selection')} />
+          </TransitionWrapper>
+        );
       case 'selection':
-        return <Selection onSelect={handleSelectExperience} />;
+        return (
+          <TransitionWrapper transitionKey="selection">
+            <Selection onSelect={handleSelectExperience} />
+          </TransitionWrapper>
+        );
       case 'full':
-        return <FullExperience onBackToSelection={handleBackToSelection} />;
+        return (
+          <TransitionWrapper transitionKey="full">
+            <Suspense fallback={<PageLoader />}>
+              <LenisProvider>
+                <FullExperience onBackToSelection={handleBackToSelection} />
+              </LenisProvider>
+            </Suspense>
+          </TransitionWrapper>
+        );
       case 'minimal':
-        return <VCard onSwitchToFull={() => setAppState('full')} />;
+        return (
+          <TransitionWrapper transitionKey="minimal">
+            <Suspense fallback={<PageLoader />}>
+              <VCard onSwitchToFull={() => setAppState('full')} />
+            </Suspense>
+          </TransitionWrapper>
+        );
       default:
         return null;
     }
@@ -52,7 +88,7 @@ const App: React.FC = () => {
   return (
     <>
       <SEO />
-      <div className="bg-cream text-charcoal font-sans min-h-screen">
+      <div className="bg-cream text-charcoal font-sans">
         {renderContent()}
       </div>
     </>
