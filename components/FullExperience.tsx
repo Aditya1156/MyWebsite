@@ -20,7 +20,7 @@ import Gallery from './Gallery';
 import SocialConnect from './SocialConnect';
 import AreaCoverage from './AreaCoverage';
 import Pricing from './Pricing';
-import VideoSection from './VideoSection';
+// VideoSection removed to simplify hero content
 import { LazyComponent, LoadingSkeleton } from './ui/LazyComponent';
 import { PerformanceProvider } from './PerformanceProvider';
 import CardNav from './CardNav';
@@ -169,7 +169,7 @@ const FullExperience: React.FC<FullExperienceProps> = ({ onBackToSelection }) =>
           <Process />
           <Projects />
 
-          <VideoSection />
+          {/* VideoSection removed per request (Crafting Digital Experiences) */}
           
           <section className="py-24 bg-cream text-center">
             <div className="container mx-auto px-6">
