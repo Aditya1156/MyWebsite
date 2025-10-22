@@ -12,7 +12,6 @@ import HireMe from './HireMe';
 import Memories from './Memories';
 import Footer from './Footer';
 import Contact from './Contact';
-import CursorTrail from './CursorTrail';
 import Process from './Process';
 import BlurText from './BlurText';
 import { NAV_LINKS } from '../constants';
@@ -101,7 +100,7 @@ const FullExperience: React.FC<FullExperienceProps> = ({ onBackToSelection }) =>
 
   return (
     <PerformanceProvider>
-      <ReactLenis 
+  <ReactLenis 
         root 
         options={{ 
           autoRaf: false,
@@ -119,8 +118,7 @@ const FullExperience: React.FC<FullExperienceProps> = ({ onBackToSelection }) =>
         }} 
         ref={lenisRef} 
       >
-      <CursorTrail />
-       <ScrollIndicator sections={scrollIndicatorSections} />
+  <ScrollIndicator sections={scrollIndicatorSections} />
        
        {/* Back to Home Button */}
        <motion.button

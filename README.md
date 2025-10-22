@@ -153,7 +153,7 @@ MyWebsite/
 │   ├── AnimatedLogo.tsx # Animated logo component
 │   ├── AnimatedName.tsx # Animated name component
 │   ├── Contact.tsx      # Contact section
-│   ├── CursorTrail.tsx  # Custom cursor effect
+│   ├── CursorTrail.tsx  # Custom cursor effect (removed)
 │   ├── Dock.tsx         # Dock-style navigation
 │   ├── DomeGallery.tsx  # 3D dome gallery
 │   ├── Experience.tsx   # Experience timeline
@@ -203,7 +203,7 @@ MyWebsite/
 | `AnimatedLogo` | Logo with enter animation |
 | `AnimatedName` | Name with typing effect |
 | `BlurText` | Text with blur reveal animation |
-| `CursorTrail` | Custom cursor with trail effect |
+| `CursorTrail` | Custom cursor with trail effect (removed) |
 | `Dock` | MacOS-style dock navigation |
 | `ScrollIndicator` | Visual scroll progress |
 | `GoToTopButton` | Smooth scroll to top |
