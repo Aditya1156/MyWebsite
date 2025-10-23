@@ -91,8 +91,40 @@ export const EXPERIENCE_DATA: ExperienceItem[] = [
     tags: ['Science Stream', 'Academic Excellence', 'Foundation'],
   },
 ];
-
 export const PROJECTS_DATA: Project[] = [
+  {
+    title: 'Hackathon Fusion',
+    description: 'An automated hackathon management platform that streamlines team formation, project submissions, judging, and deployment. Integrates GitHub for project pulls and uses AI for idea generation and recommendation.',
+    challenge: 'Running and managing hackathons involves many manual tasks — team formation, project submissions, judging logistics, and deployment. We needed a way to automate repetitive steps and provide organizers and participants with a seamless experience.',
+    solution: 'Built a full-stack platform with a React + TypeScript frontend and a Node/Firebase backend. Features include GitHub integration to pull project repos automatically, real-time dashboard for judges, automated environment provisioning for demos, and an AI assistant (Google Gemini) to help participants generate and refine project ideas. The system automates scoring workflows, handles team invites, and supports one-click demo deployments.',
+    results: [
+      'Automated submission and deployment pipeline for hackathon projects',
+      'Real-time judging dashboard with live scoring and analytics',
+      'AI-driven idea generation and mentor suggestions during hacks',
+    ],
+    tools: ['React', 'TypeScript', 'Node.js', 'Firebase', 'GitHub API', 'Socket.io', 'Google Gemini AI', 'Vite', 'TailwindCSS'],
+    category: 'Web',
+    imageUrl: '/images/hack1.jpg',
+    images: [
+      '/images/hack1.jpg',
+      '/images/hack2.jpg'
+    ],
+    link: 'https://github.com/Aditya1156/hackathon-fusion',
+    color: '#E8F7F3',
+  },
+  {
+    title: 'Live QuizApp - ArenaQuest',
+    description: 'ArenaQuest is a live, multiplayer quiz platform with a host-controlled gameplay and real-time synchronization for participants.',
+    challenge: 'Existing quiz apps often lack real-time host controls and synchronized gameplay for many concurrent users. The aim was to build a low-latency, engaging live quiz experience.',
+    solution: 'Developed using React for the frontend and WebSocket-based realtime messaging for synchronized question delivery and live score updates. The host controls the game flow while participants join rounds, answer questions, and see live leaderboards. Deployed on Vercel for fast global access.',
+    results: ['Live rounds with synchronized question flow', 'Real-time leaderboard and scoring', 'Low-latency multiplayer experience'],
+    tools: ['React', 'TypeScript', 'Socket.io', 'Node.js', 'Vercel', 'TailwindCSS'],
+    category: 'Web',
+  imageUrl: '/images/arena1.jpg',
+  images: ['/images/arena1.jpg', '/images/arena2.jpg', '/images/arena3.jpg', '/images/arena4.jpg'],
+    link: 'https://arenaquest.vercel.app',
+    color: '#FFF3D6',
+  },
   {
     title: 'TypingPath - AI Typing Platform',
     description: 'A modern AI-powered typing education platform that revolutionizes how people learn to type. Built with React 19, TypeScript, and integrated with Google Gemini AI for adaptive learning experiences.',
