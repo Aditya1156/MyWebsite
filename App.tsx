@@ -18,6 +18,7 @@ declare global {
 const App: React.FC = () => {
   const [appState, setAppState] = useState<'loading' | 'selection' | 'full' | 'minimal'>('loading');
   const [isPageReady, setIsPageReady] = useState(false);
+  const [isTransitioning, setIsTransitioning] = useState(false);
 
   useEffect(() => {
     const publicKey = '9Ujk8D1C01AiXeRhJ';
@@ -60,20 +61,37 @@ const App: React.FC = () => {
   
   const handleSelectExperience = (experience: 'full' | 'minimal') => {
     setIsPageReady(false);
+    setIsTransitioning(true);
+    
     // Small delay for exit animation
     setTimeout(() => {
       setAppState(experience);
       // Push state to history so back button works
       window.history.pushState({ page: experience }, '', `#${experience}`);
+      
+      // Give time for content to render in background
+      setTimeout(() => {
+        setIsTransitioning(false);
+        requestAnimationFrame(() => {
+          setIsPageReady(true);
+        });
+      }, experience === 'full' ? 800 : 400); // Longer wait for full experience
     }, 200);
   };
 
   const handleBackToSelection = () => {
     setIsPageReady(false);
+    setIsTransitioning(true);
     setTimeout(() => {
       setAppState('selection');
       // Push state to history
       window.history.pushState({ page: 'selection' }, '', '#selection');
+      setTimeout(() => {
+        setIsTransitioning(false);
+        requestAnimationFrame(() => {
+          setIsPageReady(true);
+        });
+      }, 300);
     }, 200);
   };
 
@@ -132,7 +150,21 @@ const App: React.FC = () => {
             animate="animate"
             exit="exit"
           >
-            <FullExperience onBackToSelection={handleBackToSelection} />
+            {isTransitioning ? (
+              <div className="min-h-screen w-full bg-cream flex items-center justify-center">
+                <motion.div
+                  initial={{ opacity: 0, scale: 0.8 }}
+                  animate={{ opacity: 1, scale: 1 }}
+                  transition={{ duration: 0.5 }}
+                  className="text-center"
+                >
+                  <div className="w-16 h-16 border-4 border-orange border-t-transparent rounded-full animate-spin mx-auto mb-4"></div>
+                  <p className="text-charcoal/60 font-medium">Loading Full Experience...</p>
+                </motion.div>
+              </div>
+            ) : (
+              <FullExperience onBackToSelection={handleBackToSelection} />
+            )}
           </motion.div>
         );
       case 'minimal':
@@ -144,7 +176,21 @@ const App: React.FC = () => {
             animate="animate"
             exit="exit"
           >
-            <VCard onSwitchToFull={() => setAppState('full')} />
+            {isTransitioning ? (
+              <div className="min-h-screen w-full bg-cream flex items-center justify-center">
+                <motion.div
+                  initial={{ opacity: 0, scale: 0.8 }}
+                  animate={{ opacity: 1, scale: 1 }}
+                  transition={{ duration: 0.5 }}
+                  className="text-center"
+                >
+                  <div className="w-16 h-16 border-4 border-orange border-t-transparent rounded-full animate-spin mx-auto mb-4"></div>
+                  <p className="text-charcoal/60 font-medium">Preparing Interview Mode...</p>
+                </motion.div>
+              </div>
+            ) : (
+              <VCard onSwitchToFull={() => handleSelectExperience('full')} />
+            )}
           </motion.div>
         );
       default:
