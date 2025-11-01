@@ -25,13 +25,31 @@ const App: React.FC = () => {
       console.warn("EmailJS script not loaded. Email functionality will be disabled.");
     }
   }, []);
+
+  // Handle browser back/forward navigation
+  useEffect(() => {
+    const handlePopState = (event: PopStateEvent) => {
+      if (event.state?.page) {
+        setAppState(event.state.page);
+      } else {
+        setAppState('selection');
+      }
+    };
+
+    window.addEventListener('popstate', handlePopState);
+    return () => window.removeEventListener('popstate', handlePopState);
+  }, []);
   
   const handleSelectExperience = (experience: 'full' | 'minimal') => {
     setAppState(experience);
+    // Push state to history so back button works
+    window.history.pushState({ page: experience }, '', `#${experience}`);
   };
 
   const handleBackToSelection = () => {
     setAppState('selection');
+    // Push state to history
+    window.history.pushState({ page: 'selection' }, '', '#selection');
   };
 
   const renderContent = () => {
