@@ -61,7 +61,7 @@ const Selection: React.FC<SelectionProps> = ({ onSelect }) => {
           title="Terminal Mode"
           description="For the curious & creative. A terminal-style portfolio for a developer-focused overview."
           icon={<DevIcon className="w-12 h-12 text-orange" />}
-          onClick={() => window.open('https://adicodes2.netlify.app', '_blank', 'noopener,noreferrer')}
+          onClick={() => window.open('https://adicodes2.vercel.app', '_blank', 'noopener,noreferrer')}
         />
         <SelectionCard
           title="Interviewer Mode"
