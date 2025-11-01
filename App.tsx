@@ -1,4 +1,5 @@
 import React, { useEffect, useState } from 'react';
+import { AnimatePresence, motion } from 'framer-motion';
 import Loader from './components/Loader';
 import Selection from './components/Selection';
 import FullExperience from './components/FullExperience';
@@ -16,6 +17,7 @@ declare global {
 
 const App: React.FC = () => {
   const [appState, setAppState] = useState<'loading' | 'selection' | 'full' | 'minimal'>('loading');
+  const [isTransitioning, setIsTransitioning] = useState(false);
 
   useEffect(() => {
     const publicKey = '9Ujk8D1C01AiXeRhJ';
@@ -30,7 +32,11 @@ const App: React.FC = () => {
   useEffect(() => {
     const handlePopState = (event: PopStateEvent) => {
       if (event.state?.page) {
-        setAppState(event.state.page);
+        setIsTransitioning(true);
+        setTimeout(() => {
+          setAppState(event.state.page);
+          setIsTransitioning(false);
+        }, 100);
       } else {
         setAppState('selection');
       }
@@ -41,27 +47,100 @@ const App: React.FC = () => {
   }, []);
   
   const handleSelectExperience = (experience: 'full' | 'minimal') => {
-    setAppState(experience);
-    // Push state to history so back button works
-    window.history.pushState({ page: experience }, '', `#${experience}`);
+    setIsTransitioning(true);
+    setTimeout(() => {
+      setAppState(experience);
+      setIsTransitioning(false);
+      // Push state to history so back button works
+      window.history.pushState({ page: experience }, '', `#${experience}`);
+    }, 100);
   };
 
   const handleBackToSelection = () => {
-    setAppState('selection');
-    // Push state to history
-    window.history.pushState({ page: 'selection' }, '', '#selection');
+    setIsTransitioning(true);
+    setTimeout(() => {
+      setAppState('selection');
+      setIsTransitioning(false);
+      // Push state to history
+      window.history.pushState({ page: 'selection' }, '', '#selection');
+    }, 100);
   };
 
   const renderContent = () => {
+    const pageVariants = {
+      initial: { 
+        opacity: 0,
+        scale: 0.95,
+        y: 20
+      },
+      animate: { 
+        opacity: 1,
+        scale: 1,
+        y: 0,
+        transition: {
+          duration: 0.4,
+          ease: [0.22, 1, 0.36, 1] // Custom easing for smooth feel
+        }
+      },
+      exit: { 
+        opacity: 0,
+        scale: 1.05,
+        transition: {
+          duration: 0.3,
+          ease: [0.22, 1, 0.36, 1]
+        }
+      }
+    };
+
     switch (appState) {
       case 'loading':
-        return <Loader onComplete={() => setAppState('selection')} />;
+        return (
+          <motion.div
+            key="loading"
+            variants={pageVariants}
+            initial="initial"
+            animate="animate"
+            exit="exit"
+          >
+            <Loader onComplete={() => setAppState('selection')} />
+          </motion.div>
+        );
       case 'selection':
-        return <Selection onSelect={handleSelectExperience} />;
+        return (
+          <motion.div
+            key="selection"
+            variants={pageVariants}
+            initial="initial"
+            animate="animate"
+            exit="exit"
+          >
+            <Selection onSelect={handleSelectExperience} />
+          </motion.div>
+        );
       case 'full':
-        return <FullExperience onBackToSelection={handleBackToSelection} />;
+        return (
+          <motion.div
+            key="full"
+            variants={pageVariants}
+            initial="initial"
+            animate="animate"
+            exit="exit"
+          >
+            <FullExperience onBackToSelection={handleBackToSelection} />
+          </motion.div>
+        );
       case 'minimal':
-        return <VCard onSwitchToFull={() => setAppState('full')} />;
+        return (
+          <motion.div
+            key="minimal"
+            variants={pageVariants}
+            initial="initial"
+            animate="animate"
+            exit="exit"
+          >
+            <VCard onSwitchToFull={() => setAppState('full')} />
+          </motion.div>
+        );
       default:
         return null;
     }
@@ -70,8 +149,10 @@ const App: React.FC = () => {
   return (
     <>
       <SEO />
-      <div className="bg-cream text-charcoal font-sans min-h-screen">
-        {renderContent()}
+      <div className="bg-cream text-charcoal font-sans min-h-screen overflow-hidden">
+        <AnimatePresence mode="wait">
+          {renderContent()}
+        </AnimatePresence>
       </div>
     </>
   );
