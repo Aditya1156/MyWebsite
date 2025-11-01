@@ -1,12 +1,10 @@
-import React, { useEffect, useState, Suspense } from 'react';
+import React, { useEffect, useState } from 'react';
 import { AnimatePresence, motion } from 'framer-motion';
 import Loader from './components/Loader';
 import Selection from './components/Selection';
+import FullExperience from './components/FullExperience';
+import VCard from './components/VCard';
 import SEO from './components/SEO';
-
-// Lazy load heavy components
-const FullExperience = React.lazy(() => import('./components/FullExperience'));
-const VCard = React.lazy(() => import('./components/VCard'));
 
 declare global {
   interface Window {
@@ -17,30 +15,9 @@ declare global {
   }
 }
 
-// Loading skeleton component for lazy loaded pages
-const PageLoadingSkeleton: React.FC = () => (
-  <div className="fixed inset-0 bg-cream flex items-center justify-center">
-    <div className="text-center">
-      <motion.div
-        className="w-16 h-16 border-4 border-orange/20 border-t-orange rounded-full mx-auto mb-4"
-        animate={{ rotate: 360 }}
-        transition={{ duration: 1, repeat: Infinity, ease: "linear" }}
-      />
-      <motion.p
-        className="text-charcoal/60 font-medium"
-        initial={{ opacity: 0 }}
-        animate={{ opacity: 1 }}
-        transition={{ delay: 0.2 }}
-      >
-        Loading experience...
-      </motion.p>
-    </div>
-  </div>
-);
-
 const App: React.FC = () => {
   const [appState, setAppState] = useState<'loading' | 'selection' | 'full' | 'minimal'>('loading');
-  const [isTransitioning, setIsTransitioning] = useState(false);
+  const [isPageReady, setIsPageReady] = useState(false);
 
   useEffect(() => {
     const publicKey = '9Ujk8D1C01AiXeRhJ';
@@ -55,62 +32,68 @@ const App: React.FC = () => {
   useEffect(() => {
     const handlePopState = (event: PopStateEvent) => {
       if (event.state?.page) {
-        setIsTransitioning(true);
+        setIsPageReady(false);
         setTimeout(() => {
           setAppState(event.state.page);
-          setIsTransitioning(false);
-        }, 100);
+          requestAnimationFrame(() => {
+            setIsPageReady(true);
+          });
+        }, 50);
       } else {
         setAppState('selection');
+        setIsPageReady(true);
       }
     };
 
     window.addEventListener('popstate', handlePopState);
     return () => window.removeEventListener('popstate', handlePopState);
   }, []);
+
+  // Set page ready when state changes
+  useEffect(() => {
+    if (appState !== 'loading') {
+      requestAnimationFrame(() => {
+        setIsPageReady(true);
+      });
+    }
+  }, [appState]);
   
   const handleSelectExperience = (experience: 'full' | 'minimal') => {
-    setIsTransitioning(true);
+    setIsPageReady(false);
+    // Small delay for exit animation
     setTimeout(() => {
       setAppState(experience);
-      setIsTransitioning(false);
       // Push state to history so back button works
       window.history.pushState({ page: experience }, '', `#${experience}`);
-    }, 100);
+    }, 200);
   };
 
   const handleBackToSelection = () => {
-    setIsTransitioning(true);
+    setIsPageReady(false);
     setTimeout(() => {
       setAppState('selection');
-      setIsTransitioning(false);
       // Push state to history
       window.history.pushState({ page: 'selection' }, '', '#selection');
-    }, 100);
+    }, 200);
   };
 
   const renderContent = () => {
     const pageVariants = {
       initial: { 
         opacity: 0,
-        scale: 0.95,
-        y: 20
       },
       animate: { 
         opacity: 1,
-        scale: 1,
-        y: 0,
         transition: {
-          duration: 0.4,
-          ease: [0.22, 1, 0.36, 1] // Custom easing for smooth feel
+          duration: 0.3,
+          ease: "easeOut"
         }
       },
       exit: { 
         opacity: 0,
-        scale: 1.05,
         transition: {
-          duration: 0.3,
-          ease: [0.22, 1, 0.36, 1]
+          duration: 0.2,
+          ease: "easeIn"
         }
       }
     };
@@ -149,9 +132,7 @@ const App: React.FC = () => {
             animate="animate"
             exit="exit"
           >
-            <Suspense fallback={<PageLoadingSkeleton />}>
-              <FullExperience onBackToSelection={handleBackToSelection} />
-            </Suspense>
+            <FullExperience onBackToSelection={handleBackToSelection} />
           </motion.div>
         );
       case 'minimal':
@@ -163,9 +144,7 @@ const App: React.FC = () => {
             animate="animate"
             exit="exit"
           >
-            <Suspense fallback={<PageLoadingSkeleton />}>
-              <VCard onSwitchToFull={() => setAppState('full')} />
-            </Suspense>
+            <VCard onSwitchToFull={() => setAppState('full')} />
           </motion.div>
         );
       default:
