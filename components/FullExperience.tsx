@@ -1,8 +1,8 @@
-import React, { useRef, useEffect } from 'react';
+import React, { useRef, useEffect, useState } from 'react';
 import { ReactLenis } from 'lenis/react';
 import type { LenisRef } from 'lenis/react';
 import { cancelFrame, frame } from 'framer-motion';
-import { motion } from 'framer-motion';
+import { motion, AnimatePresence } from 'framer-motion';
 import Hero from './Hero';
 import About from './About';
 import Experience from './Experience';
@@ -38,6 +38,8 @@ const FullExperience: React.FC<FullExperienceProps> = ({ onBackToSelection }) =>
   const heroEndRef = useRef<HTMLDivElement>(null);
   const isHeroOnScreen = useOnScreen(heroEndRef, 0);
   const lenisRef = useRef<LenisRef>(null);
+  const [isBackButtonVisible, setIsBackButtonVisible] = useState(true);
+  const lastScrollY = useRef(0);
 
   useEffect(() => {
     function update(data: { timestamp: number }) {
@@ -51,6 +53,28 @@ const FullExperience: React.FC<FullExperienceProps> = ({ onBackToSelection }) =>
   useEffect(() => {
     window.scrollTo(0, 0);
   }, []);
+
+  // Hide/show button on scroll
+  useEffect(() => {
+    const handleScroll = () => {
+      if (window.scrollY < 100) {
+        if (!isBackButtonVisible) setIsBackButtonVisible(true);
+        return;
+      }
+
+      const currentScrollY = window.scrollY;
+      
+      if (currentScrollY > lastScrollY.current && currentScrollY > 100) {
+        if (isBackButtonVisible) setIsBackButtonVisible(false);
+      } else {
+        if (!isBackButtonVisible) setIsBackButtonVisible(true);
+      }
+      lastScrollY.current = currentScrollY;
+    };
+
+    window.addEventListener('scroll', handleScroll, { passive: true });
+    return () => window.removeEventListener('scroll', handleScroll);
+  }, [isBackButtonVisible]);
 
   const handleBackToHome = () => {
     if (onBackToSelection) {
@@ -120,21 +144,26 @@ const FullExperience: React.FC<FullExperienceProps> = ({ onBackToSelection }) =>
       >
   <ScrollIndicator sections={scrollIndicatorSections} />
        
-       {/* Back to Home Button */}
-       <motion.button
-         onClick={handleBackToHome}
-         className="fixed top-6 left-6 z-[100] bg-orange text-cream font-semibold px-4 py-2 rounded-full shadow-lg hover:bg-orange/90 transition-all duration-300 flex items-center gap-2 group"
-         initial={{ opacity: 0, x: -20 }}
-         animate={{ opacity: 1, x: 0 }}
-         transition={{ duration: 0.5, delay: 0.5 }}
-         whileHover={{ scale: 1.05 }}
-         whileTap={{ scale: 0.95 }}
-       >
-         <svg className="w-5 h-5 transition-transform group-hover:-translate-x-1" fill="none" viewBox="0 0 24 24" stroke="currentColor">
-           <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M10 19l-7-7m0 0l7-7m-7 7h18" />
-         </svg>
-         <span className="hidden sm:inline">Back to Home</span>
-       </motion.button>
+       {/* Back to Home Button - Hides on scroll */}
+       <AnimatePresence>
+         {isBackButtonVisible && (
+           <motion.button
+             onClick={handleBackToHome}
+             className="fixed top-4 left-4 z-[100] bg-orange text-cream font-medium px-3 py-1.5 rounded-full shadow-md hover:shadow-lg hover:bg-orange/90 transition-all duration-300 flex items-center gap-1.5 group text-sm"
+             initial={{ opacity: 0, x: -20 }}
+             animate={{ opacity: 1, x: 0 }}
+             exit={{ opacity: 0, x: -20 }}
+             transition={{ duration: 0.3 }}
+             whileHover={{ scale: 1.05 }}
+             whileTap={{ scale: 0.95 }}
+           >
+             <svg className="w-4 h-4 transition-transform group-hover:-translate-x-0.5" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+               <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M10 19l-7-7m0 0l7-7m-7 7h18" />
+             </svg>
+             <span className="hidden sm:inline">Back to Home</span>
+           </motion.button>
+         )}
+       </AnimatePresence>
 
        <CardNav
         logo={logoText}
