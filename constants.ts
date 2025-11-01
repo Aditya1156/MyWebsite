@@ -109,7 +109,7 @@ export const PROJECTS_DATA: Project[] = [
       '/images/hack1.jpg',
       '/images/hack2.jpg'
     ],
-    link: 'https://github.com/Aditya1156/hackathon-fusion',
+    link: 'https://hackathonfusion.vercel.app',
     color: '#E8F7F3',
   },
   {
