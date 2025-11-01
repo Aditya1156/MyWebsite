@@ -67,7 +67,13 @@ export const Card: FC<CardProps> = ({
               className={`w-full h-full`}
               style={{ scale: imageScale }}
             >
-              <img src={project.imageUrl} alt={project.title} className='absolute inset-0 w-full h-full object-cover' />
+              <img 
+                src={project.imageUrl} 
+                alt={project.title} 
+                className='absolute inset-0 w-full h-full object-cover'
+                loading="lazy"
+                decoding="async"
+              />
             </motion.div>
           </div>
         </div>

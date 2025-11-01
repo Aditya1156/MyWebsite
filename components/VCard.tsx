@@ -59,6 +59,10 @@ const VCard: React.FC<VCardProps> = ({ onSwitchToFull }) => {
             src="/images/aditya.jpeg" 
             alt="Aditya Kumar" 
             className="w-full h-full object-cover"
+            width="128"
+            height="128"
+            loading="eager"
+            decoding="async"
           />
         </motion.div>
         <h1 className="text-4xl md:text-5xl font-bold text-charcoal mb-2">Aditya Kumar</h1>

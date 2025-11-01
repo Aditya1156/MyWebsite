@@ -63,10 +63,18 @@
     <link rel="preconnect" href="https://fonts.googleapis.com" />
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
     <link rel="preconnect" href="https://cdn.tailwindcss.com" />
+    <link rel="preconnect" href="https://aistudiocdn.com" />
+    <link rel="preconnect" href="https://cdn.jsdelivr.net" />
     <link rel="dns-prefetch" href="https://aistudiocdn.com" />
     
+    <!-- Preload critical resources -->
+    <link rel="preload" href="/images/aditya.jpeg" as="image" type="image/jpeg" />
+    
     <!-- Fonts with display=swap for performance -->
-    <link href="https://fonts.googleapis.com/css2?family=Space+Grotesk:wght@500;700&family=Inter:wght@400;500;600&family=JetBrains+Mono:wght@400&display=swap" rel="stylesheet" />
+    <link href="https://fonts.googleapis.com/css2?family=Space+Grotesk:wght@500;700&family=Inter:wght@400;500;600&family=JetBrains+Mono:wght@400&display=swap" rel="stylesheet" media="print" onload="this.media='all'" />
+    <noscript>
+      <link href="https://fonts.googleapis.com/css2?family=Space+Grotesk:wght@500;700&family=Inter:wght@400;500;600&family=JetBrains+Mono:wght@400&display=swap" rel="stylesheet" />
+    </noscript>
     
     <!-- Structured Data - Person Schema -->
     <script type="application/ld+json">
@@ -162,11 +170,20 @@
     }
     </script>
     
-    <script src="https://cdn.tailwindcss.com"></script>
+    <script src="https://cdn.tailwindcss.com" defer></script>
     <style>
+      /* Critical CSS - Load immediately */
+      #root {
+        min-height: 100vh;
+        background-color: #FFF7ED;
+      }
+      
       /* Disable native smooth scroll - Lenis will handle it */
       html {
         scroll-behavior: auto;
+        -webkit-text-size-adjust: 100%;
+        -ms-text-size-adjust: 100%;
+        text-size-adjust: 100%;
       }
       
       /* Mobile touch optimizations */
@@ -175,28 +192,9 @@
         -webkit-touch-callout: none;
       }
       
-      /* Prevent text size adjustment on orientation change */
-      html {
-        -webkit-text-size-adjust: 100%;
-        -ms-text-size-adjust: 100%;
-        text-size-adjust: 100%;
-      }
-      
       /* Safe area handling for notched devices */
       body {
         padding: env(safe-area-inset-top) env(safe-area-inset-right) env(safe-area-inset-bottom) env(safe-area-inset-left);
-      }
-      
-      /* Smooth scrolling for touch devices */
-      @supports (-webkit-overflow-scrolling: touch) {
-        * {
-          -webkit-overflow-scrolling: touch;
-        }
-      }
-      
-      /* Better touch target sizing */
-      .touch-manipulation {
-        touch-action: manipulation;
       }
     </style>
     <script>
@@ -262,7 +260,7 @@
 </head>
   <body>
     <div id="root"></div>
-    <script type="text/javascript" src="https://cdn.jsdelivr.net/npm/@emailjs/browser@4/dist/email.min.js"></script>
+    <script type="text/javascript" src="https://cdn.jsdelivr.net/npm/@emailjs/browser@4/dist/email.min.js" async></script>
     <script type="module" src="/index.tsx"></script>
   </body>
 </html>
