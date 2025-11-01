@@ -1,10 +1,12 @@
-import React, { useEffect, useState } from 'react';
+import React, { useEffect, useState, Suspense } from 'react';
 import { AnimatePresence, motion } from 'framer-motion';
 import Loader from './components/Loader';
 import Selection from './components/Selection';
-import FullExperience from './components/FullExperience';
-import VCard from './components/VCard';
 import SEO from './components/SEO';
+
+// Lazy load heavy components
+const FullExperience = React.lazy(() => import('./components/FullExperience'));
+const VCard = React.lazy(() => import('./components/VCard'));
 
 declare global {
   interface Window {
@@ -14,6 +16,27 @@ declare global {
     };
   }
 }
+
+// Loading skeleton component for lazy loaded pages
+const PageLoadingSkeleton: React.FC = () => (
+  <div className="fixed inset-0 bg-cream flex items-center justify-center">
+    <div className="text-center">
+      <motion.div
+        className="w-16 h-16 border-4 border-orange/20 border-t-orange rounded-full mx-auto mb-4"
+        animate={{ rotate: 360 }}
+        transition={{ duration: 1, repeat: Infinity, ease: "linear" }}
+      />
+      <motion.p
+        className="text-charcoal/60 font-medium"
+        initial={{ opacity: 0 }}
+        animate={{ opacity: 1 }}
+        transition={{ delay: 0.2 }}
+      >
+        Loading experience...
+      </motion.p>
+    </div>
+  </div>
+);
 
 const App: React.FC = () => {
   const [appState, setAppState] = useState<'loading' | 'selection' | 'full' | 'minimal'>('loading');
@@ -126,7 +149,9 @@ const App: React.FC = () => {
             animate="animate"
             exit="exit"
           >
-            <FullExperience onBackToSelection={handleBackToSelection} />
+            <Suspense fallback={<PageLoadingSkeleton />}>
+              <FullExperience onBackToSelection={handleBackToSelection} />
+            </Suspense>
           </motion.div>
         );
       case 'minimal':
@@ -138,7 +163,9 @@ const App: React.FC = () => {
             animate="animate"
             exit="exit"
           >
-            <VCard onSwitchToFull={() => setAppState('full')} />
+            <Suspense fallback={<PageLoadingSkeleton />}>
+              <VCard onSwitchToFull={() => setAppState('full')} />
+            </Suspense>
           </motion.div>
         );
       default:
