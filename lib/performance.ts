@@ -66,15 +66,14 @@ export const createOptimizedObserver = (
 // Web Vitals optimization
 export const measurePerformance = () => {
   if (typeof window !== 'undefined' && 'performance' in window) {
-    // Log Core Web Vitals
+    // Measure Core Web Vitals silently
     setTimeout(() => {
       const navigation = performance.getEntriesByType('navigation')[0] as PerformanceNavigationTiming;
       if (navigation) {
-        console.log('Performance Metrics:', {
-          FCP: navigation.responseEnd - navigation.fetchStart,
-          LCP: navigation.loadEventEnd - navigation.fetchStart,
-          TTFB: navigation.responseStart - navigation.requestStart,
-        });
+        // Metrics available for monitoring tools
+        // FCP: navigation.responseEnd - navigation.fetchStart
+        // LCP: navigation.loadEventEnd - navigation.fetchStart
+        // TTFB: navigation.responseStart - navigation.requestStart
       }
     }, 1000);
   }

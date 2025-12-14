@@ -29,7 +29,6 @@ const Contact: React.FC = () => {
     const templateID = 'template_9deeb9x';
 
     if (typeof window.emailjs === 'undefined') {
-        console.error("EmailJS is not loaded. Cannot send email.");
         setStatus('error');
         setTimeout(() => setStatus('idle'), 5000);
         return;
@@ -46,12 +45,10 @@ const Contact: React.FC = () => {
 
     window.emailjs.send(serviceID, templateID, templateParams)
       .then((response) => {
-         console.log('SUCCESS!', response.status, response.text);
          setStatus('success');
          form.reset();
          setTimeout(() => setStatus('idle'), 5000);
       }, (err) => {
-         console.error('FAILED...', err);
          setStatus('error');
          setTimeout(() => setStatus('idle'), 5000);
       });

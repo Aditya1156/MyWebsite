@@ -1,4 +1,4 @@
-import React, { useRef, useEffect } from 'react';
+import React, { useRef, useEffect, lazy, Suspense } from 'react';
 import { ReactLenis } from 'lenis/react';
 import type { LenisRef } from 'lenis/react';
 import { cancelFrame, frame } from 'framer-motion';
@@ -6,27 +6,28 @@ import { motion } from 'framer-motion';
 import Hero from './Hero';
 import About from './About';
 import Experience from './Experience';
-import Projects from './Projects';
-import Skills from './Skills';
-import HireMe from './HireMe';
-import Memories from './Memories';
-import Footer from './Footer';
-import Contact from './Contact';
-import Process from './Process';
 import BlurText from './BlurText';
 import { NAV_LINKS } from '../constants';
 import ScrollIndicator from './ScrollIndicator';
-import Gallery from './Gallery';
-import SocialConnect from './SocialConnect';
-import AreaCoverage from './AreaCoverage';
-import Pricing from './Pricing';
-// VideoSection removed to simplify hero content
 import { LazyComponent, LoadingSkeleton } from './ui/LazyComponent';
 import { PerformanceProvider } from './PerformanceProvider';
 import CardNav from './CardNav';
 import { CardNavItem } from '../types';
 import GoToTopButton from './GoToTopButton';
 import useOnScreen from '../hooks/useOnScreen';
+
+// Lazy load heavy components
+const Projects = lazy(() => import('./Projects'));
+const Skills = lazy(() => import('./Skills'));
+const HireMe = lazy(() => import('./HireMe'));
+const Memories = lazy(() => import('./Memories'));
+const Footer = lazy(() => import('./Footer'));
+const Contact = lazy(() => import('./Contact'));
+const Process = lazy(() => import('./Process'));
+const Gallery = lazy(() => import('./Gallery'));
+const SocialConnect = lazy(() => import('./SocialConnect'));
+const AreaCoverage = lazy(() => import('./AreaCoverage'));
+const Pricing = lazy(() => import('./Pricing'));
 
 const logoText = "Aditya Kumar";
 
@@ -166,8 +167,13 @@ const FullExperience: React.FC<FullExperienceProps> = ({ onBackToSelection }) =>
 
         {/* This wrapper ensures the normal scrolling content appears ON TOP of the last sticky section */}
         <div className="relative z-40 bg-white">
-          <Process />
-          <Projects />
+          <Suspense fallback={<LoadingSkeleton className="h-96 mx-4" />}>
+            <Process />
+          </Suspense>
+          
+          <Suspense fallback={<LoadingSkeleton className="h-screen mx-4" />}>
+            <Projects />
+          </Suspense>
 
           {/* VideoSection removed per request (Crafting Digital Experiences) */}
           
@@ -183,11 +189,13 @@ const FullExperience: React.FC<FullExperienceProps> = ({ onBackToSelection }) =>
             </div>
           </section>
 
-          <Skills />
+          <Suspense fallback={<LoadingSkeleton className="h-screen mx-4" />}>
+            <Skills />
+          </Suspense>
           
-          <LazyComponent fallback={<LoadingSkeleton className="h-96 mx-4" />}>
+          <Suspense fallback={<LoadingSkeleton className="h-96 mx-4" />}>
             <Gallery />
-          </LazyComponent>
+          </Suspense>
 
           <section className="py-24 bg-white text-center">
             <div className="container mx-auto px-6">
@@ -201,11 +209,13 @@ const FullExperience: React.FC<FullExperienceProps> = ({ onBackToSelection }) =>
             </div>
           </section>
 
-          <HireMe />
+          <Suspense fallback={<LoadingSkeleton className="h-96 mx-4" />}>
+            <HireMe />
+          </Suspense>
           
-          <LazyComponent fallback={<LoadingSkeleton className="h-64 mx-4" />}>
+          <Suspense fallback={<LoadingSkeleton className="h-64 mx-4" />}>
             <Memories />
-          </LazyComponent>
+          </Suspense>
 
           <section className="py-24 bg-cream text-center">
             <div className="container mx-auto px-6">
@@ -231,17 +241,21 @@ const FullExperience: React.FC<FullExperienceProps> = ({ onBackToSelection }) =>
             </div>
           </section>
 
-          <Contact />
+          <Suspense fallback={<LoadingSkeleton className="h-96 mx-4" />}>
+            <Contact />
+          </Suspense>
 
-          <LazyComponent fallback={<LoadingSkeleton className="h-96 mx-4" />}>
+          <Suspense fallback={<LoadingSkeleton className="h-96 mx-4" />}>
             <AreaCoverage />
-          </LazyComponent>
+          </Suspense>
 
-          <LazyComponent fallback={<LoadingSkeleton className="h-[600px] mx-4" />}>
+          <Suspense fallback={<LoadingSkeleton className="h-[600px] mx-4" />}>
             <Pricing />
-          </LazyComponent>
+          </Suspense>
 
-          <SocialConnect />
+          <Suspense fallback={<LoadingSkeleton className="h-64 mx-4" />}>
+            <SocialConnect />
+          </Suspense>
 
           <section className="py-24 bg-white text-center">
             <div className="container mx-auto px-6">
@@ -258,7 +272,9 @@ const FullExperience: React.FC<FullExperienceProps> = ({ onBackToSelection }) =>
 
       </main>
       <GoToTopButton isVisible={!isHeroOnScreen} />
-      <Footer />
+      <Suspense fallback={<LoadingSkeleton className="h-32 mx-4" />}>
+        <Footer />
+      </Suspense>
       </ReactLenis>
     </PerformanceProvider>
   );

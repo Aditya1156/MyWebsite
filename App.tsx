@@ -21,8 +21,6 @@ const App: React.FC = () => {
     const publicKey = '9Ujk8D1C01AiXeRhJ';
     if (typeof window.emailjs !== 'undefined') {
       window.emailjs.init({ publicKey });
-    } else {
-      console.warn("EmailJS script not loaded. Email functionality will be disabled.");
     }
   }, []);
   
