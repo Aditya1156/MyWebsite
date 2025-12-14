@@ -31,11 +31,7 @@ const Pricing = lazy(() => import('./Pricing'));
 
 const logoText = "Aditya Kumar";
 
-interface FullExperienceProps {
-  onBackToSelection?: () => void;
-}
-
-const FullExperience: React.FC<FullExperienceProps> = ({ onBackToSelection }) => {
+const FullExperience: React.FC = () => {
   const heroEndRef = useRef<HTMLDivElement>(null);
   const isHeroOnScreen = useOnScreen(heroEndRef, 0);
   const lenisRef = useRef<LenisRef>(null);
@@ -52,14 +48,6 @@ const FullExperience: React.FC<FullExperienceProps> = ({ onBackToSelection }) =>
   useEffect(() => {
     window.scrollTo(0, 0);
   }, []);
-
-  const handleBackToHome = () => {
-    if (onBackToSelection) {
-      onBackToSelection();
-    } else {
-      window.location.href = '/';
-    }
-  };
 
   const scrollIndicatorSections = NAV_LINKS.map(link => ({
     id: link.href.substring(1),
@@ -120,22 +108,6 @@ const FullExperience: React.FC<FullExperienceProps> = ({ onBackToSelection }) =>
         ref={lenisRef} 
       >
   <ScrollIndicator sections={scrollIndicatorSections} />
-       
-       {/* Back to Home Button */}
-       <motion.button
-         onClick={handleBackToHome}
-         className="fixed top-6 left-6 z-[100] bg-orange text-cream font-semibold px-4 py-2 rounded-full shadow-lg hover:bg-orange/90 transition-all duration-300 flex items-center gap-2 group"
-         initial={{ opacity: 0, x: -20 }}
-         animate={{ opacity: 1, x: 0 }}
-         transition={{ duration: 0.5, delay: 0.5 }}
-         whileHover={{ scale: 1.05 }}
-         whileTap={{ scale: 0.95 }}
-       >
-         <svg className="w-5 h-5 transition-transform group-hover:-translate-x-1" fill="none" viewBox="0 0 24 24" stroke="currentColor">
-           <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M10 19l-7-7m0 0l7-7m-7 7h18" />
-         </svg>
-         <span className="hidden sm:inline">Back to Home</span>
-       </motion.button>
 
        <CardNav
         logo={logoText}
