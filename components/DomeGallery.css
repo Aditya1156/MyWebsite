@@ -49,7 +49,7 @@
   .sphere-root[data-enlarging="true"] .scrim {
     opacity: 1 !important;
     pointer-events: all !important;
-    background: rgba(30, 30, 30, 0.85) !important;
+    background: rgba(56, 39, 76, 0.85) !important;
     cursor: pointer !important;
     z-index: 50 !important;
   }

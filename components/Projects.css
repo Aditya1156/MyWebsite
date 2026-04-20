@@ -10,15 +10,15 @@
 }
 
 .modal-scroll::-webkit-scrollbar-track {
-  background: #f5f5f5;
+  background: #f9edff;
   border-radius: 10px;
 }
 
 .modal-scroll::-webkit-scrollbar-thumb {
-  background: #ff6b00;
+  background: #6a1cf6;
   border-radius: 10px;
 }
 
 .modal-scroll::-webkit-scrollbar-thumb:hover {
-  background: #e65f00;
+  background: #ac8eff;
 }

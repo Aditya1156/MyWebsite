@@ -48,7 +48,7 @@ const AnimatedLogo: React.FC<{ className?: string }> = ({ className }) => {
     >
       <motion.path
         d="M12 36L24 12L36 36"
-        stroke="#FFF7ED"
+        stroke="#38274c"
         strokeWidth="4"
         strokeLinecap="round"
         strokeLinejoin="round"
@@ -57,7 +57,7 @@ const AnimatedLogo: React.FC<{ className?: string }> = ({ className }) => {
       />
       <motion.path
         d="M18 27H30"
-        stroke="#FF6B00"
+        stroke="#6a1cf6"
         strokeWidth="4"
         strokeLinecap="round"
         strokeLinejoin="round"
