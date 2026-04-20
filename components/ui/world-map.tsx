@@ -18,7 +18,7 @@ interface MapProps {
 
 export function WorldMap({ 
   dots = [], 
-  lineColor = "#FF6B00",
+  lineColor = "#6a1cf6",
   showLabels = true,
   labelClassName = "text-sm",
   animationDuration = 2,
@@ -35,9 +35,9 @@ export function WorldMap({
   const svgMap = useMemo(
     () => map.getSVG({
       radius: 0.22,
-      color: "#FF6B0040",
+      color: "#6a1cf640",
       shape: "circle",
-      backgroundColor: "#FFF7ED",
+      backgroundColor: "#fdf3ff",
     }),
     [map]
   );
@@ -218,7 +218,7 @@ export function WorldMap({
                       className="block"
                     >
                       <div className="flex items-center justify-center h-full">
-                        <span className="text-sm font-medium px-2 py-0.5 rounded-md bg-white/95 text-charcoal border border-orange/20 shadow-sm">
+                        <span className="text-sm font-medium px-2.5 py-1 rounded-full bg-white/95 text-charcoal kp-shadow-ambient">
                           {dot.start.label}
                         </span>
                       </div>
@@ -285,7 +285,7 @@ export function WorldMap({
                       className="block"
                     >
                       <div className="flex items-center justify-center h-full">
-                        <span className="text-sm font-medium px-2 py-0.5 rounded-md bg-white/95 text-charcoal border border-orange/20 shadow-sm">
+                        <span className="text-sm font-medium px-2.5 py-1 rounded-full bg-white/95 text-charcoal kp-shadow-ambient">
                           {dot.end.label}
                         </span>
                       </div>
@@ -305,7 +305,7 @@ export function WorldMap({
             initial={{ opacity: 0, y: 10 }}
             animate={{ opacity: 1, y: 0 }}
             exit={{ opacity: 0, y: 10 }}
-            className="absolute bottom-4 left-4 bg-white/90 text-charcoal px-3 py-2 rounded-lg text-sm font-medium backdrop-blur-sm sm:hidden border border-orange/20"
+            className="absolute bottom-4 left-4 kp-glass text-charcoal px-4 py-2 rounded-full text-sm font-medium sm:hidden kp-shadow-ambient"
           >
             {hoveredLocation}
           </motion.div>

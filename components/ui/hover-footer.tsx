@@ -50,19 +50,19 @@ export const TextHoverEffect = ({
           cy="50%"
           r="25%"
         >
-          <stop offset="0%" stopColor={hovered ? "#eab308" : "#FF6B00"}>
+          <stop offset="0%" stopColor={hovered ? "#eab308" : "#6a1cf6"}>
             <animate
               attributeName="stop-color"
-              values="#FF6B00;#eab308;#ef4444;#80eeb4;#06b6d4;#8b5cf6;#FF6B00"
+              values="#6a1cf6;#eab308;#ef4444;#80eeb4;#06b6d4;#8b5cf6;#6a1cf6"
               dur="3s"
               repeatCount="indefinite"
               begin={hovered ? "0s" : "indefinite"}
             />
           </stop>
-          <stop offset="25%" stopColor={hovered ? "#ef4444" : "#FF8533"}>
+          <stop offset="25%" stopColor={hovered ? "#ef4444" : "#ac8eff"}>
             <animate
               attributeName="stop-color"
-              values="#FF8533;#ef4444;#80eeb4;#06b6d4;#8b5cf6;#eab308;#FF8533"
+              values="#ac8eff;#ef4444;#80eeb4;#06b6d4;#8b5cf6;#eab308;#ac8eff"
               dur="3s"
               repeatCount="indefinite"
               begin={hovered ? "0s" : "indefinite"}
@@ -173,7 +173,7 @@ export const FooterBackgroundGradient = () => {
       className="absolute inset-0 z-0"
       style={{
         background:
-          "radial-gradient(125% 125% at 50% 10%, rgba(15, 15, 17, 0.4) 50%, rgba(255, 107, 0, 0.2) 100%)",
+          "radial-gradient(125% 125% at 50% 10%, rgba(56, 39, 76, 0.4) 50%, rgba(106, 28, 246, 0.2) 100%)",
       }}
     />
   );

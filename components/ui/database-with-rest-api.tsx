@@ -109,7 +109,7 @@ const DatabaseWithRestApi = ({
           {/* First Button */}
           <g>
             <rect
-              fill="#FF6B00"
+              fill="#6a1cf6"
               x="14"
               y="5"
               width="34"

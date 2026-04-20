@@ -41,7 +41,7 @@ const iconComponents: Record<IconType, { component: () => React.JSX.Element; col
         <path d="M1.5 0h21l-1.91 21.563L11.977 24l-8.564-2.438L1.5 0zm7.031 9.75l-.232-2.718 10.059.003.23-2.622L5.412 4.41l.698 8.01h9.126l-.326 3.426-2.91.804-2.955-.81-.188-2.11H6.248l.33 4.171L12 19.351l5.379-1.443.744-8.157H8.531z" fill="#E34F26"/>
       </svg>
     ),
-    color: '#FF6B00'
+    color: '#6a1cf6'
   },
   css: {
     component: () => (
@@ -49,7 +49,7 @@ const iconComponents: Record<IconType, { component: () => React.JSX.Element; col
         <path d="M1.5 0h21l-1.91 21.563L11.977 24l-8.565-2.438L1.5 0zm17.09 4.413L5.41 4.41l.213 2.622 10.125.002-.255 2.716h-6.64l.24 2.573h6.182l-.366 3.523-2.91.804-2.956-.81-.188-2.11h-2.61l.29 3.751L12 19.351l5.379-1.443.744-8.157z" fill="#1572B6"/>
       </svg>
     ),
-    color: '#FF6B00'
+    color: '#6a1cf6'
   },
   javascript: {
     component: () => (
@@ -290,14 +290,14 @@ OrbitingSkill.displayName = 'OrbitingSkill';
 const GlowingOrbitPath = memo(({ radius, glowColor = 'orange', animationDelay = 0 }: GlowingOrbitPathProps) => {
   const glowColors = {
     orange: {
-      primary: 'rgba(255, 107, 0, 0.4)',
-      secondary: 'rgba(255, 107, 0, 0.2)',
-      border: 'rgba(255, 107, 0, 0.3)'
+      primary: 'rgba(106, 28, 246, 0.4)',
+      secondary: 'rgba(106, 28, 246, 0.2)',
+      border: 'rgba(106, 28, 246, 0.3)'
     },
     charcoal: {
-      primary: 'rgba(30, 30, 30, 0.4)',
-      secondary: 'rgba(30, 30, 30, 0.2)',
-      border: 'rgba(30, 30, 30, 0.3)'
+      primary: 'rgba(56, 39, 76, 0.4)',
+      secondary: 'rgba(56, 39, 76, 0.2)',
+      border: 'rgba(56, 39, 76, 0.3)'
     },
     purple: {
       primary: 'rgba(147, 51, 234, 0.4)',
@@ -377,8 +377,8 @@ export default function OrbitingSkills() {
         <div 
           className="absolute inset-0" 
           style={{
-            backgroundImage: `radial-gradient(circle at 25% 25%, #FF6B00 0%, transparent 50%),
-                             radial-gradient(circle at 75% 75%, #1E1E1E 0%, transparent 50%)`,
+            backgroundImage: `radial-gradient(circle at 25% 25%, #6a1cf6 0%, transparent 50%),
+                             radial-gradient(circle at 75% 75%, #ac8eff 0%, transparent 50%)`,
           }}
         />
       </div>

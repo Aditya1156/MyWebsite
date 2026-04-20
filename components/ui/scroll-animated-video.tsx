@@ -494,21 +494,21 @@ export const HeroScrollVideo: React.FC<HeroScrollVideoProps> = ({
         /* System theme: define light defaults, override in dark */
         .hsv-root {
           /* Light */
-          --bg: #FFF7ED;
-          --text: #1E1E1E;
+          --bg: #fdf3ff;
+          --text: #38274c;
           --muted: #6b7280;
           --muted-bg: rgba(15,17,21,0.06);
           --muted-border: rgba(15,17,21,0.12);
           --overlay-bg: rgba(10,10,14,0.42);
           --overlay-text: #ffffff;
-          --accent: #FF6B00;    /* orange */
-          --accent-2: #FFF7ED;  /* cream */
+          --accent: #6a1cf6;    /* orange */
+          --accent-2: #fdf3ff;  /* cream */
           --shadow: 0 10px 30px rgba(0,0,0,0.08);
 
           color-scheme: light dark;
           background: var(--bg);
           color: var(--text);
-          font-family: Inter, Inter var, ui-sans-serif, system-ui, -apple-system, Segoe UI, Roboto, Helvetica, Arial, "Apple Color Emoji","Segoe UI Emoji";
+          font-family: Manrope, ui-sans-serif, system-ui, -apple-system, Segoe UI, Roboto, Helvetica, Arial, "Apple Color Emoji","Segoe UI Emoji";
           overflow-x: clip;
         }
         @media (prefers-color-scheme: dark) {
@@ -520,8 +520,8 @@ export const HeroScrollVideo: React.FC<HeroScrollVideoProps> = ({
             --muted-border: rgba(229,231,235,0.14);
             --overlay-bg: rgba(8,8,12,0.55);
             --overlay-text: #ffffff;
-            --accent: #FF6B00;
-            --accent-2: #FFF7ED;
+            --accent: #6a1cf6;
+            --accent-2: #fdf3ff;
             --shadow: 0 12px 36px rgba(0,0,0,0.35);
           }
         }
