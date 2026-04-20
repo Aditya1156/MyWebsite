@@ -35,7 +35,7 @@ export const ExperienceColumn = (props: {
             <React.Fragment key={index}>
               {props.experiences.map((exp, i) => (
                 <div 
-                  className="p-6 sm:p-8 rounded-2xl border border-charcoal/10 shadow-xl shadow-orange/5 max-w-sm w-full bg-white/80 backdrop-blur-sm relative overflow-hidden group hover:shadow-2xl hover:shadow-orange/10 transition-all duration-300" 
+                  className="p-6 sm:p-8 rounded-[2rem] kp-shadow-ambient max-w-sm w-full kp-glass-strong relative overflow-hidden group hover:kp-shadow-ambient-lg hover:bg-surface-highest transition-all duration-300"
                   key={i}
                 >
                   {/* Gradient overlay */}
@@ -75,7 +75,7 @@ export const ExperienceColumn = (props: {
                       {exp.tags.map((tag, tagIndex) => (
                         <span 
                           key={tagIndex}
-                          className="text-xs font-mono bg-gradient-to-br from-cream to-cream/80 text-charcoal/80 px-3 py-1 rounded-full border border-charcoal/10"
+                          className="text-xs font-mono bg-surface-highest text-primary px-3 py-1 rounded-full"
                         >
                           {tag}
                         </span>

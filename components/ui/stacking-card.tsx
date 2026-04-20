@@ -40,7 +40,7 @@ export const Card: FC<CardProps> = ({
           scale,
           top: `calc(-5vh + ${i * 25}px)`,
         }}
-        className={`flex flex-col relative h-auto min-h-[520px] sm:min-h-[500px] md:h-[500px] w-[92vw] sm:w-[90vw] max-w-[1000px] rounded-xl sm:rounded-2xl p-5 sm:p-6 md:p-10 origin-top text-charcoal overflow-visible`}
+        className={`flex flex-col relative h-auto min-h-[520px] sm:min-h-[500px] md:h-[500px] w-[92vw] sm:w-[90vw] max-w-[1000px] rounded-[2rem] p-5 sm:p-6 md:p-10 origin-top text-charcoal overflow-visible kp-shadow-ambient-lg`}
       >
         <h2 className='text-xl sm:text-2xl md:text-3xl text-center font-display font-bold mb-3 sm:mb-0'>{project.title}</h2>
         <div className={`flex flex-col md:flex-row h-full mt-3 sm:mt-5 gap-4 sm:gap-6 md:gap-10`}>
@@ -51,9 +51,9 @@ export const Card: FC<CardProps> = ({
                   <span key={tool} className="text-[10px] sm:text-xs font-mono bg-white/50 text-charcoal/80 px-2 sm:px-3 py-0.5 sm:py-1 rounded-full">{tool}</span>
                 ))}
               </div>
-            <button 
-              onClick={() => onCardClick(project)} 
-              className="inline-flex items-center text-orange font-semibold hover:text-orange-light transition-colors duration-300 group mt-1 sm:mt-2 text-sm sm:text-base min-h-[44px] sm:min-h-0 touch-manipulation"
+            <button
+              onClick={() => onCardClick(project)}
+              className="inline-flex items-center kp-gradient-primary text-white font-semibold px-6 py-2.5 rounded-full hover:brightness-110 hover:scale-105 transition-all duration-300 group mt-1 sm:mt-2 text-sm sm:text-base min-h-[44px] sm:min-h-0 touch-manipulation"
             >
                 View Case Study
                 <ArrowRightIcon className="w-4 h-4 ml-2 transition-transform duration-300 group-hover:translate-x-1" />

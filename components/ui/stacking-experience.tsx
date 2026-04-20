@@ -64,7 +64,7 @@ export const Card: FC<CardProps> = ({
           opacity,
           top: `calc(-5vh + ${i * 25}px)`,
         }}
-        className={`relative w-[92vw] sm:w-[85vw] max-w-4xl bg-white/80 backdrop-blur-sm rounded-2xl shadow-xl px-6 py-8 sm:px-8 sm:py-10 border border-charcoal/5 overflow-hidden group`}
+        className={`relative w-[92vw] sm:w-[85vw] max-w-4xl kp-glass-strong rounded-[2rem] kp-shadow-ambient-lg px-6 py-8 sm:px-8 sm:py-10 overflow-hidden group`}
       >
         {/* Gradient overlay on hover */}
         <div className="absolute inset-0 bg-gradient-to-br from-orange/5 via-transparent to-purple-400/5 opacity-0 group-hover:opacity-100 transition-opacity duration-500"></div>
@@ -125,7 +125,7 @@ export const Card: FC<CardProps> = ({
               {experience.tags.map((tag, i) => (
                 <motion.span 
                   key={i} 
-                  className="text-xs font-mono bg-gradient-to-br from-cream to-cream/80 text-charcoal/80 px-3 py-1.5 rounded-full border border-charcoal/10 hover:border-orange/40 transition-colors cursor-default"
+                  className="text-xs font-mono bg-surface-highest text-primary px-3 py-1.5 rounded-full hover:bg-primary hover:text-white transition-colors cursor-default"
                   whileHover={{ scale: 1.05, y: -2 }}
                   transition={{ type: 'spring', stiffness: 400 }}
                 >

@@ -110,7 +110,7 @@ export const PROJECTS_DATA: Project[] = [
       '/images/hack2.jpg'
     ],
     link: 'https://hackathonfusion.vercel.app',
-    color: '#E8F7F3',
+    color: '#ebd4ff',
   },
   {
     title: 'Live QuizApp - ArenaQuest',
@@ -123,7 +123,7 @@ export const PROJECTS_DATA: Project[] = [
   imageUrl: '/images/arena1.jpg',
   images: ['/images/arena1.jpg', '/images/arena2.jpg', '/images/arena3.jpg', '/images/arena4.jpg'],
     link: 'https://arenaquest.vercel.app',
-    color: '#FFF3D6',
+    color: '#f2e3ff',
   },
   {
     title: 'TypingPath - AI Typing Platform',
@@ -142,7 +142,7 @@ export const PROJECTS_DATA: Project[] = [
       '/images/typingpath5.jpg'
     ],
     link: 'https://typingpath.com',
-    color: '#D1E8E2',
+    color: '#f9edff',
   },
   {
     title: 'Airline Management System',
@@ -161,7 +161,7 @@ export const PROJECTS_DATA: Project[] = [
       '/images/airline (5).png'
     ],
     link: 'https://github.com/Aditya1156/FlightManagementSys',
-    color: '#F4C7C4',
+    color: '#ebd4ff',
   },
   {
     title: 'GODOX - AI Logistics Chatbot',
@@ -179,7 +179,7 @@ export const PROJECTS_DATA: Project[] = [
       '/images/chatbot4.jpg'
     ],
     link: 'https://godox.netlify.app/',
-    color: '#FFD3B6',
+    color: '#f2e3ff',
   },
   {
     title: 'Portfolio Website',
@@ -195,7 +195,7 @@ export const PROJECTS_DATA: Project[] = [
       '/images/portfolio2.jpg'
     ],
     link: 'https://adicodes.in',
-    color: '#C3E2DD',
+    color: '#f9edff',
   },
 ];
 

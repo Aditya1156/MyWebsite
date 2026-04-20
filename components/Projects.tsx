@@ -6,7 +6,6 @@ import { ArrowRightIcon, CloseIcon, GithubIcon, GoArrowUpRightIcon } from './ico
 import { motion, AnimatePresence, Variants } from 'framer-motion';
 import StackingCards from './ui/stacking-card';
 import ShareButtons from './ShareButtons';
-import BlurText from './BlurText';
 import './Projects.css';
 
 // FIX: Explicitly type backdropVariants with Variants for consistency.
@@ -44,7 +43,10 @@ const modalVariants: Variants = {
 
 const DetailSection: React.FC<{ title: string; content: string }> = ({ title, content }) => (
   <div>
-    <h3 className="font-display text-lg sm:text-xl md:text-2xl font-bold text-charcoal mb-2 border-l-4 border-orange pl-3">{title}</h3>
+    <h3 className="font-display text-lg sm:text-xl md:text-2xl font-bold text-charcoal mb-3 flex items-center gap-3">
+      <span className="w-1.5 h-6 rounded-full kp-gradient-primary" aria-hidden="true" />
+      {title}
+    </h3>
     <p className="text-charcoal/80 leading-relaxed text-sm sm:text-base">{content}</p>
   </div>
 );
@@ -93,17 +95,18 @@ const Projects: React.FC = () => {
 
   return (
     <section id="projects" className="bg-charcoal">
-      <AnimatedSection className="pt-16 sm:pt-20 md:pt-24 pb-12 sm:pb-14 md:pb-16">
-        <div className="container mx-auto px-4 sm:px-6 text-center">
-          <BlurText
-            text="Things I've Built"
-            delay={100}
-            animateBy="words"
-            direction="top"
-            className="font-display text-3xl sm:text-4xl md:text-5xl font-bold text-cream mb-4 sm:mb-6 tracking-tighter"
-          />
-          <p className="text-cream/70 max-w-2xl mx-auto text-sm sm:text-base px-4">
-              A selection of projects that showcase my passion for creating meaningful technology. Scroll down to see them in action.
+      <AnimatedSection className="pt-20 sm:pt-24 md:pt-32 pb-12 sm:pb-14 md:pb-16">
+        <div className="container mx-auto px-4 sm:px-6">
+          <div className="flex items-center gap-3 font-sans text-xs tracking-[0.24em] uppercase font-semibold text-primary mb-6">
+            <span className="font-mono text-cream/50">03</span>
+            <span className="w-8 h-px bg-cream/20" aria-hidden="true" />
+            <span>Selected work</span>
+          </div>
+          <h2 className="font-display text-4xl sm:text-5xl md:text-6xl font-extrabold text-cream mb-5 tracking-[-0.02em] leading-[1.05] max-w-3xl">
+            Projects shipped &amp; in production.
+          </h2>
+          <p className="text-cream/65 max-w-2xl text-sm sm:text-base leading-relaxed">
+              Case studies from the last two years &mdash; real products with users, constraints, and measurable outcomes.
           </p>
         </div>
       </AnimatedSection>
@@ -138,7 +141,7 @@ const Projects: React.FC = () => {
                 className="modal-scroll overflow-y-auto p-5 sm:p-6 md:p-8 lg:p-12"
                 style={{
                   scrollbarWidth: 'thin',
-                  scrollbarColor: '#ff6b00 #f5f5f5',
+                  scrollbarColor: '#6a1cf6 #f9edff',
                   maxHeight: '90vh'
                 }}
               >
@@ -204,7 +207,7 @@ const Projects: React.FC = () => {
                         </div>
                     </div>
                     <div className="md:col-span-1">
-                        <div className="bg-cream p-5 sm:p-6 rounded-xl space-y-5 sm:space-y-6">
+                        <div className="bg-surface-highest p-5 sm:p-6 rounded-2xl space-y-5 sm:space-y-6">
                             <div>
                                 <h4 className="font-display text-lg sm:text-xl font-bold text-charcoal mb-3 sm:mb-4">Tech Stack</h4>
                                 <div className="flex flex-wrap gap-1.5 sm:gap-2">
@@ -224,16 +227,16 @@ const Projects: React.FC = () => {
                              <div>
                                 <h4 className="font-display text-xl font-bold text-charcoal mb-4">Links</h4>
                                 <div className="space-y-3">
-                                    <a href={selectedProject.link} target="_blank" rel="noopener noreferrer" className="flex items-center justify-center w-full bg-charcoal text-cream font-semibold py-3 px-4 rounded-lg hover:bg-orange transition-all duration-300 transform hover:scale-105 group">
+                                    <a href={selectedProject.link} target="_blank" rel="noopener noreferrer" className="flex items-center justify-center w-full kp-gradient-primary text-white font-semibold py-3 px-4 rounded-full hover:brightness-110 transition-all duration-300 transform hover:scale-105 group">
                                         Live Demo <GoArrowUpRightIcon className="w-5 h-5 ml-2" />
                                     </a>
-                                    <a href="#" target="_blank" rel="noopener noreferrer" className="flex items-center justify-center w-full bg-charcoal/10 text-charcoal font-semibold py-3 px-4 rounded-lg hover:bg-charcoal/20 transition-all duration-300 transform hover:scale-105 group">
+                                    <a href="#" target="_blank" rel="noopener noreferrer" className="flex items-center justify-center w-full bg-secondary text-white font-semibold py-3 px-4 rounded-full hover:bg-secondary/90 transition-all duration-300 transform hover:scale-105 group">
                                         GitHub Repo <GithubIcon className="w-5 h-5 ml-2" />
                                     </a>
                                 </div>
                             </div>
 
-                            <div className="border-t border-charcoal/10 pt-4">
+                            <div className="bg-white -mx-5 sm:-mx-6 px-5 sm:px-6 pt-5 pb-1 rounded-b-2xl">
                                 <h4 className="font-display text-xl font-bold text-charcoal mb-4">Share Project</h4>
                                 <ShareButtons 
                                     url={window.location.href} 
