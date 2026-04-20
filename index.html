@@ -47,7 +47,7 @@
     <meta name="twitter:site" content="@adicodes_" />
     
     <!-- Additional SEO Meta Tags -->
-    <meta name="theme-color" content="#FF6B00" />
+    <meta name="theme-color" content="#6a1cf6" />
     <meta name="apple-mobile-web-app-capable" content="yes" />
     <meta name="apple-mobile-web-app-status-bar-style" content="black-translucent" />
     <meta name="apple-mobile-web-app-title" content="Aditya Kumar" />
@@ -66,7 +66,7 @@
     <link rel="dns-prefetch" href="https://aistudiocdn.com" />
     
     <!-- Fonts with display=swap for performance -->
-    <link href="https://fonts.googleapis.com/css2?family=Space+Grotesk:wght@500;700&family=Inter:wght@400;500;600&family=JetBrains+Mono:wght@400&display=swap" rel="stylesheet" />
+    <link href="https://fonts.googleapis.com/css2?family=Plus+Jakarta+Sans:wght@400;500;600;700;800&family=Manrope:wght@300;400;500;600;700&family=JetBrains+Mono:wght@400&display=swap" rel="stylesheet" />
     
     <!-- Structured Data - Person Schema -->
     <script type="application/ld+json">
@@ -171,7 +171,7 @@
       
       /* Mobile touch optimizations */
       * {
-        -webkit-tap-highlight-color: rgba(255, 107, 0, 0.1);
+        -webkit-tap-highlight-color: rgba(106, 28, 246, 0.1);
         -webkit-touch-callout: none;
       }
       
@@ -204,17 +204,52 @@
         theme: {
           extend: {
             colors: {
-              cream: '#FFF7ED',
-              charcoal: '#1E1E1E',
+              // Kinetic Pulse palette — legacy token names remapped so existing
+              // classes (bg-cream, text-charcoal, bg-orange) cascade to the new palette.
+              cream: '#fdf3ff',       // surface (base layer)
+              charcoal: '#38274c',    // on_surface (primary text)
               orange: {
-                DEFAULT: '#FF6B00',
-                light: '#FF8A33',
+                DEFAULT: '#6a1cf6',   // primary (electric purple)
+                light: '#ac8eff',     // primary_container
               },
+              // Kinetic Pulse semantic tokens
+              primary: {
+                DEFAULT: '#6a1cf6',
+                container: '#ac8eff',
+              },
+              secondary: {
+                DEFAULT: '#00675d',
+                on: '#ffffff',
+              },
+              surface: {
+                DEFAULT: '#fdf3ff',
+                lowest: '#ffffff',
+                low: '#f9edff',
+                high: '#f2e3ff',
+                highest: '#ebd4ff',
+                bright: '#ffffff',
+              },
+              'on-surface': {
+                DEFAULT: '#38274c',
+                variant: '#5a4a6f',
+              },
+              'outline-variant': '#bba4d2',
             },
             fontFamily: {
-              sans: ['Inter', 'sans-serif'],
-              display: ['Space Grotesk', 'sans-serif'],
+              sans: ['Manrope', 'sans-serif'],
+              display: ['Plus Jakarta Sans', 'sans-serif'],
               mono: ['JetBrains Mono', 'monospace'],
+            },
+            borderRadius: {
+              'xl-plus': '3rem',
+            },
+            backgroundImage: {
+              'gradient-primary': 'linear-gradient(135deg, #6a1cf6 0%, #ac8eff 100%)',
+              'gradient-primary-soft': 'linear-gradient(135deg, rgba(106,28,246,0.85) 0%, rgba(172,142,255,0.85) 100%)',
+            },
+            boxShadow: {
+              'ambient': '0 16px 32px rgba(56, 39, 76, 0.08)',
+              'ambient-lg': '0 24px 48px rgba(56, 39, 76, 0.10)',
             },
             animation: {
               'gradient-bg': 'gradient-bg 15s ease infinite',

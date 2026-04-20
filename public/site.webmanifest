@@ -4,8 +4,8 @@
   "description": "Full-Stack Developer specializing in MERN Stack, React, TypeScript, and AI integration",
   "start_url": "/",
   "display": "standalone",
-  "background_color": "#FFF7ED",
-  "theme_color": "#FF6B00",
+  "background_color": "#fdf3ff",
+  "theme_color": "#6a1cf6",
   "orientation": "portrait-primary",
   "icons": [
     {
