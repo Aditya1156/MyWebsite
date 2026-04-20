@@ -22,10 +22,10 @@ const CardNav: React.FC<CardNavProps> = ({
   items,
   className = '',
   ease = 'power3.out',
-  baseColor = 'rgba(255, 247, 237, 0.8)', // cream with transparency
+  baseColor = 'rgba(253, 243, 255, 0.8)', // surface with transparency
   menuColor,
-  buttonBgColor = '#FF6B00', // orange
-  buttonTextColor = '#FFF7ED' // cream
+  buttonBgColor = '#6a1cf6', // primary
+  buttonTextColor = '#ffffff' // surface_container_lowest
 }) => {
   const [isHamburgerOpen, setIsHamburgerOpen] = useState(false);
   const [isExpanded, setIsExpanded] = useState(false);
@@ -222,8 +222,8 @@ const CardNav: React.FC<CardNavProps> = ({
     >
       <nav
         ref={navRef}
-        className={`card-nav ${isExpanded ? 'open' : ''} block h-[60px] p-0 rounded-xl shadow-lg relative overflow-hidden will-change-[height] backdrop-blur-lg`}
-        style={{ backgroundColor: baseColor, color: menuColor || '#1E1E1E' }}
+        className={`card-nav ${isExpanded ? 'open' : ''} kp-glass-strong kp-shadow-ambient-lg block h-[60px] p-0 rounded-full relative overflow-hidden will-change-[height]`}
+        style={{ backgroundColor: baseColor, color: menuColor || '#38274c' }}
       >
         <div className="card-nav-top absolute inset-x-0 top-0 h-[60px] flex items-center justify-between p-2 pl-[1.1rem] z-[2]">
           <div
@@ -232,7 +232,7 @@ const CardNav: React.FC<CardNavProps> = ({
             role="button"
             aria-label={isExpanded ? 'Close menu' : 'Open menu'}
             tabIndex={0}
-            style={{ color: menuColor || '#1E1E1E' }}
+            style={{ color: menuColor || '#38274c' }}
           >
             <div
               className={`hamburger-line w-[30px] h-[2px] bg-current transition-[transform,opacity,margin] duration-300 ease-linear [transform-origin:50%_50%] ${
@@ -260,8 +260,8 @@ const CardNav: React.FC<CardNavProps> = ({
 
           <a
             href="#hire-me"
-            className="card-nav-cta-button hidden md:inline-flex items-center justify-center border-0 rounded-lg px-4 h-10 font-medium cursor-pointer transition-all duration-300 hover:bg-orange-light transform hover:scale-105 no-underline"
-            style={{ backgroundColor: buttonBgColor, color: buttonTextColor }}
+            className="card-nav-cta-button kp-gradient-primary hidden md:inline-flex items-center justify-center border-0 rounded-full px-6 h-10 font-semibold cursor-pointer transition-all duration-300 hover:brightness-110 transform hover:scale-105 no-underline text-white"
+            style={{ color: buttonTextColor }}
             onClick={(e) => handleLinkClick(e, '#hire-me')}
           >
             Hire Me
