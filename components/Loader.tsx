@@ -110,7 +110,7 @@ const Loader: React.FC<LoaderProps> = ({ onComplete }) => {
           <div 
             className="absolute inset-0 z-[1] pointer-events-none" 
             style={{
-              background: 'radial-gradient(circle at center, rgba(255, 247, 237, 0.3) 0%, rgba(255, 247, 237, 0.7) 50%, rgba(255, 247, 237, 0.9) 100%)'
+              background: 'radial-gradient(circle at center, rgba(253, 243, 255, 0.3) 0%, rgba(253, 243, 255, 0.7) 50%, rgba(253, 243, 255, 0.9) 100%)'
             }}
             aria-hidden="true"
           />

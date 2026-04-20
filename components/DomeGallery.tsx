@@ -496,7 +496,7 @@ export default function DomeGallery({
     imageContainer.style.cssText = `
         width: 100%;
         height: 100%;
-        background-color: #FFF7ED;
+        background-color: #fdf3ff;
         padding: 16px;
         box-sizing: border-box;
         border-radius: ${openedImageBorderRadius};
@@ -531,7 +531,7 @@ export default function DomeGallery({
         width: 40px;
         height: 40px;
         border-radius: 50%;
-        background: rgba(30, 30, 30, 0.8);
+        background: rgba(56, 39, 76, 0.8);
         color: white;
         border: none;
         font-size: 32px;
@@ -548,12 +548,12 @@ export default function DomeGallery({
         box-shadow: 0 4px 12px rgba(0, 0, 0, 0.3);
     `;
     closeButton.onmouseover = () => {
-        closeButton.style.background = 'rgba(255, 107, 0, 0.95)';
+        closeButton.style.background = 'rgba(106, 28, 246, 0.95)';
         closeButton.style.transform = 'scale(1.15) rotate(90deg)';
-        closeButton.style.boxShadow = '0 6px 16px rgba(255, 107, 0, 0.4)';
+        closeButton.style.boxShadow = '0 6px 16px rgba(106, 28, 246, 0.4)';
     };
     closeButton.onmouseout = () => {
-        closeButton.style.background = 'rgba(30, 30, 30, 0.8)';
+        closeButton.style.background = 'rgba(56, 39, 76, 0.8)';
         closeButton.style.transform = 'scale(1) rotate(0deg)';
         closeButton.style.boxShadow = '0 4px 12px rgba(0, 0, 0, 0.3)';
     };
@@ -670,7 +670,7 @@ export default function DomeGallery({
       animatingContainer.style.cssText = `
           width: 100%;
           height: 100%;
-          background-color: #FFF7ED;
+          background-color: #fdf3ff;
           padding: 16px;
           box-sizing: border-box;
           border-radius: ${openedImageBorderRadius};
@@ -876,16 +876,16 @@ export default function DomeGallery({
           ref={scrimRef}
           className="scrim absolute inset-0 z-50 pointer-events-none opacity-0 transition-all duration-500 cursor-pointer"
           style={{
-            background: 'rgba(30, 30, 30, 0.85)'
+            background: 'rgba(56, 39, 76, 0.85)'
           }}
           onMouseEnter={(e) => {
             if (rootRef.current?.getAttribute('data-enlarging') === 'true') {
-              e.currentTarget.style.background = 'rgba(30, 30, 30, 0.9)';
+              e.currentTarget.style.background = 'rgba(56, 39, 76, 0.9)';
             }
           }}
           onMouseLeave={(e) => {
             if (rootRef.current?.getAttribute('data-enlarging') === 'true') {
-              e.currentTarget.style.background = 'rgba(30, 30, 30, 0.85)';
+              e.currentTarget.style.background = 'rgba(56, 39, 76, 0.85)';
             }
           }}
         />

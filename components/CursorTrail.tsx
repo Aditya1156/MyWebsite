@@ -68,7 +68,7 @@ const CursorTrail: React.FC = () => {
               translateY: '-50%',
               opacity: index === 0 ? 1 : 0.6 * scale,
               zIndex: 9999,
-              boxShadow: index === 0 ? '0 0 10px rgba(255, 107, 0, 0.7)' : 'none',
+              boxShadow: index === 0 ? '0 0 10px rgba(106, 28, 246, 0.7)' : 'none',
             }}
           />
         );

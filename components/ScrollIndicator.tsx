@@ -46,7 +46,7 @@ const ScrollIndicator: React.FC<ScrollIndicatorProps> = ({ sections }) => {
                   animate={{ 
                     scale: isActive ? 1.3 : 1,
                     boxShadow: isActive 
-                        ? '0 0 5px rgba(255, 107, 0, 0.6)' 
+                        ? '0 0 5px rgba(106, 28, 246, 0.6)' 
                         : 'none'
                   }}
                   transition={{
