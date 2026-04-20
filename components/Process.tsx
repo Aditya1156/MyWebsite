@@ -154,13 +154,13 @@ const Process: React.FC = () => {
                         whileInView={{ opacity: 1, y: 0 }}
                         viewport={{ once: true, amount: 0.3 }}
                         transition={{ duration: 0.6, delay: 0.1 }}
-                        className="bg-white/80 backdrop-blur-sm rounded-2xl p-8 shadow-xl border border-orange/10 hover:shadow-2xl hover:border-orange/30 transition-all duration-300 group"
+                        className="bg-white rounded-[2rem] p-8 kp-shadow-ambient hover:kp-shadow-ambient-lg hover:bg-surface-highest transition-all duration-300 group"
                     >
                         <h3 className="font-display text-2xl font-bold text-charcoal mb-4 group-hover:text-orange transition-colors">01. Discover</h3>
                         <p className="text-charcoal/70 mb-6 text-sm">
                             Understanding requirements and mapping data flows
                         </p>
-                        <div className="flex justify-center items-center h-[250px] bg-gradient-to-br from-cream/50 to-orange/10 rounded-xl border border-orange/20">
+                        <div className="flex justify-center items-center h-[250px] bg-surface-low rounded-2xl">
                             <CpuArchitecture
                                 className="text-orange"
                                 text="IDEA"
@@ -176,7 +176,7 @@ const Process: React.FC = () => {
                         whileInView={{ opacity: 1, y: 0 }}
                         viewport={{ once: true, amount: 0.3 }}
                         transition={{ duration: 0.6, delay: 0.2 }}
-                        className="bg-white/80 backdrop-blur-sm rounded-2xl p-8 shadow-xl border border-orange/10 hover:shadow-2xl hover:border-orange/30 transition-all duration-300 group"
+                        className="bg-white rounded-[2rem] p-8 kp-shadow-ambient hover:kp-shadow-ambient-lg hover:bg-surface-highest transition-all duration-300 group"
                     >
                         <h3 className="font-display text-2xl font-bold text-charcoal mb-4 group-hover:text-orange transition-colors">02. Design</h3>
                         <p className="text-charcoal/70 mb-6 text-sm">
@@ -197,7 +197,7 @@ const Process: React.FC = () => {
                                     first: "Design",
                                     second: "Architecture",
                                 }}
-                                lightColor="#FF6B00"
+                                lightColor="#6a1cf6"
                             />
                         </div>
                     </motion.div>
@@ -208,7 +208,7 @@ const Process: React.FC = () => {
                         whileInView={{ opacity: 1, y: 0 }}
                         viewport={{ once: true, amount: 0.3 }}
                         transition={{ duration: 0.6, delay: 0.3 }}
-                        className="bg-gradient-to-br from-orange via-orange-light to-cream rounded-2xl overflow-hidden shadow-xl border border-orange/20 hover:shadow-2xl transition-all duration-300 md:col-span-2 lg:col-span-1"
+                        className="kp-gradient-primary rounded-[2rem] overflow-hidden kp-shadow-ambient-lg hover:brightness-110 transition-all duration-300 md:col-span-2 lg:col-span-1"
                     >
                         <div className="h-[400px] relative">
                             <RadialOrbitalTimeline timelineData={timelineData} />

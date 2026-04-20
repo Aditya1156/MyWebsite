@@ -100,11 +100,11 @@ const PricingSwitch = ({
 
   return (
     <div className={cn("flex justify-center", className)}>
-      <div className="relative z-10 mx-auto flex w-fit rounded-xl bg-white border border-orange/20 p-1 shadow-lg">
+      <div className="relative z-10 mx-auto flex w-fit rounded-full bg-white p-1 kp-shadow-ambient">
         <button
           onClick={() => handleSwitch("0")}
           className={cn(
-            "relative z-10 w-fit cursor-pointer h-12 rounded-xl sm:px-6 px-3 sm:py-2 py-1 font-medium transition-colors sm:text-base text-sm",
+            "relative z-10 w-fit cursor-pointer h-12 rounded-full sm:px-6 px-3 sm:py-2 py-1 font-medium transition-colors sm:text-base text-sm",
             selected === "0"
               ? "text-white"
               : "text-charcoal/70 hover:text-charcoal",
@@ -113,7 +113,7 @@ const PricingSwitch = ({
           {selected === "0" && (
             <motion.span
               layoutId={"switch"}
-              className="absolute top-0 left-0 h-12 w-full rounded-xl border-4 shadow-sm shadow-orange border-orange bg-gradient-to-t from-orange via-orange-light to-orange"
+              className="absolute top-0 left-0 h-12 w-full rounded-full kp-gradient-primary"
               transition={{ type: "spring", stiffness: 500, damping: 30 }}
             />
           )}
@@ -123,7 +123,7 @@ const PricingSwitch = ({
         <button
           onClick={() => handleSwitch("1")}
           className={cn(
-            "relative z-10 w-fit cursor-pointer h-12 flex-shrink-0 rounded-xl sm:px-6 px-3 sm:py-2 py-1 font-medium transition-colors sm:text-base text-sm",
+            "relative z-10 w-fit cursor-pointer h-12 flex-shrink-0 rounded-full sm:px-6 px-3 sm:py-2 py-1 font-medium transition-colors sm:text-base text-sm",
             selected === "1"
               ? "text-white"
               : "text-charcoal/70 hover:text-charcoal",
@@ -132,13 +132,13 @@ const PricingSwitch = ({
           {selected === "1" && (
             <motion.span
               layoutId={"switch"}
-              className="absolute top-0 left-0 h-12 w-full rounded-xl border-4 shadow-sm shadow-orange border-orange bg-gradient-to-t from-orange via-orange-light to-orange"
+              className="absolute top-0 left-0 h-12 w-full rounded-full kp-gradient-primary"
               transition={{ type: "spring", stiffness: 500, damping: 30 }}
             />
           )}
           <span className="relative flex items-center gap-2">
             Yearly Maintenance
-            <span className="rounded-full bg-cream px-2 py-0.5 text-xs font-medium text-charcoal">
+            <span className="rounded-full bg-secondary/15 text-secondary px-2 py-0.5 text-xs font-semibold">
               Save 10%
             </span>
           </span>
@@ -174,7 +174,7 @@ export default function PricingSection() {
 
   return (
     <div
-      className="px-4 py-20 min-h-screen max-w-7xl mx-auto relative bg-gradient-to-br from-cream via-white to-cream/50"
+      className="px-4 py-20 min-h-screen max-w-7xl mx-auto relative bg-surface"
       ref={pricingRef}
     >
       <article className="text-left mb-6 space-y-4 max-w-2xl">
@@ -227,10 +227,10 @@ export default function PricingSection() {
             customVariants={revealVariants}
           >
             <Card
-              className={`relative border ${
+              className={`relative rounded-[2rem] kp-shadow-ambient-lg border-0 ${
                 plan.popular
-                  ? "ring-2 ring-orange bg-cream shadow-xl shadow-orange/20"
-                  : "bg-white border-orange/20"
+                  ? "bg-surface-highest"
+                  : "bg-white"
               }`}
             >
               <CardHeader className="text-left">
@@ -240,7 +240,7 @@ export default function PricingSection() {
                   </h3>
                   {plan.popular && (
                     <div className="">
-                      <span className="bg-orange text-white px-3 py-1 rounded-full text-sm font-medium">
+                      <span className="kp-gradient-primary text-white px-4 py-1.5 rounded-full text-xs font-semibold tracking-[0.14em] uppercase">
                         Popular
                       </span>
                     </div>
@@ -266,11 +266,11 @@ export default function PricingSection() {
               <CardContent className="pt-0">
                 <a
                   href="mailto:adicodes@outlook.com?subject=Project Inquiry - ${plan.name} Plan"
-                  className={`block w-full mb-4 p-4 text-center text-xl rounded-xl ${
+                  className={`block w-full mb-4 p-4 text-center text-xl rounded-full ${
                     plan.popular
-                      ? "bg-gradient-to-t from-orange to-orange-light shadow-lg shadow-orange/50 border border-orange text-white"
-                      : "bg-gradient-to-t from-charcoal to-charcoal/80 shadow-lg shadow-charcoal/30 border border-charcoal/70 text-white"
-                  } hover:scale-105 transition-transform duration-300`}
+                      ? "kp-gradient-primary text-white kp-shadow-ambient"
+                      : "bg-secondary text-white"
+                  } hover:scale-105 hover:brightness-110 transition-all duration-300`}
                 >
                   {plan.buttonText}
                 </a>
@@ -278,12 +278,12 @@ export default function PricingSection() {
                   href={`https://wa.me/919108453756?text=Hi! I'm interested in the ${plan.name} Plan`}
                   target="_blank"
                   rel="noopener noreferrer"
-                  className="block w-full mb-6 p-4 text-center text-xl rounded-xl bg-white text-charcoal border border-orange/20 shadow-lg shadow-orange/10 hover:bg-cream hover:scale-105 transition-all duration-300"
+                  className="block w-full mb-6 p-4 text-center text-xl rounded-full bg-white text-charcoal hover:bg-surface-highest hover:scale-105 transition-all duration-300 kp-shadow-ambient"
                 >
                   💬 WhatsApp
                 </a>
 
-                <div className="space-y-3 pt-4 border-t border-orange/20">
+                <div className="space-y-3 pt-4 mt-2 -mx-6 px-6 bg-surface-low/50 rounded-b-[2rem]">
                   <h2 className="text-xl font-semibold uppercase text-charcoal mb-3">
                     Features
                   </h2>
@@ -293,8 +293,8 @@ export default function PricingSection() {
                   <ul className="space-y-2 font-semibold">
                     {plan.includes.slice(1).map((feature, featureIndex) => (
                       <li key={featureIndex} className="flex items-center">
-                        <span className="h-6 w-6 bg-white border border-orange rounded-full grid place-content-center mt-0.5 mr-3">
-                          <CheckCheck className="h-4 w-4 text-orange" />
+                        <span className="h-6 w-6 kp-gradient-primary rounded-full grid place-content-center mt-0.5 mr-3">
+                          <CheckCheck className="h-4 w-4 text-white" />
                         </span>
                         <span className="text-sm text-charcoal/70">{feature}</span>
                       </li>

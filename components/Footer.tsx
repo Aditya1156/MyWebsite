@@ -157,7 +157,7 @@ const Footer: React.FC = () => {
         </div>
 
         {/* Bottom Section: Copyright & Legal */}
-        <div className="mt-8 pt-8 border-t border-cream/20">
+        <div className="mt-8 pt-8 bg-white/[0.04] -mx-6 px-6 rounded-t-[2rem]">
           <div className="flex flex-col md:flex-row justify-between items-center gap-4">
             <div className="flex flex-col sm:flex-row items-center gap-4 text-center sm:text-left">
               <p className="text-sm text-cream/60">
@@ -179,7 +179,7 @@ const Footer: React.FC = () => {
           </div>
           
           {/* Additional Info */}
-          <div className="mt-6 pt-6 border-t border-cream/10 text-center">
+          <div className="mt-6 pt-6 text-center">
             <p className="text-xs text-cream/40">
               This website uses smooth scrolling powered by Lenis, animations by Framer Motion, and is deployed on Vercel.
             </p>

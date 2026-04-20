@@ -74,14 +74,19 @@ const socialLinks: SocialLink[] = [
 
 const SocialConnect: React.FC = () => {
   return (
-    <AnimatedSection id="social-connect" className="py-20 sm:py-24 md:py-28 bg-gradient-to-b from-white to-cream">
+    <AnimatedSection id="social-connect" className="py-24 sm:py-28 md:py-32 bg-surface">
       <div className="container mx-auto px-4 sm:px-6">
-        <div className="text-center mb-12 sm:mb-16">
-          <h2 className="font-display text-4xl sm:text-5xl md:text-6xl font-bold text-charcoal mb-4 tracking-tighter">
-            Let's Connect
+        <div className="mb-14 sm:mb-16 max-w-3xl">
+          <div className="flex items-center gap-3 font-sans text-xs tracking-[0.24em] uppercase font-semibold text-primary mb-6">
+            <span className="font-mono text-on-surface/40">08</span>
+            <span className="w-8 h-px bg-on-surface/20" aria-hidden="true" />
+            <span>Elsewhere</span>
+          </div>
+          <h2 className="font-display text-4xl sm:text-5xl md:text-6xl font-extrabold text-on-surface mb-5 tracking-[-0.02em] leading-[1.05]">
+            Follow the work.
           </h2>
-          <p className="text-charcoal/70 max-w-2xl mx-auto text-base sm:text-lg">
-            Follow my journey across platforms. From code repositories to tutorials, stay updated with my latest work.
+          <p className="text-on-surface/65 text-base md:text-lg leading-relaxed max-w-2xl">
+            Repositories, long-form writing, and the occasional build log &mdash; find me across the web.
           </p>
         </div>
 
@@ -92,7 +97,7 @@ const SocialConnect: React.FC = () => {
               href={social.url}
               target="_blank"
               rel="noopener noreferrer"
-              className="group relative bg-white rounded-2xl p-6 sm:p-8 shadow-lg hover:shadow-2xl transition-all duration-300 overflow-hidden border border-cream"
+              className="group relative bg-white rounded-[2rem] p-6 sm:p-8 kp-shadow-ambient hover:kp-shadow-ambient-lg hover:bg-surface-highest transition-all duration-300 overflow-hidden"
               initial={{ opacity: 0, y: 30 }}
               whileInView={{ opacity: 1, y: 0 }}
               viewport={{ once: true, amount: 0.2 }}

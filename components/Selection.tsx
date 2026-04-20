@@ -85,7 +85,7 @@ const SelectionCard: React.FC<SelectionCardProps> = ({ title, description, icon,
     return (
         <motion.div
             variants={cardVariants}
-            className="bg-white rounded-2xl p-8 cursor-pointer shadow-lg border border-transparent hover:border-orange/50 transition-all duration-300 group"
+            className="bg-white rounded-[2rem] p-8 cursor-pointer kp-shadow-ambient hover:bg-surface-highest hover:kp-shadow-ambient-lg transition-all duration-300 group"
             onClick={onClick}
             whileHover={{ y: -10, boxShadow: '0 20px 25px -5px rgb(0 0 0 / 0.1), 0 8px 10px -6px rgb(0 0 0 / 0.1)' }}
         >

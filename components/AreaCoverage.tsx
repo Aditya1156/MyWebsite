@@ -119,7 +119,7 @@ const AreaCoverage: React.FC = () => {
         >
           <WorldMap 
             dots={areaCoverageData}
-            lineColor="#FF6B00"
+            lineColor="#6a1cf6"
             showLabels={true}
             animationDuration={2}
             loop={true}
@@ -140,7 +140,7 @@ const AreaCoverage: React.FC = () => {
                 viewport={{ once: true, amount: 0.3 }}
                 transition={{ duration: 0.5, delay: index * 0.1 }}
                 whileHover={{ y: -5, scale: 1.05 }}
-                className="bg-white rounded-xl p-4 shadow-lg hover:shadow-xl transition-all duration-300 border border-orange/10 group cursor-pointer"
+                className="bg-white rounded-2xl p-4 kp-shadow-ambient hover:kp-shadow-ambient-lg hover:bg-surface-highest transition-all duration-300 group cursor-pointer"
               >
                 <div className="flex flex-col items-center text-center">
                   <span className="text-3xl mb-2 group-hover:scale-125 transition-transform duration-300">
@@ -154,9 +154,9 @@ const AreaCoverage: React.FC = () => {
                     {city.region}
                   </p>
                 </div>
-                <div className="mt-3 pt-3 border-t border-orange/10">
-                  <div className="flex items-center justify-center gap-2 text-orange text-xs font-semibold">
-                    <span className="w-2 h-2 bg-orange rounded-full animate-pulse"></span>
+                <div className="mt-3 pt-3 -mx-4 px-4 pb-1 bg-surface-low rounded-b-2xl">
+                  <div className="flex items-center justify-center gap-2 text-secondary text-xs font-semibold">
+                    <span className="w-2 h-2 bg-secondary rounded-full animate-pulse"></span>
                     Available
                   </div>
                 </div>
@@ -173,7 +173,7 @@ const AreaCoverage: React.FC = () => {
           transition={{ duration: 0.6, delay: 0.3 }}
           className="mt-16 text-center"
         >
-          <div className="bg-gradient-to-r from-orange/10 via-orange/5 to-orange/10 rounded-2xl p-8 max-w-3xl mx-auto border border-orange/20">
+          <div className="bg-surface-highest rounded-[2rem] p-8 max-w-3xl mx-auto kp-shadow-ambient-lg">
             <h3 className="text-2xl font-bold text-charcoal mb-3">
               Don't see your location?
             </h3>
