@@ -74,11 +74,16 @@ ${originalMessage}
       <div className="container mx-auto px-4 sm:px-6">
         <div className="grid lg:grid-cols-2 gap-10 sm:gap-12 lg:gap-16 items-center">
           <div>
-            <h2 className="font-display text-3xl sm:text-4xl md:text-5xl font-bold mb-3 sm:mb-4 tracking-tighter">
-              Let's create something great together.
+            <div className="flex items-center gap-3 font-sans text-xs tracking-[0.24em] uppercase font-semibold text-primary-container mb-6">
+              <span className="font-mono text-cream/45">05</span>
+              <span className="w-8 h-px bg-cream/20" aria-hidden="true" />
+              <span>Engage</span>
+            </div>
+            <h2 className="font-display text-4xl sm:text-5xl md:text-6xl font-extrabold mb-5 tracking-[-0.02em] leading-[1.05] text-cream">
+              Start a project.
             </h2>
-            <p className="text-cream/70 text-sm sm:text-base md:text-lg leading-relaxed">
-              Have a project in mind or just want to discuss an idea? I'm always open to new opportunities and collaborations. Fill out the form, and let's start the conversation.
+            <p className="text-cream/70 text-base md:text-lg leading-relaxed max-w-lg">
+              Share scope, timeline, and budget &mdash; I'll respond within 24 hours with a proposed approach.
             </p>
           </div>
           <motion.form 
@@ -106,7 +111,7 @@ ${originalMessage}
               type="submit"
               disabled={status === 'sending'}
               onClick={() => soundManager.playClick()}
-              className="w-full bg-orange text-cream font-bold py-3 sm:py-4 px-6 sm:px-8 rounded-lg transition-colors duration-300 focus:outline-none focus:ring-2 focus:ring-orange-light focus:ring-offset-2 focus:ring-offset-charcoal disabled:bg-orange/50 disabled:cursor-not-allowed min-h-[48px] touch-manipulation text-sm sm:text-base"
+              className="w-full kp-gradient-primary text-white font-bold py-3.5 sm:py-4 px-8 sm:px-10 rounded-full transition-all duration-300 hover:brightness-110 focus:outline-none disabled:opacity-50 disabled:cursor-not-allowed min-h-[48px] touch-manipulation text-sm sm:text-base kp-shadow-ambient-lg"
               whileHover={{ scale: 1.03 }}
               whileTap={{ scale: 0.98 }}
               transition={{ type: 'spring', stiffness: 400, damping: 15 }}
@@ -133,10 +138,10 @@ const InputField: React.FC<{ label: string, name: string, type: string, placehol
         id={name} 
         placeholder={placeholder}
         required
-        className="w-full bg-charcoal/50 border border-cream/20 rounded-lg py-2.5 sm:py-3 px-3 sm:px-4 focus:outline-none focus:ring-2 focus:ring-orange transition-all text-sm sm:text-base min-h-[44px] touch-manipulation"
+        className="w-full bg-white/10 rounded-2xl py-3 sm:py-3.5 px-4 sm:px-5 focus:outline-none transition-all text-sm sm:text-base min-h-[44px] touch-manipulation text-cream placeholder:text-cream/40"
         onFocus={() => setIsFocused(true)}
         onBlur={() => setIsFocused(false)}
-        animate={{ boxShadow: isFocused ? "0 0 0 4px rgba(255, 107, 0, 0.2)" : "0 0 0 0px rgba(255, 107, 0, 0)" }}
+        animate={{ boxShadow: isFocused ? "0 0 0 4px rgba(106, 28, 246, 0.2)" : "0 0 0 0px rgba(106, 28, 246, 0)" }}
         transition={{ type: 'spring', stiffness: 500, damping: 30 }}
       />
     </motion.div>
@@ -152,11 +157,11 @@ const SelectField: React.FC<{ label: string, name: string, children: React.React
         name={name}
         id={name}
         required
-        className="w-full bg-charcoal/50 border border-cream/20 rounded-lg py-2.5 sm:py-3 px-3 sm:px-4 focus:outline-none focus:ring-2 focus:ring-orange transition-all appearance-none text-sm sm:text-base min-h-[44px] touch-manipulation"
-        style={{ backgroundImage: `url("data:image/svg+xml,%3csvg xmlns='http://www.w3.org/2000/svg' fill='none' viewBox='0 0 20 20'%3e%3cpath stroke='%23FF6B00' stroke-linecap='round' stroke-linejoin='round' stroke-width='1.5' d='M6 8l4 4 4-4'/%3e%3c/svg%3e")`, backgroundPosition: 'right 0.5rem center', backgroundRepeat: 'no-repeat', backgroundSize: '1.5em 1.5em' }}
+        className="w-full bg-white/10 rounded-2xl py-3 sm:py-3.5 px-4 sm:px-5 focus:outline-none transition-all appearance-none text-sm sm:text-base min-h-[44px] touch-manipulation text-cream"
+        style={{ backgroundImage: `url("data:image/svg+xml,%3csvg xmlns='http://www.w3.org/2000/svg' fill='none' viewBox='0 0 20 20'%3e%3cpath stroke='%23ffffff' stroke-linecap='round' stroke-linejoin='round' stroke-width='1.5' d='M6 8l4 4 4-4'/%3e%3c/svg%3e")`, backgroundPosition: 'right 0.75rem center', backgroundRepeat: 'no-repeat', backgroundSize: '1.5em 1.5em', paddingRight: '2.5rem' }}
         onFocus={() => setIsFocused(true)}
         onBlur={() => setIsFocused(false)}
-        animate={{ boxShadow: isFocused ? "0 0 0 4px rgba(255, 107, 0, 0.2)" : "0 0 0 0px rgba(255, 107, 0, 0)" }}
+        animate={{ boxShadow: isFocused ? "0 0 0 4px rgba(106, 28, 246, 0.2)" : "0 0 0 0px rgba(106, 28, 246, 0)" }}
         transition={{ type: 'spring', stiffness: 500, damping: 30 }}
       >
         {children}
@@ -176,10 +181,10 @@ const TextareaField: React.FC<{ label: string, name: string, placeholder: string
         placeholder={placeholder}
         rows={4}
         required
-        className="w-full bg-charcoal/50 border border-cream/20 rounded-lg py-2.5 sm:py-3 px-3 sm:px-4 focus:outline-none focus:ring-2 focus:ring-orange transition-all resize-none text-sm sm:text-base min-h-[100px] touch-manipulation"
+        className="w-full bg-white/10 rounded-2xl py-3 sm:py-3.5 px-4 sm:px-5 focus:outline-none transition-all resize-none text-sm sm:text-base min-h-[100px] touch-manipulation text-cream placeholder:text-cream/40"
         onFocus={() => setIsFocused(true)}
         onBlur={() => setIsFocused(false)}
-        animate={{ boxShadow: isFocused ? "0 0 0 4px rgba(255, 107, 0, 0.2)" : "0 0 0 0px rgba(255, 107, 0, 0)" }}
+        animate={{ boxShadow: isFocused ? "0 0 0 4px rgba(106, 28, 246, 0.2)" : "0 0 0 0px rgba(106, 28, 246, 0)" }}
         transition={{ type: 'spring', stiffness: 500, damping: 30 }}
       />
     </motion.div>

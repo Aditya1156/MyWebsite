@@ -59,22 +59,27 @@ const Contact: React.FC = () => {
       <div className="container mx-auto px-4 sm:px-6">
         <div className="grid lg:grid-cols-2 gap-10 sm:gap-12 lg:gap-16 items-center">
           <div>
-            <h2 className="font-display text-3xl sm:text-4xl md:text-5xl font-bold mb-3 sm:mb-4 tracking-tighter">
-              Say Hello
+            <div className="flex items-center gap-3 font-sans text-xs tracking-[0.24em] uppercase font-semibold text-primary mb-6">
+              <span className="font-mono text-on-surface/40">07</span>
+              <span className="w-8 h-px bg-on-surface/20" aria-hidden="true" />
+              <span>Contact</span>
+            </div>
+            <h2 className="font-display text-4xl sm:text-5xl md:text-6xl font-extrabold text-on-surface mb-5 tracking-[-0.02em] leading-[1.05]">
+              Let's talk.
             </h2>
-            <p className="text-charcoal/70 text-sm sm:text-base md:text-lg leading-relaxed mb-6 sm:mb-8">
-              Whether you have a question, a project idea, or just want to connect, feel free to drop me a line. I'm always excited to hear about new ideas and opportunities.
+            <p className="text-on-surface/65 text-base md:text-lg leading-relaxed mb-8 max-w-lg">
+              Questions, collaborations, or just a hello &mdash; drop a line and I'll respond within a day.
             </p>
-            <div>
-                <h3 className="font-display text-lg sm:text-xl font-bold mb-2">Contact Details</h3>
-                <p className="text-charcoal/80 text-sm sm:text-base">
-                    <a href="mailto:hello@adicodes.in" className="hover:text-orange transition-colors">hello@adicodes.in</a>
-                </p>
+            <div className="space-y-2">
+              <div className="font-sans text-[11px] tracking-[0.28em] uppercase font-semibold text-on-surface/45">Direct</div>
+              <p className="text-on-surface text-base sm:text-lg font-medium">
+                  <a href="mailto:hello@adicodes.in" className="hover:text-primary transition-colors">hello@adicodes.in</a>
+              </p>
             </div>
           </div>
-          <motion.form 
-            onSubmit={handleSubmit} 
-            className="w-full space-y-5 sm:space-y-6 bg-white p-5 sm:p-6 md:p-8 rounded-xl sm:rounded-2xl shadow-lg"
+          <motion.form
+            onSubmit={handleSubmit}
+            className="w-full space-y-5 sm:space-y-6 bg-surface-highest p-6 sm:p-8 md:p-10 rounded-[2rem] kp-shadow-ambient-lg"
             variants={containerVariants}
             initial="hidden"
             whileInView="visible"
@@ -87,7 +92,7 @@ const Contact: React.FC = () => {
             <motion.button 
               type="submit"
               disabled={status === 'sending'}
-              className="w-full bg-charcoal text-cream font-bold py-3 sm:py-4 px-6 sm:px-8 rounded-lg transition-colors duration-300 hover:bg-orange focus:outline-none focus:ring-2 focus:ring-orange focus:ring-offset-2 disabled:bg-charcoal/50 disabled:cursor-not-allowed inline-flex items-center justify-center group min-h-[48px] touch-manipulation text-sm sm:text-base"
+              className="w-full kp-gradient-primary text-white font-bold py-3.5 sm:py-4 px-8 sm:px-10 rounded-full transition-all duration-300 hover:brightness-110 focus:outline-none disabled:opacity-50 disabled:cursor-not-allowed inline-flex items-center justify-center group min-h-[48px] touch-manipulation text-sm sm:text-base kp-shadow-ambient"
               whileHover={{ scale: 1.03 }}
               whileTap={{ scale: 0.98 }}
               transition={{ type: 'spring', stiffness: 400, damping: 15 }}
@@ -115,10 +120,10 @@ const InputField: React.FC<{ label: string, name: string, type: string, placehol
         id={name} 
         placeholder={placeholder}
         required
-        className="w-full bg-cream/50 border border-cream rounded-lg py-2.5 sm:py-3 px-3 sm:px-4 focus:outline-none focus:ring-2 focus:ring-orange transition-all text-sm sm:text-base min-h-[44px] touch-manipulation"
+        className="w-full bg-white rounded-2xl py-3 sm:py-3.5 px-4 sm:px-5 focus:outline-none transition-all text-sm sm:text-base min-h-[44px] touch-manipulation placeholder:text-on-surface/40"
         onFocus={() => setIsFocused(true)}
         onBlur={() => setIsFocused(false)}
-        animate={{ boxShadow: isFocused ? "0 0 0 4px rgba(255, 107, 0, 0.2)" : "0 0 0 0px rgba(255, 107, 0, 0)" }}
+        animate={{ boxShadow: isFocused ? "0 0 0 4px rgba(106, 28, 246, 0.2)" : "0 0 0 0px rgba(106, 28, 246, 0)" }}
         transition={{ type: 'spring', stiffness: 500, damping: 30 }}
       />
     </motion.div>
@@ -136,10 +141,10 @@ const TextareaField: React.FC<{ label: string, name: string, placeholder: string
         placeholder={placeholder}
         rows={4}
         required
-        className="w-full bg-cream/50 border border-cream rounded-lg py-2.5 sm:py-3 px-3 sm:px-4 focus:outline-none focus:ring-2 focus:ring-orange transition-all resize-none text-sm sm:text-base min-h-[100px] touch-manipulation"
+        className="w-full bg-white rounded-2xl py-3 sm:py-3.5 px-4 sm:px-5 focus:outline-none transition-all resize-none text-sm sm:text-base min-h-[100px] touch-manipulation placeholder:text-on-surface/40"
         onFocus={() => setIsFocused(true)}
         onBlur={() => setIsFocused(false)}
-        animate={{ boxShadow: isFocused ? "0 0 0 4px rgba(255, 107, 0, 0.2)" : "0 0 0 0px rgba(255, 107, 0, 0)" }}
+        animate={{ boxShadow: isFocused ? "0 0 0 4px rgba(106, 28, 246, 0.2)" : "0 0 0 0px rgba(106, 28, 246, 0)" }}
         transition={{ type: 'spring', stiffness: 500, damping: 30 }}
       />
     </motion.div>
