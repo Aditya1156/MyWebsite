@@ -6,9 +6,6 @@ import { motion } from 'framer-motion';
 import Hero from './Hero';
 import About from './About';
 import Experience from './Experience';
-import BlurText from './BlurText';
-import { NAV_LINKS } from '../constants';
-import ScrollIndicator from './ScrollIndicator';
 import { LazyComponent, LoadingSkeleton } from './ui/LazyComponent';
 import { PerformanceProvider } from './PerformanceProvider';
 import CardNav from './CardNav';
@@ -18,16 +15,12 @@ import useOnScreen from '../hooks/useOnScreen';
 
 // Lazy load heavy components
 const Projects = lazy(() => import('./Projects'));
-const Skills = lazy(() => import('./Skills'));
 const HireMe = lazy(() => import('./HireMe'));
 const Memories = lazy(() => import('./Memories'));
 const Footer = lazy(() => import('./Footer'));
 const Contact = lazy(() => import('./Contact'));
-const Process = lazy(() => import('./Process'));
 const Gallery = lazy(() => import('./Gallery'));
 const SocialConnect = lazy(() => import('./SocialConnect'));
-const AreaCoverage = lazy(() => import('./AreaCoverage'));
-const Pricing = lazy(() => import('./Pricing'));
 
 const logoText = "Aditya Kumar";
 
@@ -49,36 +42,29 @@ const FullExperience: React.FC = () => {
     window.scrollTo(0, 0);
   }, []);
 
-  const scrollIndicatorSections = NAV_LINKS.map(link => ({
-    id: link.href.substring(1),
-    name: link.name
-  }));
-
   const cardNavItems: CardNavItem[] = [
     {
       label: "About",
-      bgColor: "#f0eade",
-      textColor: "#1E1E1E",
+      bgColor: "#f9edff",
+      textColor: "#38274c",
       links: [
         { label: "My Story", href: "#about", ariaLabel: "Learn more about me" },
         { label: "Experience", href: "#experience", ariaLabel: "View my work experience" },
-        { label: "My Process", href: "#process", ariaLabel: "Learn about my creative process" },
       ],
     },
     {
       label: "Projects",
-      bgColor: "#e9dac8",
-      textColor: "#1E1E1E",
+      bgColor: "#f2e3ff",
+      textColor: "#38274c",
       links: [
         { label: "Featured Work", href: "#projects", ariaLabel: "View my featured projects" },
-        { label: "Skills", href: "#skills", ariaLabel: "See my technical skills" },
         { label: "Gallery", href: "#gallery", ariaLabel: "See my photo gallery" },
       ],
     },
     {
       label: "Connect",
-      bgColor: "#e1c9b2",
-      textColor: "#1E1E1E",
+      bgColor: "#ebd4ff",
+      textColor: "#38274c",
       links: [
         { label: "Memories", href: "#memories", ariaLabel: "Explore my memories" },
         { label: "Hire Me", href: "#hire-me", ariaLabel: "Get in touch to hire me" },
@@ -107,141 +93,48 @@ const FullExperience: React.FC = () => {
         }} 
         ref={lenisRef} 
       >
-  <ScrollIndicator sections={scrollIndicatorSections} />
-
        <CardNav
         logo={logoText}
         items={cardNavItems}
-        baseColor="rgba(255, 247, 237, 0.8)"
-        menuColor="#1E1E1E"
-        buttonBgColor="#FF6B00"
-        buttonTextColor="#FFF7ED"
+        baseColor="rgba(253, 243, 255, 0.72)"
+        menuColor="#38274c"
+        buttonBgColor="#6a1cf6"
+        buttonTextColor="#ffffff"
        />
       <main>
         <Hero />
         <div ref={heroEndRef} aria-hidden="true" />
-        
+
         {/* Sticky sections for cinematic stacking effect */}
         <About />
         <Experience />
 
-        <section className="py-24 bg-white text-center">
-            <div className="container mx-auto px-6">
-                <BlurText
-                    text="From Pixels to Pipelines."
-                    delay={150}
-                    animateBy="words"
-                    direction="top"
-                    className="font-display text-5xl md:text-7xl font-bold text-charcoal tracking-tighter"
-                />
-            </div>
-        </section>
-
-        {/* This wrapper ensures the normal scrolling content appears ON TOP of the last sticky section */}
-        <div className="relative z-40 bg-white">
-          <Suspense fallback={<LoadingSkeleton className="h-96 mx-4" />}>
-            <Process />
-          </Suspense>
-          
+        {/* Main content flow — editorial rhythm, no poster quotes */}
+        <div className="relative z-40 bg-surface">
           <Suspense fallback={<LoadingSkeleton className="h-screen mx-4" />}>
             <Projects />
           </Suspense>
 
-          {/* VideoSection removed per request (Crafting Digital Experiences) */}
-          
-          <section className="py-24 bg-cream text-center">
-            <div className="container mx-auto px-6">
-              <BlurText
-                text="Good design is obvious. Great design is transparent."
-                delay={150}
-                animateBy="words"
-                direction="top"
-                className="font-display text-6xl md:text-8xl font-bold text-charcoal tracking-tighter"
-              />
-            </div>
-          </section>
-
-          <Suspense fallback={<LoadingSkeleton className="h-screen mx-4" />}>
-            <Skills />
-          </Suspense>
-          
           <Suspense fallback={<LoadingSkeleton className="h-96 mx-4" />}>
             <Gallery />
           </Suspense>
 
-          <section className="py-24 bg-white text-center">
-            <div className="container mx-auto px-6">
-               <BlurText
-                text="Always Learning."
-                delay={200}
-                animateBy="words"
-                direction="bottom"
-                className="font-display text-6xl md:text-8xl font-bold text-charcoal tracking-tighter"
-              />
-            </div>
-          </section>
-
           <Suspense fallback={<LoadingSkeleton className="h-96 mx-4" />}>
             <HireMe />
           </Suspense>
-          
+
           <Suspense fallback={<LoadingSkeleton className="h-64 mx-4" />}>
             <Memories />
           </Suspense>
-
-          <section className="py-24 bg-cream text-center">
-            <div className="container mx-auto px-6">
-               <BlurText
-                text="Ready to build the future?"
-                delay={150}
-                animateBy="words"
-                direction="top"
-                className="font-display text-5xl md:text-7xl font-bold text-charcoal tracking-tighter"
-              />
-            </div>
-          </section>
-
-          <section className="py-24 bg-white text-center">
-            <div className="container mx-auto px-6">
-               <BlurText
-                text="Creativity is intelligence having fun."
-                delay={150}
-                animateBy="words"
-                direction="bottom"
-                className="font-display text-6xl md:text-8xl font-bold text-charcoal tracking-tighter"
-              />
-            </div>
-          </section>
 
           <Suspense fallback={<LoadingSkeleton className="h-96 mx-4" />}>
             <Contact />
           </Suspense>
 
-          <Suspense fallback={<LoadingSkeleton className="h-96 mx-4" />}>
-            <AreaCoverage />
-          </Suspense>
-
-          <Suspense fallback={<LoadingSkeleton className="h-[600px] mx-4" />}>
-            <Pricing />
-          </Suspense>
-
           <Suspense fallback={<LoadingSkeleton className="h-64 mx-4" />}>
             <SocialConnect />
           </Suspense>
-
-          <section className="py-24 bg-white text-center">
-            <div className="container mx-auto px-6">
-               <BlurText
-                text="Let's build tomorrow, today."
-                delay={150}
-                animateBy="words"
-                direction="top"
-                className="font-display text-5xl md:text-7xl font-bold text-charcoal tracking-tighter"
-              />
-            </div>
-          </section>
         </div>
-
       </main>
       <GoToTopButton isVisible={!isHeroOnScreen} />
       <Suspense fallback={<LoadingSkeleton className="h-32 mx-4" />}>

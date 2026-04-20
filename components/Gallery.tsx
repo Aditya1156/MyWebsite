@@ -73,18 +73,23 @@ const Gallery: React.FC = () => {
   return (
     <AnimatedSection id="gallery" className="py-24 bg-cream">
       <div className="container mx-auto px-6">
-        <motion.div 
-          className="text-center mb-16"
-          initial={{ opacity: 0, y: -20 }}
+        <motion.div
+          className="mb-16 max-w-3xl"
+          initial={{ opacity: 0, y: 24 }}
           whileInView={{ opacity: 1, y: 0 }}
-          viewport={{ once: true }}
-          transition={{ duration: 0.6, ease: "easeOut" }}
+          viewport={{ once: true, amount: 0.4 }}
+          transition={{ duration: 0.7, ease: [0.22, 1, 0.36, 1] }}
         >
-          <h2 className="font-display text-4xl md:text-5xl font-bold text-charcoal mb-4 tracking-tighter">
-            Snapshots of My Journey
+          <div className="flex items-center gap-3 font-sans text-xs tracking-[0.24em] uppercase font-semibold text-primary mb-6">
+            <span className="font-mono text-on-surface/40">04</span>
+            <span className="w-8 h-px bg-on-surface/20" aria-hidden="true" />
+            <span>Gallery</span>
+          </div>
+          <h2 className="font-display text-4xl sm:text-5xl md:text-6xl font-extrabold text-on-surface mb-5 tracking-[-0.02em] leading-[1.05]">
+            Moments from the field.
           </h2>
-          <p className="text-charcoal/70 max-w-2xl mx-auto text-lg">
-            A collection of moments from hackathons, conferences, and collaborative projects.
+          <p className="text-on-surface/65 text-base md:text-lg leading-relaxed max-w-2xl">
+            Hackathons, build sessions, and conferences &mdash; the work behind the work.
           </p>
         </motion.div>
 

@@ -36,31 +36,40 @@ const About: React.FC = () => {
               }}
             />
           </div>
-          <div className="lg:max-w-xl text-center lg:text-left px-2 sm:px-0">
-            <h2 className="font-display text-3xl sm:text-4xl md:text-5xl font-bold text-charcoal mb-4 sm:mb-6 tracking-tighter">My Story, My Purpose</h2>
-            <p className="text-charcoal/80 mb-4 sm:mb-6 leading-relaxed text-sm sm:text-base">
-              I'm Aditya Kumar, a third-year Computer Science student at PESITM, Shivamogga, driven by an insatiable passion for MERN stack development and full-stack engineering. My journey in tech is powered by the thrill of transforming complex challenges into scalable, intelligent web applications that make a real impact.
+          <div className="lg:max-w-xl text-left px-2 sm:px-0">
+            <div className="flex items-center gap-3 font-sans text-xs tracking-[0.24em] uppercase font-semibold text-primary mb-6">
+              <span className="font-mono text-on-surface/40">01</span>
+              <span className="w-8 h-px bg-on-surface/20" aria-hidden="true" />
+              <span>About</span>
+            </div>
+            <h2 className="font-display text-4xl sm:text-5xl md:text-6xl font-extrabold text-on-surface mb-6 tracking-[-0.02em] leading-[1.05]">
+              Third-year CS student building for production.
+            </h2>
+            <p className="text-on-surface/70 mb-5 leading-relaxed text-base">
+              I'm Aditya Kumar, studying Computer Science at PESITM, Shivamogga. I focus on shipping full-stack web applications &mdash; React and TypeScript on the front, Node.js and MongoDB on the back, with AI integrations where they add real value.
             </p>
-            <p className="text-charcoal/80 mb-6 sm:mb-8 leading-relaxed text-sm sm:text-base">
-              From architecting <strong>TypingPath</strong>—an AI-powered typing education platform with Google Gemini integration—to building robust desktop applications like an Airline Management System, I thrive at the intersection of performance optimization, clean code architecture, and modern UI/UX design. I believe technology should be elegant, purposeful, and user-centric. Let's build something extraordinary together.
+            <p className="text-on-surface/70 mb-8 leading-relaxed text-base">
+              Recent work includes <strong className="text-on-surface">TypingPath</strong>, an AI-adaptive typing platform powered by Google Gemini, and an Airline Management System built in Java. I care about performance, clean architecture, and interfaces that respect the user's attention.
             </p>
             <a
               href="/resume.pdf"
               download="Aditya_Kumar_Resume.pdf"
-              className="bg-charcoal text-cream px-6 sm:px-8 py-3 rounded-full font-semibold hover:bg-orange transition-all duration-300 transform hover:scale-105 inline-flex items-center group cursor-pointer no-underline min-h-[48px] touch-manipulation"
+              className="kp-gradient-primary text-white px-8 py-3.5 rounded-full font-semibold hover:brightness-110 transition-all duration-300 inline-flex items-center group cursor-pointer no-underline min-h-[48px] touch-manipulation kp-shadow-ambient"
             >
-              Download Resume
-              <DownloadIcon className="w-5 h-5 ml-2 transition-transform duration-300 group-hover:translate-y-0.5" />
+              Download resume
+              <DownloadIcon className="w-4 h-4 ml-2 transition-transform duration-300 group-hover:translate-y-0.5" />
             </a>
           </div>
         </div>
         
-        <div className="mt-12 sm:mt-16 md:mt-20 overflow-hidden">
-            <h3 className="text-center font-display text-xl sm:text-2xl text-charcoal/80 mb-6 sm:mb-8">My Tech Arsenal</h3>
+        <div className="mt-16 sm:mt-20 md:mt-24 overflow-hidden">
+            <div className="font-sans text-[11px] tracking-[0.28em] uppercase font-semibold text-on-surface/45 mb-6 text-center">
+              Stack
+            </div>
             <div className="relative w-full">
                  <div className="flex animate-marquee whitespace-nowrap">
                     {TECH_STACK_ICONS.concat(TECH_STACK_ICONS).map((tech, index) => (
-                        <span key={index} className="mx-3 sm:mx-4 text-base sm:text-lg font-mono text-charcoal/60">{tech}</span>
+                        <span key={index} className="mx-4 sm:mx-6 text-sm sm:text-base font-mono text-on-surface/50">{tech}</span>
                     ))}
                 </div>
             </div>

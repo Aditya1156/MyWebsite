@@ -2,22 +2,24 @@ import React from 'react';
 import AnimatedSection from './AnimatedSection';
 import DomeGallery from './DomeGallery';
 import { MEMORY_IMAGES } from '../constants';
-import BlurText from './BlurText';
 
 const Memories: React.FC = () => {
   return (
-    <AnimatedSection id="memories" className="py-24 bg-white text-charcoal">
-      <div className="container mx-auto px-6 text-center">
-        <BlurText
-          text="A Walk Through My Memories"
-          delay={150}
-          animateBy="words"
-          direction="top"
-          className="font-display text-5xl md:text-7xl font-bold text-charcoal mb-4 tracking-tighter"
-        />
-        <p className="text-charcoal/70 text-lg max-w-2xl mx-auto mb-16">
-          An interactive dome of moments, projects, and experiences that have shaped my journey. Drag to explore.
-        </p>
+    <AnimatedSection id="memories" className="py-24 bg-surface text-on-surface">
+      <div className="container mx-auto px-6">
+        <div className="max-w-3xl mb-16">
+          <div className="flex items-center gap-3 font-sans text-xs tracking-[0.24em] uppercase font-semibold text-primary mb-6">
+            <span className="font-mono text-on-surface/40">06</span>
+            <span className="w-8 h-px bg-on-surface/20" aria-hidden="true" />
+            <span>Archive</span>
+          </div>
+          <h2 className="font-display text-4xl sm:text-5xl md:text-6xl font-extrabold text-on-surface mb-5 tracking-[-0.02em] leading-[1.05]">
+            An interactive archive.
+          </h2>
+          <p className="text-on-surface/65 text-base md:text-lg leading-relaxed max-w-2xl">
+            Drag the dome to explore moments that shaped the work &mdash; projects, collaborations, and milestones.
+          </p>
+        </div>
       </div>
       <div className="relative w-full h-[80vh] min-h-[600px] max-h-[900px]">
         <DomeGallery
