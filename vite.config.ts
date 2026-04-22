@@ -27,7 +27,6 @@ export default defineConfig(({ mode }) => {
             manualChunks: {
               'react-vendor': ['react', 'react-dom'],
               'animation-vendor': ['framer-motion', 'gsap'],
-              'scroll-vendor': ['lenis'],
               'utils': ['clsx', 'tailwind-merge', 'class-variance-authority'],
             },
           },
