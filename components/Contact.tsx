@@ -9,7 +9,8 @@ import ImageMarquee from './ImageMarquee';
 // Lock down "Allowed Origins" in the EmailJS dashboard for security.
 const EMAILJS_PUBLIC_KEY = '9Ujk8D1C01AiXeRhJ';
 const EMAILJS_SERVICE_ID = 'service_qp7skz8';
-const EMAILJS_TEMPLATE_ID = 'template_9deeb9x';
+const EMAILJS_TEMPLATE_ID = 'template_9deeb9x';          // notify me
+const EMAILJS_AUTOREPLY_ID = 'template_5j15ve3';         // confirm to sender
 
 emailjs.init({ publicKey: EMAILJS_PUBLIC_KEY });
 
@@ -65,6 +66,7 @@ const Contact: React.FC = () => {
     };
 
     try {
+      // Primary: notify me. If this fails we show the error.
       const response = await emailjs.send(
         EMAILJS_SERVICE_ID,
         EMAILJS_TEMPLATE_ID,
@@ -73,6 +75,16 @@ const Contact: React.FC = () => {
       if (response.status !== 200) {
         throw new Error(`Unexpected status ${response.status}: ${response.text}`);
       }
+
+      // Secondary: auto-reply to the sender. Fire-and-forget — if this
+      // fails the user still got their message through, so don't block
+      // the success state.
+      emailjs
+        .send(EMAILJS_SERVICE_ID, EMAILJS_AUTOREPLY_ID, templateParams)
+        .catch((autoReplyErr) => {
+          console.warn('[Contact] Auto-reply failed (message still reached inbox):', autoReplyErr);
+        });
+
       setStatus('success');
       form.reset();
       setTimeout(() => setStatus('idle'), 5000);
