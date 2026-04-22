@@ -48,6 +48,9 @@ const Contact: React.FC = () => {
 
     // Cover both common EmailJS template variable naming conventions
     // so the email isn't blank if the template was authored either way.
+    // to_email is passed explicitly so the template can use {{to_email}}
+    // in the "To Email" field without hitting the "recipients address
+    // is empty" (422) error.
     const templateParams = {
       from_name: name,
       from_email: email,
@@ -55,7 +58,10 @@ const Contact: React.FC = () => {
       name,
       email,
       reply_to: email,
+      to_email: 'aditya@thenexturl.in',
+      to_name: 'Aditya Kumar',
       title: `New message from ${name}`,
+      subject: `New inquiry from ${name} — via adicodes.in`,
     };
 
     try {
