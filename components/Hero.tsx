@@ -1,199 +1,168 @@
-import React, { useRef } from 'react';
-// FIX: Import Variants type from framer-motion to resolve typing issues.
-import { motion, useScroll, useTransform, Variants } from 'framer-motion';
-import { useLenis } from 'lenis/react';
-import { ArrowRightIcon } from './icons';
-import { IconCloud } from './ui/interactive-icon-cloud';
+import React from 'react';
+import { motion, Variants } from 'framer-motion';
+import { MailIcon } from './icons';
 
-// Tech stack icon slugs for the icon cloud
-const iconSlugs = [
-  "typescript",
-  "javascript",
-  "react",
-  "nodedotjs",
-  "express",
-  "mongodb",
-  "html5",
-  "css3",
-  "tailwindcss",
-  "git",
-  "github",
-  "vite",
-  "npm",
-  "visualstudiocode",
-  "figma",
-  "postman",
-  "python",
-  "framer",
-];
-
-// FIX: Explicitly type headlineContainerVariants with Variants for consistency.
-const headlineContainerVariants: Variants = {
+const containerVariants: Variants = {
   hidden: {},
   visible: {
-    transition: {
-      staggerChildren: 0.2,
-      delayChildren: 0.3,
-    },
+    transition: { staggerChildren: 0.08, delayChildren: 0.1 },
   },
 };
 
-// FIX: Explicitly type lineVariants with Variants to fix type inference issues with the 'ease' property.
-const lineVariants: Variants = {
-  hidden: { opacity: 0, y: '100%' },
+const itemVariants: Variants = {
+  hidden: { opacity: 0, y: 18 },
   visible: {
     opacity: 1,
     y: 0,
-    transition: {
-      duration: 1,
-      ease: [0.22, 1, 0.36, 1], // easeOutQuint for a smooth, cinematic effect
-    },
+    transition: { duration: 0.8, ease: [0.22, 1, 0.36, 1] },
   },
 };
 
-
 const Hero: React.FC = () => {
-  const lenis = useLenis();
-
   const handleScrollTo = (e: React.MouseEvent<HTMLAnchorElement>) => {
-    e.preventDefault();
     const href = e.currentTarget.getAttribute('href');
-    if (href && lenis) {
-      lenis.scrollTo(href, {
-        duration: 1.2,
-        easing: (t) => Math.min(1, 1.001 - Math.pow(2, -10 * t)),
-        offset: 0,
-      });
+    if (!href || !href.startsWith('#')) return;
+    e.preventDefault();
+    const target = document.querySelector(href);
+    if (target) {
+      target.scrollIntoView({ behavior: 'smooth', block: 'start' });
     }
   };
-  
-  const targetRef = useRef<HTMLDivElement>(null);
-  const { scrollYProgress } = useScroll({
-    target: targetRef,
-    offset: ['start start', 'end start'],
-  });
-
-  // Creates a subtle parallax effect for the background gradient.
-  // As the user scrolls through the hero section, the background moves up at 40% of the scroll speed, creating depth.
-  const backgroundY = useTransform(scrollYProgress, [0, 1], ['0%', '40%']);
 
   return (
-    <section id="hero" ref={targetRef} className="relative min-h-screen flex items-center justify-center overflow-hidden bg-surface">
-      {/* Tonal layering: soft primary wash on surface base (no borders) */}
-      <motion.div
-        className="absolute inset-0 z-0"
-        style={{
-          y: backgroundY,
-          background:
-            'radial-gradient(1200px 600px at 15% 20%, rgba(106,28,246,0.18), transparent 60%), radial-gradient(900px 500px at 85% 80%, rgba(172,142,255,0.22), transparent 65%), linear-gradient(180deg, #fdf3ff 0%, #f9edff 100%)',
-        }}
+    <section
+      id="hero"
+      className="relative min-h-screen flex items-center bg-surface px-5 sm:px-6 lg:px-8 overflow-hidden"
+    >
+      {/* Decorative organic blobs — hidden on mobile to prevent overflow */}
+      <div
+        className="hidden md:block absolute top-0 right-0 -z-10 w-1/2 h-[800px] organic-blob bg-primary-fixed/30 blur-3xl opacity-60 transform translate-x-1/3"
+        aria-hidden="true"
+      />
+      <div
+        className="hidden md:block absolute top-[30%] left-0 -z-10 w-72 h-72 organic-blob-alt bg-secondary-container/40 blur-2xl opacity-50 transform -translate-x-1/3"
+        aria-hidden="true"
+      />
+      {/* Mobile-only soft radial glow */}
+      <div
+        className="md:hidden absolute top-0 right-0 -z-10 w-full h-[500px] bg-primary-fixed/20 blur-3xl opacity-50"
         aria-hidden="true"
       />
 
-      {/* Interactive Icon Cloud - Desktop only */}
-      <div className="absolute inset-0 z-0 hidden lg:flex items-center justify-end pr-20" aria-hidden="true">
-        <motion.div
-          className="w-[500px] h-[500px]"
-          initial={{ opacity: 0, scale: 0.8 }}
-          animate={{ opacity: 1, scale: 1 }}
-          transition={{ duration: 1, delay: 0.5 }}
-        >
-          <IconCloud iconSlugs={iconSlugs} />
-        </motion.div>
-      </div>
-
-      <div className="container mx-auto px-4 sm:px-6 z-10">
-        <div className="grid lg:grid-cols-2 gap-8 items-center">
-          <div className="text-center lg:text-left">
-            {/* Editorial eyebrow — numbered, refined */}
-            <motion.div
-              initial={{ opacity: 0, y: 12 }}
-              animate={{ opacity: 1, y: 0 }}
-              transition={{ duration: 0.6, delay: 0.2 }}
-              className="inline-flex items-center gap-3 font-sans text-xs tracking-[0.24em] uppercase font-semibold text-on-surface/60 mb-8"
-            >
-              <span className="font-mono text-primary">00</span>
-              <span className="w-8 h-px bg-on-surface/20" aria-hidden="true" />
-              <span>Portfolio &mdash; 2026</span>
-            </motion.div>
-
+      <div className="max-w-7xl mx-auto w-full pt-28 sm:pt-24 pb-12">
+        <div className="grid grid-cols-1 lg:grid-cols-12 gap-10 sm:gap-12 lg:gap-16 items-center">
+          <motion.div
+            className="lg:col-span-7"
+            variants={containerVariants}
+            initial="hidden"
+            animate="visible"
+          >
             <motion.h1
-              className="font-display text-5xl sm:text-6xl md:text-7xl lg:text-[6.5rem] font-extrabold text-on-surface mb-6 md:mb-8 tracking-[-0.03em] leading-[0.98]"
-              variants={headlineContainerVariants}
-              initial="hidden"
-              animate="visible"
+              variants={itemVariants}
+              className="font-display text-[2rem] sm:text-5xl md:text-6xl lg:text-[4.5rem] xl:text-[5rem] font-bold text-on-surface leading-[1.05] tracking-[-0.02em] mb-8"
             >
-              <span className="block overflow-hidden">
-                <motion.span className="block" variants={lineVariants}>
-                  Engineering
-                </motion.span>
+              <span className="sm:whitespace-nowrap">
+                Owning the{' '}
+                <span className="italic text-primary-container font-semibold">technical</span>
               </span>
-              <span className="block overflow-hidden">
-                <motion.span className="block" variants={lineVariants}>
-                  durable <span className="kp-gradient-primary-text">software</span>
-                </motion.span>
-              </span>
-              <span className="block overflow-hidden">
-                <motion.span className="block" variants={lineVariants}>
-                  for modern teams.
-                </motion.span>
-              </span>
+              <br className="hidden sm:inline" />
+              {' '}
+              <span className="whitespace-nowrap">end-to-end.</span>
             </motion.h1>
 
-            <p className="font-sans text-base sm:text-lg text-on-surface/65 mb-10 max-w-lg mx-auto lg:mx-0 leading-relaxed">
-              I'm Aditya &mdash; a full-stack engineer building production-grade web applications with React, TypeScript, Node.js and AI-driven workflows.
-            </p>
+            <motion.p
+              variants={itemVariants}
+              className="font-sans text-base md:text-lg text-on-surface-variant max-w-xl leading-relaxed mb-10"
+            >
+              I'm Aditya Kumar &mdash;{' '}
+              <strong className="font-bold text-on-surface">CEO and founder</strong>
+              {' '}at{' '}
+              <a
+                href="https://thenexturl.com"
+                target="_blank"
+                rel="noopener noreferrer"
+                className="font-semibold text-primary hover:text-primary-container transition-colors border-b border-primary/40 hover:border-primary-container"
+              >
+                TheNextUrl
+              </a>
+              . I own the technology, product architecture, frontend and backend engineering, hosting, QA, and every client handover. B.Tech, based in Shivamogga.
+            </motion.p>
 
-            <div className="flex flex-col sm:flex-row justify-center lg:justify-start items-stretch sm:items-center gap-3">
+            <motion.div variants={itemVariants} className="flex flex-col sm:flex-row gap-4 mb-12">
               <a
                 href="#projects"
                 onClick={handleScrollTo}
-                className="kp-gradient-primary text-white px-8 py-3.5 rounded-full font-semibold hover:brightness-110 transition-all duration-300 inline-flex items-center justify-center group w-full sm:w-auto kp-shadow-ambient"
+                className="bg-primary text-white px-8 py-3.5 rounded-full font-semibold text-sm tracking-wide hover:bg-primary-container transition-all duration-300 inline-flex items-center justify-center group kp-shadow-ambient"
               >
                 View selected work
-                <ArrowRightIcon className="w-4 h-4 ml-2 transition-transform duration-300 group-hover:translate-x-0.5" />
+                <span className="ml-2 transition-transform duration-300 group-hover:translate-x-1" aria-hidden="true">&rarr;</span>
               </a>
               <a
                 href="#contact"
                 onClick={handleScrollTo}
-                className="text-on-surface hover:text-primary font-semibold px-4 py-3.5 transition-colors duration-300 inline-flex items-center justify-center group w-full sm:w-auto"
+                className="border border-outline-variant text-on-surface px-8 py-3.5 rounded-full font-semibold text-sm tracking-wide hover:bg-surface-low transition-all duration-300 inline-flex items-center justify-center"
               >
-                Get in touch
-                <span className="w-4 h-px bg-current ml-2 transition-all duration-300 group-hover:w-6" aria-hidden="true" />
+                Start a conversation
               </a>
-            </div>
-          </div>
-
-          {/* Mobile Icon Cloud */}
-          <div className="lg:hidden flex justify-center">
-            <motion.div
-              className="w-full max-w-md h-[300px]"
-              initial={{ opacity: 0, scale: 0.8 }}
-              animate={{ opacity: 1, scale: 1 }}
-              transition={{ duration: 1, delay: 0.5 }}
-            >
-              <IconCloud iconSlugs={iconSlugs} />
             </motion.div>
-          </div>
+
+            <motion.div variants={itemVariants} className="flex flex-wrap gap-x-10 gap-y-5">
+              <div className="flex items-start gap-3">
+                <div className="w-9 h-9 rounded-full bg-surface-container flex items-center justify-center flex-shrink-0 mt-0.5">
+                  <MailIcon className="w-4 h-4 text-primary" />
+                </div>
+                <div>
+                  <div className="font-sans text-[10px] font-semibold tracking-[0.2em] uppercase text-on-surface-variant mb-1">
+                    Email me
+                  </div>
+                  <a
+                    href="mailto:aditya@thenexturl.in"
+                    className="font-display text-base sm:text-lg text-on-surface hover:text-primary transition-colors"
+                  >
+                    aditya@thenexturl.in
+                  </a>
+                </div>
+              </div>
+              <div className="flex items-start gap-3">
+                <div className="w-9 h-9 rounded-full bg-surface-container flex items-center justify-center flex-shrink-0 mt-0.5">
+                  <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" className="w-4 h-4 text-primary">
+                    <path d="M21 10c0 7-9 13-9 13s-9-6-9-13a9 9 0 0118 0z" strokeLinecap="round" strokeLinejoin="round" />
+                    <circle cx="12" cy="10" r="3" strokeLinecap="round" strokeLinejoin="round" />
+                  </svg>
+                </div>
+                <div>
+                  <div className="font-sans text-[10px] font-semibold tracking-[0.2em] uppercase text-on-surface-variant mb-1">
+                    Studio location
+                  </div>
+                  <div className="font-display text-base sm:text-lg text-on-surface">
+                    Shivamogga, Karnataka
+                  </div>
+                </div>
+              </div>
+            </motion.div>
+          </motion.div>
+
+          {/* Portrait in fluid blob mask */}
+          <motion.div
+            className="lg:col-span-5 relative flex justify-center lg:justify-end"
+            initial={{ opacity: 0, scale: 0.9 }}
+            animate={{ opacity: 1, scale: 1 }}
+            transition={{ duration: 1, delay: 0.4, ease: [0.22, 1, 0.36, 1] }}
+          >
+            <div className="relative w-[240px] h-[240px] sm:w-[320px] sm:h-[320px] md:w-[400px] md:h-[400px] lg:w-[440px] lg:h-[440px]">
+              <div className="absolute inset-0 organic-blob bg-primary-fixed-dim/30 blur-2xl" aria-hidden="true" />
+              <div className="organic-blob w-full h-full bg-surface-container relative overflow-hidden kp-shadow-ambient-lg">
+                <img
+                  src="/images/adityafinal.jpeg"
+                  alt="Aditya Kumar portrait"
+                  className="w-full h-full object-cover"
+                  style={{ objectPosition: 'center 20%' }}
+                />
+              </div>
+            </div>
+          </motion.div>
         </div>
       </div>
-
-      {/* Credential strip — subtle, refined */}
-      <motion.div
-        initial={{ opacity: 0, y: 20 }}
-        animate={{ opacity: 1, y: 0 }}
-        transition={{ duration: 0.8, delay: 1.2 }}
-        className="absolute bottom-10 left-1/2 -translate-x-1/2 z-20 hidden md:flex items-center gap-8 text-[11px] tracking-[0.22em] uppercase font-semibold text-on-surface/55"
-      >
-        <span className="flex items-center gap-2">
-          <span className="w-1.5 h-1.5 rounded-full bg-secondary" />
-          Available for work
-        </span>
-        <span className="w-8 h-px bg-on-surface/15" aria-hidden="true" />
-        <span>React &middot; TypeScript &middot; Node</span>
-        <span className="w-8 h-px bg-on-surface/15" aria-hidden="true" />
-        <span>Shivamogga, IN</span>
-      </motion.div>
     </section>
   );
 };
