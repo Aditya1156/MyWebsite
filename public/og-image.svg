@@ -1,0 +1,90 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 1200 630" width="1200" height="630">
+  <defs>
+    <linearGradient id="bg" x1="0" y1="0" x2="1" y2="1">
+      <stop offset="0%" stop-color="#fff8f6"/>
+      <stop offset="100%" stop-color="#fff1ec"/>
+    </linearGradient>
+    <linearGradient id="monogram-bg" x1="0" y1="0" x2="1" y2="1">
+      <stop offset="0%" stop-color="#874d2f"/>
+      <stop offset="100%" stop-color="#a56545"/>
+    </linearGradient>
+    <radialGradient id="blob1" cx="50%" cy="50%" r="50%">
+      <stop offset="0%" stop-color="#ffb693" stop-opacity="0.55"/>
+      <stop offset="100%" stop-color="#ffb693" stop-opacity="0"/>
+    </radialGradient>
+    <radialGradient id="blob2" cx="50%" cy="50%" r="50%">
+      <stop offset="0%" stop-color="#d6e7d9" stop-opacity="0.6"/>
+      <stop offset="100%" stop-color="#d6e7d9" stop-opacity="0"/>
+    </radialGradient>
+  </defs>
+
+  <rect width="1200" height="630" fill="url(#bg)"/>
+
+  <!-- decorative blobs -->
+  <circle cx="1050" cy="120" r="280" fill="url(#blob1)"/>
+  <circle cx="140" cy="540" r="240" fill="url(#blob2)"/>
+
+  <!-- monogram badge -->
+  <g transform="translate(90,90)">
+    <rect width="120" height="120" rx="28" ry="28" fill="url(#monogram-bg)"/>
+    <text
+      x="60"
+      y="60"
+      font-family="'Noto Serif', Georgia, serif"
+      font-size="62"
+      font-weight="700"
+      fill="#fff8f6"
+      text-anchor="middle"
+      dominant-baseline="central"
+      letter-spacing="-1">AK</text>
+  </g>
+
+  <!-- eyebrow -->
+  <text
+    x="90"
+    y="280"
+    font-family="'Plus Jakarta Sans', 'Segoe UI', system-ui, sans-serif"
+    font-size="20"
+    font-weight="600"
+    fill="#874d2f"
+    letter-spacing="6">CEO &amp; FOUNDER · THENEXTURL</text>
+
+  <!-- name -->
+  <text
+    x="90"
+    y="380"
+    font-family="'Noto Serif', Georgia, serif"
+    font-size="88"
+    font-weight="700"
+    fill="#221a17"
+    letter-spacing="-2">Aditya Kumar</text>
+
+  <!-- tagline -->
+  <text
+    x="90"
+    y="460"
+    font-family="'Noto Serif', Georgia, serif"
+    font-size="48"
+    font-style="italic"
+    font-weight="400"
+    fill="#a56545">Owning the technical end-to-end.</text>
+
+  <!-- stack line -->
+  <text
+    x="90"
+    y="545"
+    font-family="'JetBrains Mono', 'Courier New', monospace"
+    font-size="18"
+    fill="#53443d"
+    letter-spacing="2">Next.js  ·  Node.js  ·  PostgreSQL  ·  TypeScript</text>
+
+  <!-- url -->
+  <text
+    x="90"
+    y="585"
+    font-family="'Plus Jakarta Sans', 'Segoe UI', system-ui, sans-serif"
+    font-size="18"
+    font-weight="600"
+    fill="#874d2f"
+    letter-spacing="4">ADICODES.IN</text>
+</svg>

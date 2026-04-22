@@ -1,18 +1,19 @@
-# https://www.robotstxt.org/robotstxt.html
-# Allow all crawlers
+# https://www.adicodes.in — Aditya Kumar, CEO & Founder at TheNextUrl
 User-agent: *
 Allow: /
 
-# Disallow admin or private directories (if any)
-# Disallow: /admin/
-# Disallow: /private/
+# Block Vercel internal routes
+Disallow: /_vercel/
+Disallow: /api/
 
-# Sitemap location
-Sitemap: https://adityakumar.dev/sitemap.xml
+# Block known AI scrapers that don't respect attribution
+User-agent: GPTBot
+Disallow: /
 
-# Crawl-delay (optional, helps prevent server overload)
-Crawl-delay: 1
+User-agent: CCBot
+Disallow: /
 
-# Block specific bots (optional)
-# User-agent: BadBot
-# Disallow: /
+User-agent: anthropic-ai
+Allow: /
+
+Sitemap: https://www.adicodes.in/sitemap.xml
