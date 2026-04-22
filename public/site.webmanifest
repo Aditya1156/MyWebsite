@@ -1,11 +1,11 @@
 {
-  "name": "Aditya Kumar - Full Stack Developer",
+  "name": "Aditya Kumar — CEO & Founder at TheNextUrl",
   "short_name": "Aditya Kumar",
-  "description": "Full-Stack Developer specializing in MERN Stack, React, TypeScript, and AI integration",
+  "description": "CEO & Founder at TheNextUrl. Product architecture, engineering, hosting, and delivery with Next.js, Node.js, and PostgreSQL.",
   "start_url": "/",
   "display": "standalone",
-  "background_color": "#fdf3ff",
-  "theme_color": "#6a1cf6",
+  "background_color": "#fff8f6",
+  "theme_color": "#874d2f",
   "orientation": "portrait-primary",
   "icons": [
     {
