@@ -1,153 +1,202 @@
 import React, { useState } from 'react';
 import AnimatedSection from './AnimatedSection';
-import { ArrowRightIcon } from './icons';
-import { motion } from 'framer-motion';
+import { motion, Variants } from 'framer-motion';
+import { MailIcon } from './icons';
+import ImageMarquee from './ImageMarquee';
 
-const containerVariants = {
-  hidden: { opacity: 0 },
-  visible: {
-    opacity: 1,
-    transition: {
-      staggerChildren: 0.1,
-      delayChildren: 0.2,
-    },
-  },
+const fieldVariants: Variants = {
+  hidden: { opacity: 0, y: 12 },
+  visible: { opacity: 1, y: 0, transition: { duration: 0.5, ease: [0.22, 1, 0.36, 1] } },
 };
 
-const fieldVariants = {
-  hidden: { opacity: 0, x: -20 },
-  visible: { opacity: 1, x: 0 },
+const containerVariants: Variants = {
+  hidden: {},
+  visible: { transition: { staggerChildren: 0.06, delayChildren: 0.1 } },
 };
 
 const Contact: React.FC = () => {
   const [status, setStatus] = useState<'idle' | 'sending' | 'success' | 'error'>('idle');
-  
+
   const handleSubmit = (e: React.FormEvent<HTMLFormElement>) => {
     e.preventDefault();
-
-    const serviceID = 'service_qp7skz8';
-    const templateID = 'template_9deeb9x';
-
-    if (typeof window.emailjs === 'undefined') {
-        setStatus('error');
-        setTimeout(() => setStatus('idle'), 5000);
-        return;
-    }
-
     setStatus('sending');
     const form = e.currentTarget;
     const formData = new FormData(form);
+
+    const serviceID = 'service_bcm0rsx';
+    const templateID = 'template_ylzgcyi';
     const templateParams = {
-        from_name: formData.get('name') as string,
-        from_email: formData.get('email') as string,
-        message: formData.get('message') as string,
+      from_name: formData.get('name') as string,
+      from_email: formData.get('email') as string,
+      message: formData.get('message') as string,
     };
 
-    window.emailjs.send(serviceID, templateID, templateParams)
-      .then((response) => {
-         setStatus('success');
-         form.reset();
-         setTimeout(() => setStatus('idle'), 5000);
-      }, (err) => {
-         setStatus('error');
-         setTimeout(() => setStatus('idle'), 5000);
-      });
+    window.emailjs
+      .send(serviceID, templateID, templateParams)
+      .then(
+        () => {
+          setStatus('success');
+          form.reset();
+          setTimeout(() => setStatus('idle'), 5000);
+        },
+        () => {
+          setStatus('error');
+          setTimeout(() => setStatus('idle'), 5000);
+        },
+      );
   };
 
   return (
-    <AnimatedSection id="contact" className="py-16 sm:py-20 md:py-24 bg-cream">
-      <div className="container mx-auto px-4 sm:px-6">
-        <div className="grid lg:grid-cols-2 gap-10 sm:gap-12 lg:gap-16 items-center">
-          <div>
-            <div className="flex items-center gap-3 font-sans text-xs tracking-[0.24em] uppercase font-semibold text-primary mb-6">
-              <span className="font-mono text-on-surface/40">07</span>
-              <span className="w-8 h-px bg-on-surface/20" aria-hidden="true" />
-              <span>Contact</span>
-            </div>
-            <h2 className="font-display text-4xl sm:text-5xl md:text-6xl font-extrabold text-on-surface mb-5 tracking-[-0.02em] leading-[1.05]">
-              Let's talk.
-            </h2>
-            <p className="text-on-surface/65 text-base md:text-lg leading-relaxed mb-8 max-w-lg">
-              Questions, collaborations, or just a hello &mdash; drop a line and I'll respond within a day.
-            </p>
-            <div className="space-y-2">
-              <div className="font-sans text-[11px] tracking-[0.28em] uppercase font-semibold text-on-surface/45">Direct</div>
-              <p className="text-on-surface text-base sm:text-lg font-medium">
-                  <a href="mailto:hello@adicodes.in" className="hover:text-primary transition-colors">hello@adicodes.in</a>
+    <AnimatedSection id="contact" className="bg-surface py-20 sm:py-28 md:py-32 px-5 sm:px-6 lg:px-8 relative overflow-hidden">
+      {/* Ambient blobs — hidden on mobile */}
+      <div
+        className="hidden md:block absolute top-[10%] left-0 -z-10 w-80 h-80 organic-blob-alt bg-secondary-container/30 blur-3xl opacity-60 transform -translate-x-1/3"
+        aria-hidden="true"
+      />
+      <div
+        className="hidden md:block absolute bottom-[10%] right-0 -z-10 w-96 h-96 organic-blob bg-primary-fixed/20 blur-3xl opacity-50 transform translate-x-1/3"
+        aria-hidden="true"
+      />
+
+      <div className="max-w-6xl mx-auto">
+        {/* Sliding image gallery */}
+        <ImageMarquee />
+
+        {/* Inquiry form */}
+        <motion.div
+          initial={{ opacity: 0, y: 24 }}
+          whileInView={{ opacity: 1, y: 0 }}
+          viewport={{ once: true, amount: 0.15 }}
+          transition={{ duration: 0.7, ease: [0.22, 1, 0.36, 1] }}
+          className="bg-surface-container-low rounded-[1.5rem] sm:rounded-[2rem] p-5 sm:p-8 md:p-12 lg:p-14 mb-10 relative overflow-hidden"
+        >
+          <div
+            className="absolute -top-16 -right-16 w-56 h-56 organic-blob bg-primary-fixed/30 blur-2xl opacity-70"
+            aria-hidden="true"
+          />
+
+          <div className="relative grid grid-cols-1 lg:grid-cols-12 gap-10 lg:gap-16">
+            {/* Lead */}
+            <div className="lg:col-span-5">
+              <h3 className="font-display text-3xl sm:text-4xl font-bold text-on-surface leading-tight mb-4">
+                Start a conversation.
+              </h3>
+              <p className="font-sans text-sm sm:text-base text-on-surface-variant leading-relaxed mb-8">
+                Share scope, timeline, and anything else that helps. I reply within 24 hours on weekdays.
               </p>
+
+              <div className="space-y-4 text-sm">
+                <a
+                  href="mailto:aditya@thenexturl.in"
+                  className="flex items-start gap-3 group"
+                >
+                  <div className="w-9 h-9 rounded-full bg-surface-container-lowest border border-outline-variant/40 flex items-center justify-center flex-shrink-0">
+                    <MailIcon className="w-4 h-4 text-primary" />
+                  </div>
+                  <div>
+                    <div className="font-mono text-[10px] font-semibold tracking-[0.22em] uppercase text-on-surface-variant mb-0.5">
+                      Direct
+                    </div>
+                    <div className="font-display text-sm sm:text-base text-on-surface group-hover:text-primary transition-colors">
+                      aditya@thenexturl.in
+                    </div>
+                  </div>
+                </a>
+
+                <div className="flex items-start gap-3">
+                  <div className="w-9 h-9 rounded-full bg-surface-container-lowest border border-outline-variant/40 flex items-center justify-center flex-shrink-0">
+                    <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" className="w-4 h-4 text-primary">
+                      <path d="M21 10c0 7-9 13-9 13s-9-6-9-13a9 9 0 0118 0z" strokeLinecap="round" strokeLinejoin="round" />
+                      <circle cx="12" cy="10" r="3" strokeLinecap="round" strokeLinejoin="round" />
+                    </svg>
+                  </div>
+                  <div>
+                    <div className="font-mono text-[10px] font-semibold tracking-[0.22em] uppercase text-on-surface-variant mb-0.5">
+                      Based
+                    </div>
+                    <div className="font-display text-sm sm:text-base text-on-surface">
+                      Shivamogga &middot; remote worldwide
+                    </div>
+                  </div>
+                </div>
+              </div>
             </div>
-          </div>
-          <motion.form
-            onSubmit={handleSubmit}
-            className="w-full space-y-5 sm:space-y-6 bg-surface-highest p-6 sm:p-8 md:p-10 rounded-[2rem] kp-shadow-ambient-lg"
-            variants={containerVariants}
-            initial="hidden"
-            whileInView="visible"
-            viewport={{ once: true, amount: 0.2 }}
-          >
-            <InputField label="Full Name" name="name" type="text" placeholder="Your Name" />
-            <InputField label="Email" name="email" type="email" placeholder="your@email.com" />
-            <TextareaField label="Your Message" name="message" placeholder="What's on your mind?" />
-            
-            <motion.button 
-              type="submit"
-              disabled={status === 'sending'}
-              className="w-full kp-gradient-primary text-white font-bold py-3.5 sm:py-4 px-8 sm:px-10 rounded-full transition-all duration-300 hover:brightness-110 focus:outline-none disabled:opacity-50 disabled:cursor-not-allowed inline-flex items-center justify-center group min-h-[48px] touch-manipulation text-sm sm:text-base kp-shadow-ambient"
-              whileHover={{ scale: 1.03 }}
-              whileTap={{ scale: 0.98 }}
-              transition={{ type: 'spring', stiffness: 400, damping: 15 }}
+
+            {/* Form */}
+            <motion.form
+              onSubmit={handleSubmit}
+              className="lg:col-span-7 space-y-6"
+              variants={containerVariants}
+              initial="hidden"
+              whileInView="visible"
+              viewport={{ once: true, amount: 0.2 }}
             >
-              {status === 'sending' ? 'Sending...' : 'Send Message'}
-               {status !== 'sending' && <ArrowRightIcon className="w-5 h-5 ml-2 transition-transform duration-300 group-hover:translate-x-1" />}
-            </motion.button>
-            {status === 'success' && <p className="text-center text-green-600 text-xs sm:text-sm">✅ Message sent! Thanks for reaching out.</p>}
-            {status === 'error' && <p className="text-center text-red-600 text-xs sm:text-sm">❌ Oops! Something went wrong. Please try again.</p>}
-          </motion.form>
-        </div>
+              <div className="grid sm:grid-cols-2 gap-6">
+                <motion.div variants={fieldVariants}>
+                  <label htmlFor="name" className="block font-mono text-[10px] font-semibold tracking-[0.22em] uppercase text-on-surface-variant mb-2.5">
+                    Your name
+                  </label>
+                  <input
+                    type="text"
+                    name="name"
+                    id="name"
+                    placeholder="Tell me who you are"
+                    required
+                    className="w-full bg-surface-container-lowest rounded-full px-5 py-3 text-sm font-sans text-on-surface placeholder:text-on-surface-variant/50 border border-outline-variant/40 focus:outline-none focus:border-primary transition-colors"
+                  />
+                </motion.div>
+                <motion.div variants={fieldVariants}>
+                  <label htmlFor="email" className="block font-mono text-[10px] font-semibold tracking-[0.22em] uppercase text-on-surface-variant mb-2.5">
+                    Email
+                  </label>
+                  <input
+                    type="email"
+                    name="email"
+                    id="email"
+                    placeholder="Where can I reach you?"
+                    required
+                    className="w-full bg-surface-container-lowest rounded-full px-5 py-3 text-sm font-sans text-on-surface placeholder:text-on-surface-variant/50 border border-outline-variant/40 focus:outline-none focus:border-primary transition-colors"
+                  />
+                </motion.div>
+              </div>
+
+              <motion.div variants={fieldVariants}>
+                <label htmlFor="message" className="block font-mono text-[10px] font-semibold tracking-[0.22em] uppercase text-on-surface-variant mb-2.5">
+                  Project brief
+                </label>
+                <textarea
+                  name="message"
+                  id="message"
+                  placeholder="Scope, timeline, budget &mdash; anything that helps me respond with specifics."
+                  rows={5}
+                  required
+                  className="w-full bg-surface-container-lowest rounded-2xl px-5 py-4 text-sm font-sans text-on-surface placeholder:text-on-surface-variant/50 border border-outline-variant/40 focus:outline-none focus:border-primary transition-colors resize-none"
+                />
+              </motion.div>
+
+              <motion.div variants={fieldVariants} className="flex flex-wrap items-center gap-6 pt-2">
+                <button
+                  type="submit"
+                  disabled={status === 'sending'}
+                  className="group inline-flex items-center gap-2 bg-primary text-white px-8 py-3.5 rounded-full font-sans text-sm font-semibold hover:bg-primary-container transition-colors disabled:opacity-50 disabled:cursor-not-allowed"
+                >
+                  {status === 'sending' ? 'Sending…' : 'Send inquiry'}
+                  {status !== 'sending' && (
+                    <span className="transition-transform duration-300 group-hover:translate-x-1" aria-hidden="true">&rarr;</span>
+                  )}
+                </button>
+                {status === 'success' && (
+                  <span className="font-sans text-sm text-secondary font-medium">Message sent &mdash; talk soon.</span>
+                )}
+                {status === 'error' && (
+                  <span className="font-sans text-sm text-red-600 font-medium">Something went wrong. Try again.</span>
+                )}
+              </motion.div>
+            </motion.form>
+          </div>
+        </motion.div>
       </div>
     </AnimatedSection>
-  );
-};
-
-const InputField: React.FC<{ label: string, name: string, type: string, placeholder: string }> = ({ label, name, type, placeholder }) => {
-  const [isFocused, setIsFocused] = useState(false);
-  return (
-    <motion.div variants={fieldVariants} className="transition-transform duration-300 ease-out focus-within:-translate-y-1">
-      <label htmlFor={name} className="block text-xs sm:text-sm font-medium text-charcoal/80 mb-1.5 sm:mb-2">{label}</label>
-      <motion.input 
-        type={type} 
-        name={name} 
-        id={name} 
-        placeholder={placeholder}
-        required
-        className="w-full bg-white rounded-2xl py-3 sm:py-3.5 px-4 sm:px-5 focus:outline-none transition-all text-sm sm:text-base min-h-[44px] touch-manipulation placeholder:text-on-surface/40"
-        onFocus={() => setIsFocused(true)}
-        onBlur={() => setIsFocused(false)}
-        animate={{ boxShadow: isFocused ? "0 0 0 4px rgba(106, 28, 246, 0.2)" : "0 0 0 0px rgba(106, 28, 246, 0)" }}
-        transition={{ type: 'spring', stiffness: 500, damping: 30 }}
-      />
-    </motion.div>
-  );
-};
-
-const TextareaField: React.FC<{ label: string, name: string, placeholder: string }> = ({ label, name, placeholder }) => {
-  const [isFocused, setIsFocused] = useState(false);
-  return (
-    <motion.div variants={fieldVariants} className="transition-transform duration-300 ease-out focus-within:-translate-y-1">
-      <label htmlFor={name} className="block text-xs sm:text-sm font-medium text-charcoal/80 mb-1.5 sm:mb-2">{label}</label>
-      <motion.textarea
-        name={name}
-        id={name}
-        placeholder={placeholder}
-        rows={4}
-        required
-        className="w-full bg-white rounded-2xl py-3 sm:py-3.5 px-4 sm:px-5 focus:outline-none transition-all resize-none text-sm sm:text-base min-h-[100px] touch-manipulation placeholder:text-on-surface/40"
-        onFocus={() => setIsFocused(true)}
-        onBlur={() => setIsFocused(false)}
-        animate={{ boxShadow: isFocused ? "0 0 0 4px rgba(106, 28, 246, 0.2)" : "0 0 0 0px rgba(106, 28, 246, 0)" }}
-        transition={{ type: 'spring', stiffness: 500, damping: 30 }}
-      />
-    </motion.div>
   );
 };
 
