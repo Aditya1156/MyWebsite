@@ -10,9 +10,9 @@ interface SEOProps {
 }
 
 const defaultSEO = {
-  title: 'Aditya Kumar - Full Stack Developer | MERN Stack Specialist | React & TypeScript Expert',
-  description: 'Full-Stack Developer specializing in MERN Stack, React 19, TypeScript, and AI integration. Building modern web applications with cutting-edge technologies. Available for freelance projects.',
-  keywords: 'Aditya Kumar, Full Stack Developer, MERN Stack, React Developer, TypeScript, JavaScript, Web Development, Frontend Developer, Backend Developer, AI Integration, Shivamogga, Karnataka, India, Freelance Developer, TypingPath, Google Gemini AI',
+  title: 'Aditya Kumar — CEO & Founder at TheNextUrl | Next.js, Node.js, PostgreSQL',
+  description: 'CEO & Founder at TheNextUrl. Owning product architecture, engineering, hosting, and delivery — built with Next.js, Node.js, and PostgreSQL.',
+  keywords: 'Aditya Kumar, TheNextUrl, CEO, Founder, Next.js Developer, Node.js, PostgreSQL, TypeScript, React, Full-Stack Engineer, Product Architecture, Shivamogga, Karnataka, India',
   image: 'https://adityakumar.dev/images/og-image.jpg',
   url: 'https://adityakumar.dev/',
   type: 'website',
