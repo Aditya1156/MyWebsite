@@ -8,7 +8,7 @@ import ImageMarquee from './ImageMarquee';
 // EmailJS — public key is safe to expose client-side.
 // Lock down "Allowed Origins" in the EmailJS dashboard for security.
 const EMAILJS_PUBLIC_KEY = '9Ujk8D1C01AiXeRhJ';
-const EMAILJS_SERVICE_ID = 'service_bcm0rsx';
+const EMAILJS_SERVICE_ID = 'service_qp7skz8';
 const EMAILJS_TEMPLATE_ID = 'template_9deeb9x';
 
 emailjs.init({ publicKey: EMAILJS_PUBLIC_KEY });
