@@ -1,6 +1,6 @@
-import React, { useState } from 'react';
+import React, { useState, useEffect, useRef } from 'react';
 import AnimatedSection from './AnimatedSection';
-import { motion, Variants } from 'framer-motion';
+import { motion, AnimatePresence, Variants } from 'framer-motion';
 import emailjs from '@emailjs/browser';
 import { MailIcon } from './icons';
 import ImageMarquee from './ImageMarquee';
@@ -27,6 +27,22 @@ const containerVariants: Variants = {
 const Contact: React.FC = () => {
   const [status, setStatus] = useState<'idle' | 'sending' | 'success' | 'error'>('idle');
   const [errorMessage, setErrorMessage] = useState<string>('');
+  const [captcha, setCaptcha] = useState({ a: 3, b: 5 });
+  const [captchaAnswer, setCaptchaAnswer] = useState('');
+  const mountedAtRef = useRef<number>(Date.now());
+
+  const generateCaptcha = () => {
+    setCaptcha({
+      a: Math.floor(Math.random() * 8) + 2, // 2–9
+      b: Math.floor(Math.random() * 8) + 2, // 2–9
+    });
+    setCaptchaAnswer('');
+  };
+
+  useEffect(() => {
+    generateCaptcha();
+    mountedAtRef.current = Date.now();
+  }, []);
 
   const handleSubmit = async (e: React.FormEvent<HTMLFormElement>) => {
     e.preventDefault();
@@ -36,6 +52,27 @@ const Contact: React.FC = () => {
     const form = e.currentTarget;
     const formData = new FormData(form);
 
+    // Honeypot — bots fill invisible fields; humans don't.
+    const honeypot = (formData.get('website') as string) || '';
+    if (honeypot) {
+      // Silently pretend success so the bot moves on without retrying.
+      setStatus('success');
+      form.reset();
+      setTimeout(() => {
+        setStatus('idle');
+        generateCaptcha();
+      }, 5000);
+      return;
+    }
+
+    // Min-time gate — real humans take >2s to fill a form.
+    if (Date.now() - mountedAtRef.current < 2000) {
+      setStatus('error');
+      setErrorMessage('Slow down a moment — try again.');
+      setTimeout(() => setStatus('idle'), 4000);
+      return;
+    }
+
     const name = (formData.get('name') as string)?.trim();
     const email = (formData.get('email') as string)?.trim();
     const message = (formData.get('message') as string)?.trim();
@@ -44,6 +81,18 @@ const Contact: React.FC = () => {
       setStatus('error');
       setErrorMessage('Please fill in every field.');
       setTimeout(() => setStatus('idle'), 4000);
+      return;
+    }
+
+    // Captcha — simple math challenge blocks 99% of spam bots without a
+    // third-party service or an accessibility hit.
+    const expected = captcha.a + captcha.b;
+    const given = parseInt(captchaAnswer.trim(), 10);
+    if (!captchaAnswer.trim() || Number.isNaN(given) || given !== expected) {
+      setStatus('error');
+      setErrorMessage(`That's not right — what is ${captcha.a} + ${captcha.b}?`);
+      generateCaptcha();
+      setTimeout(() => setStatus('idle'), 5000);
       return;
     }
 
@@ -87,7 +136,10 @@ const Contact: React.FC = () => {
 
       setStatus('success');
       form.reset();
-      setTimeout(() => setStatus('idle'), 5000);
+      setTimeout(() => {
+        setStatus('idle');
+        generateCaptcha();
+      }, 5000);
     } catch (err) {
       // Log full details so we can see in the browser console why it failed.
       console.error('[Contact] EmailJS send failed:', err);
@@ -231,20 +283,116 @@ const Contact: React.FC = () => {
                 />
               </motion.div>
 
-              <motion.div variants={fieldVariants} className="flex flex-wrap items-center gap-6 pt-2">
+              {/* Honeypot — invisible to humans, filled by bots */}
+              <input
+                type="text"
+                name="website"
+                tabIndex={-1}
+                autoComplete="off"
+                aria-hidden="true"
+                style={{
+                  position: 'absolute',
+                  left: '-9999px',
+                  top: 'auto',
+                  width: 0,
+                  height: 0,
+                  opacity: 0,
+                  pointerEvents: 'none',
+                }}
+              />
+
+              {/* Math captcha */}
+              <motion.div variants={fieldVariants} className="flex flex-wrap items-end gap-3">
+                <div className="flex-1 min-w-[180px]">
+                  <label htmlFor="captcha" className="block font-mono text-[10px] font-semibold tracking-[0.22em] uppercase text-on-surface-variant mb-2.5">
+                    Quick check &middot; what is <span className="text-primary">{captcha.a} + {captcha.b}</span>?
+                  </label>
+                  <input
+                    id="captcha"
+                    type="text"
+                    inputMode="numeric"
+                    pattern="[0-9]*"
+                    autoComplete="off"
+                    value={captchaAnswer}
+                    onChange={(e) => setCaptchaAnswer(e.target.value)}
+                    placeholder="Your answer"
+                    className="w-full bg-surface-container-lowest rounded-full px-5 py-3 text-sm font-sans text-on-surface placeholder:text-on-surface-variant/50 border border-outline-variant/40 focus:outline-none focus:border-primary transition-colors"
+                  />
+                </div>
                 <button
-                  type="submit"
-                  disabled={status === 'sending'}
-                  className="group inline-flex items-center gap-2 bg-primary text-white px-8 py-3.5 rounded-full font-sans text-sm font-semibold hover:bg-primary-container transition-colors disabled:opacity-50 disabled:cursor-not-allowed"
+                  type="button"
+                  onClick={generateCaptcha}
+                  aria-label="New question"
+                  title="New question"
+                  className="h-11 w-11 flex items-center justify-center rounded-full bg-surface-container-lowest border border-outline-variant/40 text-on-surface-variant hover:text-primary hover:border-primary/60 transition-colors"
                 >
-                  {status === 'sending' ? 'Sending…' : 'Send inquiry'}
-                  {status !== 'sending' && (
-                    <span className="transition-transform duration-300 group-hover:translate-x-1" aria-hidden="true">&rarr;</span>
-                  )}
+                  <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" className="w-4 h-4">
+                    <path d="M21 12a9 9 0 11-2.64-6.36M21 3v6h-6" strokeLinecap="round" strokeLinejoin="round" />
+                  </svg>
                 </button>
-                {status === 'success' && (
-                  <span className="font-sans text-sm text-secondary font-medium">Message sent &mdash; talk soon.</span>
-                )}
+              </motion.div>
+
+              {/* Submit / success state */}
+              <motion.div variants={fieldVariants} className="flex flex-wrap items-center gap-6 pt-2 min-h-[48px]">
+                <AnimatePresence mode="wait" initial={false}>
+                  {status === 'success' ? (
+                    <motion.div
+                      key="success"
+                      initial={{ scale: 0.6, opacity: 0 }}
+                      animate={{ scale: 1, opacity: 1 }}
+                      exit={{ scale: 0.8, opacity: 0 }}
+                      transition={{ duration: 0.45, ease: [0.22, 1, 0.36, 1] }}
+                      className="inline-flex items-center gap-3"
+                    >
+                      <span className="relative inline-flex items-center justify-center w-11 h-11 rounded-full bg-secondary text-white">
+                        <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="3" strokeLinecap="round" strokeLinejoin="round" className="w-5 h-5 relative z-10">
+                          <motion.path
+                            d="M5 12l5 5L20 7"
+                            initial={{ pathLength: 0, opacity: 0 }}
+                            animate={{ pathLength: 1, opacity: 1 }}
+                            transition={{ duration: 0.55, ease: [0.22, 1, 0.36, 1], delay: 0.15 }}
+                          />
+                        </svg>
+                        <span
+                          className="absolute inset-0 rounded-full bg-secondary opacity-50 animate-ping"
+                          aria-hidden="true"
+                        />
+                      </span>
+                      <div className="font-sans text-sm">
+                        <div className="font-semibold text-on-surface">Message sent</div>
+                        <div className="text-on-surface-variant">You'll hear back within 24 hours.</div>
+                      </div>
+                    </motion.div>
+                  ) : (
+                    <motion.button
+                      key="submit"
+                      type="submit"
+                      disabled={status === 'sending'}
+                      initial={{ opacity: 0 }}
+                      animate={{ opacity: 1 }}
+                      exit={{ opacity: 0 }}
+                      whileHover={status === 'sending' ? undefined : { scale: 1.02 }}
+                      whileTap={status === 'sending' ? undefined : { scale: 0.98 }}
+                      className="group inline-flex items-center gap-2.5 bg-primary text-white px-8 py-3.5 rounded-full font-sans text-sm font-semibold hover:bg-primary-container transition-colors disabled:opacity-75 disabled:cursor-not-allowed kp-shadow-ambient"
+                    >
+                      {status === 'sending' ? (
+                        <>
+                          <svg className="w-4 h-4 animate-spin" viewBox="0 0 24 24" fill="none" aria-hidden="true">
+                            <circle cx="12" cy="12" r="10" stroke="currentColor" strokeOpacity="0.3" strokeWidth="3" />
+                            <path d="M12 2a10 10 0 0110 10" stroke="currentColor" strokeWidth="3" strokeLinecap="round" />
+                          </svg>
+                          <span>Sending&hellip;</span>
+                        </>
+                      ) : (
+                        <>
+                          <span>Send inquiry</span>
+                          <span className="transition-transform duration-300 group-hover:translate-x-1" aria-hidden="true">&rarr;</span>
+                        </>
+                      )}
+                    </motion.button>
+                  )}
+                </AnimatePresence>
+
                 {status === 'error' && (
                   <span className="font-sans text-sm text-red-600 font-medium">
                     {errorMessage || 'Something went wrong. Try again.'}
