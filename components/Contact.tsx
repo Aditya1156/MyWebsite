@@ -1,8 +1,17 @@
 import React, { useState } from 'react';
 import AnimatedSection from './AnimatedSection';
 import { motion, Variants } from 'framer-motion';
+import emailjs from '@emailjs/browser';
 import { MailIcon } from './icons';
 import ImageMarquee from './ImageMarquee';
+
+// EmailJS — public key is safe to expose client-side.
+// Lock down "Allowed Origins" in the EmailJS dashboard for security.
+const EMAILJS_PUBLIC_KEY = '9Ujk8D1C01AiXeRhJ';
+const EMAILJS_SERVICE_ID = 'service_bcm0rsx';
+const EMAILJS_TEMPLATE_ID = 'template_ylzgcyi';
+
+emailjs.init({ publicKey: EMAILJS_PUBLIC_KEY });
 
 const fieldVariants: Variants = {
   hidden: { opacity: 0, y: 12 },
@@ -16,34 +25,64 @@ const containerVariants: Variants = {
 
 const Contact: React.FC = () => {
   const [status, setStatus] = useState<'idle' | 'sending' | 'success' | 'error'>('idle');
+  const [errorMessage, setErrorMessage] = useState<string>('');
 
-  const handleSubmit = (e: React.FormEvent<HTMLFormElement>) => {
+  const handleSubmit = async (e: React.FormEvent<HTMLFormElement>) => {
     e.preventDefault();
     setStatus('sending');
+    setErrorMessage('');
+
     const form = e.currentTarget;
     const formData = new FormData(form);
 
-    const serviceID = 'service_bcm0rsx';
-    const templateID = 'template_ylzgcyi';
+    const name = (formData.get('name') as string)?.trim();
+    const email = (formData.get('email') as string)?.trim();
+    const message = (formData.get('message') as string)?.trim();
+
+    if (!name || !email || !message) {
+      setStatus('error');
+      setErrorMessage('Please fill in every field.');
+      setTimeout(() => setStatus('idle'), 4000);
+      return;
+    }
+
+    // Cover both common EmailJS template variable naming conventions
+    // so the email isn't blank if the template was authored either way.
     const templateParams = {
-      from_name: formData.get('name') as string,
-      from_email: formData.get('email') as string,
-      message: formData.get('message') as string,
+      from_name: name,
+      from_email: email,
+      message,
+      name,
+      email,
+      reply_to: email,
+      title: `New message from ${name}`,
     };
 
-    window.emailjs
-      .send(serviceID, templateID, templateParams)
-      .then(
-        () => {
-          setStatus('success');
-          form.reset();
-          setTimeout(() => setStatus('idle'), 5000);
-        },
-        () => {
-          setStatus('error');
-          setTimeout(() => setStatus('idle'), 5000);
-        },
+    try {
+      const response = await emailjs.send(
+        EMAILJS_SERVICE_ID,
+        EMAILJS_TEMPLATE_ID,
+        templateParams,
       );
+      if (response.status !== 200) {
+        throw new Error(`Unexpected status ${response.status}: ${response.text}`);
+      }
+      setStatus('success');
+      form.reset();
+      setTimeout(() => setStatus('idle'), 5000);
+    } catch (err) {
+      // Log full details so we can see in the browser console why it failed.
+      console.error('[Contact] EmailJS send failed:', err);
+      const detail =
+        err && typeof err === 'object' && 'text' in err
+          ? String((err as { text: unknown }).text)
+          : err instanceof Error
+          ? err.message
+          : 'Unknown error';
+      setErrorMessage(detail);
+      setStatus('error');
+      setTimeout(() => setStatus('idle'), 6000);
+    }
   };
 
   return (
@@ -189,7 +228,9 @@ const Contact: React.FC = () => {
                   <span className="font-sans text-sm text-secondary font-medium">Message sent &mdash; talk soon.</span>
                 )}
                 {status === 'error' && (
-                  <span className="font-sans text-sm text-red-600 font-medium">Something went wrong. Try again.</span>
+                  <span className="font-sans text-sm text-red-600 font-medium">
+                    {errorMessage || 'Something went wrong. Try again.'}
+                  </span>
                 )}
               </motion.div>
             </motion.form>
