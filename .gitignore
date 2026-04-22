@@ -12,13 +12,32 @@ dist
 dist-ssr
 *.local
 
+# Environment & secrets — never commit
+.env
+.env.*
+!.env.example
+
+# Build artifacts
+*.tsbuildinfo
+.cache
+.turbo
+
+# Deploy platforms
+.vercel
+.netlify
+
 # Editor directories and files
 .vscode/*
 !.vscode/extensions.json
 .idea
 .DS_Store
+Thumbs.db
 *.suo
 *.ntvs*
 *.njsproj
 *.sln
 *.sw?
+
+# OS
+.DS_Store
+ehthumbs.db
